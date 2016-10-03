@@ -1,0 +1,30 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\SpellButton.cs">
+    <Files>
+      <File FileName="Assets\Script\MyCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\UI.cs" Line="278" Column="38" />
+      <File FileName="Assets\Script\MainLogin.cs" Line="13" Column="32" />
+      <File FileName="Assets\Script\Variables.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Processing.cs" Line="273" Column="11" />
+      <File FileName="Assets\Script\Initializate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Connection.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\PersChoiceButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Person.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\PanelButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\ButtonList.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\ButtonInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\InventoryButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Buff.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BuffList.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BuffObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\AnimationC.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\DropItem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\SpellButton.cs" Line="3" Column="22" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

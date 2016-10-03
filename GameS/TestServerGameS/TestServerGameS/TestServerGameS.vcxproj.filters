@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{105f5582-a817-48d3-8e93-c935c78c9ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old">
+      <UniqueIdentifier>{4cc41b26-f4f6-4da3-a34b-56dcd411c60c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work">
+      <UniqueIdentifier>{1a87658b-8857-4af3-a480-96bab3f86842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{bc64224a-35ea-44c9-ae80-503f7afb078b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeoData">
+      <UniqueIdentifier>{c416a7fc-2822-40d1-860b-d2f99064b167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Work\MSQL">
+      <UniqueIdentifier>{4f43a786-af7b-4c9c-91fc-856ad0179d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Item">
+      <UniqueIdentifier>{5f39e6cd-1361-4d8f-bc6e-15c4605de064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Spell">
+      <UniqueIdentifier>{8d6486ac-76a4-48dd-9877-6ac0f726e10e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Spawn">
+      <UniqueIdentifier>{5a630a5c-f8c4-409d-90d9-8408b27d5eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person">
+      <UniqueIdentifier>{1f90a0b9-ea6c-43ba-b93f-6903522a7605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Mastery">
+      <UniqueIdentifier>{1602b55d-da73-4559-9f2f-3658cf47f500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Spell">
+      <UniqueIdentifier>{908ace93-7ea6-48d6-87bd-dde6e6c8a225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Holders">
+      <UniqueIdentifier>{beca6ad5-4455-49a5-8456-0bdac8a627f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Buff">
+      <UniqueIdentifier>{22b7f684-6a20-4cdc-a283-498338fa970c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Npc">
+      <UniqueIdentifier>{158c0841-0ad1-42bd-90ec-f50bb54f1b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Person\Inventory">
+      <UniqueIdentifier>{8d82690b-eb0b-4238-94b1-917bc4ffa46d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="app.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestServerGameS.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Processing.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GeoDvig.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Mechanic.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Work</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkFile.cpp">
+      <Filter>Work</Filter>
+    </ClCompile>
+    <ClCompile Include="Mastery.cpp">
+      <Filter>Game\Person\Mastery</Filter>
+    </ClCompile>
+    <ClCompile Include="MasteryHolder.cpp">
+      <Filter>Game\Person\Mastery</Filter>
+    </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Game\Person\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellHolder.cpp">
+      <Filter>Game\Person\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkMSQL.cpp">
+      <Filter>Work\MSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="MSQLConnect.cpp">
+      <Filter>Work\MSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseItemHolder.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSpellHolder.cpp">
+      <Filter>Game\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellInfo.cpp">
+      <Filter>Game\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnPoint.cpp">
+      <Filter>Game\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnPointHolder.cpp">
+      <Filter>Game\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Game\Person</Filter>
+    </ClCompile>
+    <ClCompile Include="Account.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountHolder.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="BasePersonHolder.cpp">
+      <Filter>Game\Person\Holders</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>Game\Person\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffHolder.cpp">
+      <Filter>Game\Person\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySlot.cpp">
+      <Filter>Game\Person\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryHolder.cpp">
+      <Filter>Game\Person\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Game\Person\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonHolder.cpp">
+      <Filter>Game\Person\Holders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Form1.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Processing.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="GameLogic.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoCell.h">
+      <Filter>GeoData</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoCube.h">
+      <Filter>GeoData</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoData.h">
+      <Filter>GeoData</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoDvig.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Mechanic.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Person2.h">
+      <Filter>Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Work</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkFile.h">
+      <Filter>Work</Filter>
+    </ClInclude>
+    <ClInclude Include="Mastery.h">
+      <Filter>Game\Person\Mastery</Filter>
+    </ClInclude>
+    <ClInclude Include="MasteryHolder.h">
+      <Filter>Game\Person\Mastery</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Game\Person\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellHolder.h">
+      <Filter>Game\Person\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkMSQL.h">
+      <Filter>Work\MSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="MSQLConnect.h">
+      <Filter>Work\MSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="MSQL_init_data.h">
+      <Filter>Work\MSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItemHolder.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSpellHolder.h">
+      <Filter>Game\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellInfo.h">
+      <Filter>Game\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnPointHolder.h">
+      <Filter>Game\Spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnPoint.h">
+      <Filter>Game\Spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Game\Person</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountHolder.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePersonHolder.h">
+      <Filter>Game\Person\Holders</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>Game\Person\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffHolder.h">
+      <Filter>Game\Person\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySlot.h">
+      <Filter>Game\Person\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryHolder.h">
+      <Filter>Game\Person\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Work</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateData.h">
+      <Filter>Work</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonHolder.h">
+      <Filter>Game\Person\Holders</Filter>
+    </ClInclude>
+    <ClInclude Include="Drop.h">
+      <Filter>Game\Person\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="DropItem.h">
+      <Filter>Game\Person\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="DropItemHolder.h">
+      <Filter>Game\Person\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Game\Person\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsDrop.h">
+      <Filter>Game\Person\Npc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resX">
+      <Filter>Файлы ресурсов</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
