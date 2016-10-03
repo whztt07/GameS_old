@@ -47,7 +47,7 @@ public:
 	string ResolutionGamePers(const vector<int>&, const int&);
 	string NeedUPD(const int&);
 	string NeedUI_UPD(const int&);
-	void Command(string, const int&, const Data&, bool = true);
+	void Command(string, const int&, const Data&, bool = false);
 	void Exit(const int&);
 	//Метод запускающий метод обновления в потоке
 	void RunThread();

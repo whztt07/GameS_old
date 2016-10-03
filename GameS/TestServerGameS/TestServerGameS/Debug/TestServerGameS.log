@@ -1,86 +1,23 @@
-﻿Build started 03.10.2016 20:36:36.
-     1>Project "E:\Gamedev\Проекты\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" on node 2 (Build target(s)).
+﻿Build started 03.10.2016 22:20:31.
+     1>Project "D:\Git\GameS\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Person.cpp BasePersonHolder.cpp GameLogic.cpp PersonHolder.cpp Client.cpp Connection.cpp Processing.cpp TestServerGameS.cpp WorkMSQL.cpp
+         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Person.cpp PersonHolder.cpp
          Person.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         BasePersonHolder.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         GameLogic.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MSQL_init_data.h(5): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\WorkMSQL.h(4) : see declaration of 'MSQL_init_data'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(12): warning C4099: 'MSQL_init_data' : type name first seen using 'struct' now seen using 'class'
-                 e:\gamedev\проекты\games\testservergames\testservergames\MSQL_init_data.h(5) : see declaration of 'MSQL_init_data'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(13): warning C4099: 'UpdateData' : type name first seen using 'struct' now seen using 'class'
-                 e:\gamedev\проекты\games\testservergames\testservergames\UpdateData.h(4) : see declaration of 'UpdateData'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Data.h(5): warning C4099: 'Data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(11) : see declaration of 'Data'
-     1>GameLogic.cpp(69): warning C4172: returning address of local variable or temporary
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
          PersonHolder.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
      1>PersonHolder.cpp(18): warning C4018: '<' : signed/unsigned mismatch
      1>PersonHolder.cpp(40): warning C4172: returning address of local variable or temporary
      1>PersonHolder.cpp(43): warning C4172: returning address of local variable or temporary
-         Client.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Connection.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-         Processing.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Data.h(5): warning C4099: 'Data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(11) : see declaration of 'Data'
-     1>Processing.cpp(161): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Processing.cpp(162): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Processing.cpp(163): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Processing.cpp(171): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Processing.cpp(178): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Processing.cpp(190): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Processing.cpp(209): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-         TestServerGameS.cpp
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MSQL_init_data.h(5): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(12) : see declaration of 'MSQL_init_data'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\UpdateData.h(4): warning C4099: 'UpdateData' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\GameLogic.h(13) : see declaration of 'UpdateData'
-         WorkMSQL.cpp
-     1>D:\VisualStudio\VC\include\config-win.h(24): warning C4005: '_WIN32_WINNT' : macro redefinition
-                 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\sdkddkver.h(200) : see previous definition of '_WIN32_WINNT'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MSQLConnect.h(7): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\WorkMSQL.h(4) : see declaration of 'MSQL_init_data'
-     1>e:\gamedev\проекты\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>e:\gamedev\проекты\games\testservergames\testservergames\MSQL_init_data.h(5): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 e:\gamedev\проекты\games\testservergames\testservergames\WorkMSQL.h(4) : see declaration of 'MSQL_init_data'
-     1>WorkMSQL.cpp(110): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(111): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(114): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(115): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(116): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(125): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(146): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(156): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(165): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(175): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(193): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(197): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(229): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(230): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(231): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(266): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(267): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(273): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
          Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\app.res" app.rc 
        Link:
-         D:\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Gamedev\Проекты\GameS\TestServerGameS\Debug\TestServerGameS.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\MySQL\MySQL Server 5.5\lib" /ASSEMBLYRESOURCE:Debug\TestServerGameS.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Gamedev\Проекты\GameS\TestServerGameS\Debug\TestServerGameS.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
+         D:\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\MySQL\MySQL Server 5.5\lib" /ASSEMBLYRESOURCE:Debug\TestServerGameS.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
          Debug\Account.obj
          Debug\AccountHolder.obj
          Debug\BaseItemHolder.obj
@@ -115,9 +52,9 @@
          Debug\WorkFile.obj
          Debug\WorkMSQL.obj
          "Debug\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
-         TestServerGameS.vcxproj -> E:\Gamedev\Проекты\GameS\TestServerGameS\Debug\TestServerGameS.exe
-     1>Done Building Project "E:\Gamedev\Проекты\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" (Build target(s)).
+         TestServerGameS.vcxproj -> D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.exe
+     1>Done Building Project "D:\Git\GameS\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.93
+Time Elapsed 00:00:03.79

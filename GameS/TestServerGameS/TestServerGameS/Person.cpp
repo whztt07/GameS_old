@@ -115,6 +115,51 @@ void Person::SetActive(const bool &_active){
 	active = _active;
 }
 
+void Person::SetNeedUpdate(const bool &_needUpdate){
+	needUpdate = _needUpdate;
+}
+
+void Person::SetUpdate(const string &_update){
+	update = _update;
+}
+
+void Person::SetUiUpdate(const string &_uiUpdate){
+	uiUpdate = _uiUpdate;
+}
+
+void Person::SetWait(const bool &_wait){
+	wait = _wait;
+}
+
+void Person::SetCommand(const string &_command){
+	command = _command;
+}
+
+void Person::SetDopCommand(const string &_dopCommand){
+	dopCommand = _dopCommand;
+}
+
+void Person::SetWaitingCommand(const string &_waitingCommand){
+	waitingCommand = _waitingCommand;
+}
+
+void Person::SetData(const Data &_data){
+	data = _data;
+}
+
+void Person::SetDopData(const Data &_dopData){
+	dopData = _dopData;
+}
+
+void Person::SetWaitingData(const Data &_waitingData){
+	waitingData = _waitingData;
+}
+
+
+
+
+
+
 const string& Person::GetName() const{
 	return name;
 }
@@ -207,4 +252,17 @@ const int& Person::GetAbilityPoint() const{
 
 const int& Person::GetSpellPoint() const{
 	return spellPoint;
+}
+
+
+const string& Person::GetUpdate() const{
+	return update;
+}
+
+const string& Person::GetUiUpdate() const{
+	return uiUpdate;
+}
+
+const bool& Person::GetDoes() const{
+	return does;
 }

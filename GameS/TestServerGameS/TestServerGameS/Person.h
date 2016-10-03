@@ -9,6 +9,7 @@ using namespace std;
 #include "MasteryHolder.h"
 #include "BuffHolder.h"
 #include "InventoryHolder.h"
+#include "Data.h"
 
 class Person{
 protected:
@@ -28,7 +29,9 @@ protected:
 	float rotation;
 	int characteristicPoint, abilityPoint, spellPoint;
 
-	bool active;
+	bool active, needUpdate, does, wait;
+	string update, uiUpdate, waitingCommand, command, dopCommand;
+	Data data, dopData, waitingData;
 	
 public:
 	SpellHolder spellList;
@@ -73,6 +76,21 @@ public:
 	void SetSpellPoint(const int&);
 
 	void SetActive(const bool&);
+	void SetNeedUpdate(const bool&);
+
+	void SetUpdate(const string&);
+	void SetUiUpdate(const string&);
+
+	void SetWait(const bool&);
+
+	void SetCommand(const string&);
+	void SetDopCommand(const string&);
+	void SetWaitingCommand(const string&);
+
+	void SetData(const Data&);
+	void SetDopData(const Data&);
+	void SetWaitingData(const Data&);
+
 	//Получение параметров
 	const string& GetName() const;
 
@@ -105,6 +123,12 @@ public:
 	const int& GetCharacteristicPoint() const;
 	const int& GetAbilityPoint() const;
 	const int& GetSpellPoint() const;
+
+	
+	const string& GetUpdate() const;
+	const string& GetUiUpdate() const;
+
+	const bool& GetDoes() const;
 
 	void UpdateSpellLvl();
 };

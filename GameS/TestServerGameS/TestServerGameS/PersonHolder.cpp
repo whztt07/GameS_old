@@ -54,33 +54,34 @@ void PersonHolder::Exit(const int &num){
 
 string PersonHolder::NeedUPD(const int &id){
 	int index = GetIndex(id);
-	string s_UPD = personList[index]->GetUPD();
+	string s_UPD = personList[index]->GetUpdate();
 	if (s_UPD == "NULL"){
-		personList[index]->SetNeedUPD(true);
+		personList[index]->SetNeedUpdate(true);
 	}
-	personList[index]->SetUPD("NULL");
+	personList[index]->SetUpdate("NULL");
 	return s_UPD;
 }
 
 string PersonHolder::NeedUI_UPD(const int &id){
 	int index = GetIndex(id);
-	string s_UPD = personList[index]->GetUI_UPD();
+	return personList[index]->GetUiUpdate();
 }
 
-void PersonHolder::Command(string, const int&, const Data&, bool b);
-int index = GetIndex(id);
-if (b){
-	if (var->personList[index].does){
-		var->personList[index].wait = true;
-		var->personList[index].waitingCommand = command;
-		var->personList[index].waitData = data;
+void PersonHolder::Command(string command, const int &id, const Data &data, bool b){
+	int index = GetIndex(id);
+	if (b){
+		if (personList[index]->GetDoes()){
+			personList[index]->SetWait(true);
+			personList[index]->SetWaitingCommand(command);
+			personList[index]->SetWaitingData(data);
+		}
+		else{
+			personList[index]->SetData(data);
+			personList[index]->SetCommand(command);
+		}
 	}
 	else{
-		var->personList[index].data = data;
-		var->personList[index].command = command;
+		personList[index]->SetDopCommand(command);
+		personList[index]->SetDopData(data);
 	}
-}
-else{
-	var->personList[index].dopCommand = command;
-	var->personList[index].dopData = data;
 }
