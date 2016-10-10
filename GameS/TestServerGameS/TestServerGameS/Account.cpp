@@ -9,74 +9,67 @@ using namespace std;
 
 CRITICAL_SECTION Account::accountSection;
 
-Account::Account() : accNum(-1), persNum(-1), dopInfo("None"), lastAnswer(), lastRequest(){}
+Account::Account() : accountId(-1), personId(-1), info("None"), lastAnswer(), lastRequest(){}
 
 
 void Account::Init(){
 	InitializeCriticalSection(&accountSection);
 }
 
-Account* Account::GetCopy() const{
+Account Account::GetCopyAccount() const{
 	EnterCriticalSection(&accountSection);
-	Account *a = new Account(*this);
+	Account account = Account(*this);
 	LeaveCriticalSection(&accountSection);
-	return a;
+	return account;
 }
 
-
-void Account::SetAccNum(const int &_accNum){
+void Account::SetPersonId(int newPersonId){
 	EnterCriticalSection(&accountSection);
-	accNum = _accNum;
-	LeaveCriticalSection(&accountSection);
-}
-
-void Account::SetPersNum(const int &_persNum){
-	EnterCriticalSection(&accountSection);
-	persNum = _persNum;
+	personId = newPersonId;
 	LeaveCriticalSection(&accountSection);
 }
 
-void Account::SetDopInfo(const string &_dopInfo){
+void Account::SetInfo(const string &newInfo){
 	EnterCriticalSection(&accountSection);
-	dopInfo = _dopInfo;
+	info = newInfo;
 	LeaveCriticalSection(&accountSection);
 }
 
-void Account::SetLastAnswer(const string &_lastAnswer){
+void Account::SetLastAnswer(const string &newLastAnswer){
 	EnterCriticalSection(&accountSection);
-	lastAnswer = _lastAnswer;
+	lastAnswer = newLastAnswer;
 	LeaveCriticalSection(&accountSection);
 }
 
-void Account::SetLastRequest(const string &_lastRequest){
+void Account::SetLastRequest(const string &newLastRequest){
 	EnterCriticalSection(&accountSection);
-	lastRequest = _lastRequest;
+	lastRequest = newLastRequest;
 	LeaveCriticalSection(&accountSection);
 }
 
-void Account::SetPersIdList(const vector<int> &_persIdList){
+void Account::SetPersonIdList(const vector<int> &newPersonIdList){
 	EnterCriticalSection(&accountSection);
-	persIdList = _persIdList;
+	personIdList = newPersonIdList;
 	LeaveCriticalSection(&accountSection);
 }
 
-const int Account::GetAccNum() const{
-	return accNum;
+const int& Account::GetAccountId() const{
+	return accountId;
 }
 
-const int Account::GetPersNum() const{
-	return persNum;
+const int& Account::GetPersonId() const{
+	return personId;
 }
 
-const string Account::GetDopInfo() const{
-	return dopInfo;
+const string& Account::GetInfo() const{
+	return info;
 }
 
-const string Account::GetLastAnswer() const{
+const string& Account::GetLastAnswer() const{
 	return lastAnswer;
 }
 
-const string Account::GetLastRequest() const{
+const string& Account::GetLastRequest() const{
 	return lastRequest;
 }
 
@@ -88,6 +81,6 @@ void Account::LeaveSection(){
 	LeaveCriticalSection(&accountSection);
 }
 
-const vector<int>& Account::GetPersIdList() const{
-	return persIdList;
+const vector<int>& Account::GetPersonIdList() const{
+	return personIdList;
 }

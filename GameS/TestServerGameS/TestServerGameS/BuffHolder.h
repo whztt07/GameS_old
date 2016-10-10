@@ -8,6 +8,7 @@ using namespace std;
 class BuffHolder{
 	vector<Buff> buffList;
 public:
-	BuffHolder(const int&);
-	void Init(const vector<Buff>&);
+	BuffHolder(const int &buffCount);
+
+	void Init(const vector<Buff> &newBuffList);
 };

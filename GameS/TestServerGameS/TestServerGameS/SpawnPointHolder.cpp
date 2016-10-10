@@ -2,6 +2,6 @@
 
 #include"SpawnPointHolder.h"
 
-void SpawnPointHolder::Init(const vector<SpawnPoint> &vec){
-	spawnPointList = vec;
+void SpawnPointHolder::Init(const vector<SpawnPoint> &newSpawnPointList){
+	spawnPointList = newSpawnPointList;
 }

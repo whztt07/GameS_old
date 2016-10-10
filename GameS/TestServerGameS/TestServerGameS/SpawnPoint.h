@@ -6,18 +6,16 @@
 using namespace std;
 
 class SpawnPoint {
-	//индексы нпс которые могут заспавниться
-	vector<int> idList;
-	//Параметры
-	float respawnTime, patrolRange, spawnRange;
-	Vector3 spawnPosition;
-	//id текущего нпс
-	int curId;
-	//Время когда освободилось место
-	unsigned int deadTime;
+	
+	vector<int>		npcIdList;		//индексы нпс которые могут заспавниться	
+	float			respawnTime;
+	float			patrolRange;
+	float			spawnRange;
+	Vector3			spawnPosition;	
+	int				currentNpcId;	//id текущего нпс	
+	unsigned int	deadTime;		//Время когда освободилось место
 
 public:
-	SpawnPoint(const Vector3&, const vector<int>&, const float&);
-		
+	SpawnPoint(const Vector3 &spawnPosition, const vector<int> &npcIdList, float respawnTime);
 };
 

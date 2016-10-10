@@ -21,7 +21,7 @@ public class Processing {
 		if(s == "AbilityPress"){
 			UI.HideMasteryPanel ();
 			UI.HideSpellPanel ();
-			UI.ShowAbilityPanel()
+			UI.ShowAbilityPanel ();
 		}
 
 		if(s == "AddressPress"){

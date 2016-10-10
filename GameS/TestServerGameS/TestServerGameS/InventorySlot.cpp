@@ -2,20 +2,12 @@
 
 #include "InventorySlot.h"
 
-InventorySlot::InventorySlot() : item(-1), count(){}
+InventorySlot::InventorySlot() : itemId(-1), count(){}
 
-void InventorySlot::SetItem(const int &_item){
-	item = _item;
+void InventorySlot::SetItemId(int newItemId){
+	itemId = newItemId;
 }
 
-void InventorySlot::SetCount(const int &_count){
-	count = _count;
-}
-
-const int& InventorySlot::GetItem() const{
-	return item;
-}
-
-const int& InventorySlot::GetCount() const{
-	return count;
+void InventorySlot::SetCount(int newCount){
+	count = newCount;
 }

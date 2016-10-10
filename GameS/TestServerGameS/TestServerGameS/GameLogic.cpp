@@ -27,6 +27,8 @@ GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::R
 
 	baseItemHolder.Init(WorkMSQL::GetBaseItem());
 
+	Person::Init(baseItemHolder);
+
 	basePersonHolder.Init(WorkMSQL::GetBasePerson());
 
 	vector<int> vec;
@@ -62,51 +64,51 @@ void GameLogic::RunThread(){
 	_beginthreadex(NULL, NULL, GameLogic::RunUpdate, this, NULL, NULL);
 }
 
-const Person& GameLogic::GetBasePerson(const int &i){
+const Person& GameLogic::GetBasePerson(int index){
 	EnterCriticalSection(&gameSection);
-	Person pers = Person(basePersonHolder.GetPerson(i));
+	Person pers = Person(basePersonHolder.GetPerson(index));
 	LeaveCriticalSection(&gameSection);
 	return pers;
 }
 
 
-void GameLogic::AddPerson(const Person &pers, int i){
+void GameLogic::AddPerson(const Person &newPerson, int type){
 	EnterCriticalSection(&gameSection);
-	personHolder.AddPerson(pers, i);
+	personHolder.AddPerson(newPerson, type);
 	LeaveCriticalSection(&gameSection);
 }
 
-string GameLogic::ResolutionGamePers(const vector<int> &vec, const int &id){
+string GameLogic::ResolutionGamePers(const vector<int> &vec, int id){
 	EnterCriticalSection(&gameSection);
 	string s = personHolder.ResolutionGamePers(vec, id);
 	LeaveCriticalSection(&gameSection);
 	return s;
 }
 
-string GameLogic::NeedUPD(const int &id){
+string GameLogic::NeedUPD(int personId){
 	EnterCriticalSection(&gameSection);
-	string s_UPD = personHolder.NeedUPD(id);
+	string s_UPD = personHolder.NeedUPD(personId);
 	LeaveCriticalSection(&gameSection);
 	return s_UPD;
 
 }
 
-string GameLogic::NeedUI_UPD(const int &id){
+string GameLogic::NeedUI_UPD(int personId){
 	EnterCriticalSection(&gameSection);
-	string s_UPD = personHolder.NeedUI_UPD(id);
+	string s_UPD = personHolder.NeedUI_UPD(personId);
 	LeaveCriticalSection(&gameSection);
 	return s_UPD;
 }
 
 
 
-void GameLogic::Command(string s, const int &id, const Data &data, bool b){
+void GameLogic::Command(const string &s, int id, const Data &data, bool b){
 	EnterCriticalSection(&gameSection);
 	personHolder.Command(s, id, data, b);
 	LeaveCriticalSection(&gameSection);
 }
 
-void GameLogic::Exit(const int &num){
+void GameLogic::Exit(int num){
 	EnterCriticalSection(&gameSection);
 	personHolder.Exit(num);
 	LeaveCriticalSection(&gameSection);

@@ -3,29 +3,25 @@
 
 
 class Spell{
-	//Learn нужен дл€ выборки изученных
-	bool learn;
-	float cooldown;
-	//lvlType нужен, что бы показать от какого Mastery зависит уровень, если -1, то lvl всегда равен 1
-	int lvl, lvlType;
-	//’ранит информацию дл€ инициализации lvlType
-	static const int *masteryLvl;
+	
+			bool		learn;			//Learn нужен дл€ выборки изученных
+			float		cooldown;	
+			int			lvl;
+			int			lvlType;		//lvlType нужен, что бы показать от какого Mastery зависит уровень, если -1, то lvl всегда равен 1	
+	static	const int	*masteryLvl;	//’ранит информацию дл€ инициализации lvlType
+
 public:
-	//»нициализирует lvlType 
-	Spell(const int&);	
-	//¬озвращает
-	const bool& GetLearn() const;
+	 
+	Spell(int spellNumber);	//»нициализирует lvlType
 
-	const float& GetCooldown() const;
+			
+			const float&	GetCooldown() const;
+			const int&		GetLvl() const;
+			const int&		GetLvlType() const;
+	
+			void			SetLearn(bool newLearn);
+			void			SetCooldown(float newCooldown);
+			void			SetLvl(int newLvl);
 
-	const int& GetLvl() const;
-	const int& GetLvlType() const;
-	//”станавливает
-	void SetLearn(const bool&);
-
-	void SetCooldown(const float&);
-
-	void SetLvl(const int&);
-
-	static void SetMasteryLvlList(const int * const);
+	static	void			SetMasteryLvlList(const int * const newMasteryList);
 };

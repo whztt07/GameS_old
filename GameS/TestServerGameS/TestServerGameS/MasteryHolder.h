@@ -11,9 +11,9 @@ class MasteryHolder{
 	vector<Mastery> masteryList;
 
 public:
-	//Инициализирует массив создавая n элементов.
-	MasteryHolder(const int&);
-	const int& GetMasteryCount() const;
-	//Возвращает Mastery для работы с ним
-	Mastery& GetMastery(const int&);
+	
+	MasteryHolder(int masteryCount);		//Инициализирует массив создавая n элементов.
+
+	const int&	GetMasteryCount() const;		
+	Mastery&	GetMastery(int index);		//Возвращает Mastery для работы с ним
 };

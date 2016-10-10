@@ -6,15 +6,13 @@ using namespace std;
 class GameLogic;
 
 class Connection {
-	//Соккет для общего приема
-	static SOCKET Socket;
-	//Метод выполняемый в другом потоке
-	static unsigned _stdcall ConnectMy(void*);
+	
+	static SOCKET Socket;	//Соккет для общего приема
+	
+	static unsigned _stdcall ConnectMy(void *pvoid);	//Метод выполняемый в другом потоке
 public:
-	//Инициализация
-	static void Init(GameLogic *game);
-	//Метод возвращающий колличество подключенных клиентов
-	static const int GetClientCount();
-	//Метод запускающий поток
-	static void RunThread();
+	
+	static void	Init(GameLogic &game);	//Инициализация	
+	static int	GetClientCount();		//Метод возвращающий колличество подключенных клиентов
+	static void	RunThread();			//Метод запускающий поток
 };

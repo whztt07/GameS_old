@@ -10,12 +10,12 @@
 
 using namespace std;
 
-void BaseSpellHolder::Init(const vector<SpellInfo> &vec){
-	spellList = vec;
+void BaseSpellHolder::Init(const vector<SpellInfo> &newSpellInfoList){
+	spellList = newSpellInfoList;
 }
 
-const SpellInfo& BaseSpellHolder::GetSpell(const int& i) const{
-	return spellList[i];
+const SpellInfo& BaseSpellHolder::GetSpell(int index) const{
+	return spellList[index];
 }
 
 const int* const BaseSpellHolder::GetMasteryLvlArray() const{

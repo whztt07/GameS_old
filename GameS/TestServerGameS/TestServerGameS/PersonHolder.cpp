@@ -36,7 +36,7 @@ string PersonHolder::ResolutionGamePers(const vector<int> &vec, const int &id){
 const int& PersonHolder::GetIndex(const int &num){
 	int size = personList.size();
 	for (int i = 0; i < size; i++){
-		if (personList[i]->GetPersId() == num){
+		if (personList[i]->GetPersonId() == num){
 			return i;
 		}
 	}
@@ -81,7 +81,7 @@ void PersonHolder::Command(string command, const int &id, const Data &data, bool
 		}
 	}
 	else{
-		personList[index]->SetDopCommand(command);
-		personList[index]->SetDopData(data);
+		personList[index]->SetFastCommand(command);
+		personList[index]->SetFastData(data);
 	}
 }

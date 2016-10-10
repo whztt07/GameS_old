@@ -8,10 +8,9 @@ using namespace std;
 class SpellHolder{
 	vector<Spell> spellList;
 public:
-	SpellHolder(const int&);
+	SpellHolder(int spellCount);
 	
-	void UpdateLvl(const int&, const int&);
-
-	Spell& GetSpell(const int&);
+	void	UpdateLvl(int masteryIndex, int masteryLvl);
+	Spell&	GetSpell(int index);
 
 };

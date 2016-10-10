@@ -2,5 +2,6 @@
 
 
 struct UpdateData{
-	int personCount, spawnPointCount;
+	int personCount;
+	int spawnPointCount;
 };

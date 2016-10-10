@@ -10,4 +10,6 @@ void BaseItemHolder::Init(const vector<Item> &vec){
 	itemList = vec;
 }
 
-
+const Item& BaseItemHolder::GetItem(int i) const{
+	return itemList[i];
+}

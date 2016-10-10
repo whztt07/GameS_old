@@ -7,33 +7,34 @@
 
 using namespace std;
 
-void AccountHolder::AddAccount(Account& acc, const int& num){
+void AccountHolder::AddAccount(Account &currentAccount, int newId){
 	Account::EnterSection();
 	for (int i = 0; i < accountList.size(); i++){
-		if (accountList[i]->GetAccNum() == num){
-			accountList[i]->accNum = -1;
-			accountList[i]->persNum = -1;
-			accountList[i]->dopInfo = "NeedExit";
+		if (accountList[i]->GetAccountId() == newId){
+
+			accountList[i]->accountId = -1;
+			accountList[i]->personId = -1;
+			accountList[i]->info = "NeedExit";
 			accountList.erase(accountList.begin() + i);
 
 			break;
 		}
 	}
-	acc.accNum = num;
-	accountList.push_back(&acc);
+	currentAccount.accountId = newId;
+	accountList.push_back(&currentAccount);
 	Account::LeaveSection();
 }
-const int AccountHolder::GetClientCount() const{
+int AccountHolder::GetClientCount() const{
 	Account::EnterSection();
 	int size = accountList.size();
 	Account::LeaveSection();
 	return size;
 }
 
-void AccountHolder::Leave(const Account& acc){
+void AccountHolder::Leave(const Account &account){
 	Account::EnterSection();
 	for (int i = 0; i < accountList.size(); i++){
-		if (accountList[i]->GetAccNum() == acc.GetAccNum()){
+		if (accountList[i]->GetAccountId() == account.GetAccountId()){
 			accountList.erase(accountList.begin() + i);
 			break;
 		}

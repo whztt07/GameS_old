@@ -1,40 +1,43 @@
 #pragma once
 
 
-class SpellInfo{
-
-	//Параметры скила
-	bool active, learn;
-	float range, castTime, cooldown;
-	int targetType, manaCost, type, animType;
-	//Что нужно для изучения
-	int goldCost, abilityPointCost, spellPointCost, intelligenceNeed;
-	int *masteryLvlNeed;
+class SpellInfo{	
+	bool	active;
+	bool	learn;
+	float	range;
+	float	castTime;
+	float	cooldown;
+	int		targetType;
+	int		manaCost;
+	int		type;
+	int		animationType;	
+	int		goldCost;
+	int		abilityPointCost;
+	int		spellPointCost;
+	int		intelligenceNeed;
+	int		*masteryLvlNeed;
 public:
 
 	SpellInfo();
 	SpellInfo(const SpellInfo&);
-	SpellInfo& operator=(const SpellInfo&);
 	~SpellInfo();
+
+	SpellInfo&	operator=(const SpellInfo&);	
 	
-	void SetActive(const bool&);
-	void SetLearn(const bool&);
+	void		SetActive(bool newActive);
+	void		SetLearn(bool newLearn);
+	void		SetRange(float newRange);
+	void		SetCastTime(float newCastTime);
+	void		SetCooldown(float newCooldown);
+	void		SetTargetType(int newTargetType);
+	void		SetManaCost(int newManaCost);
+	void		SetType(int newType);
+	void		SetAnimationType(int newAnimationType);
+	void		SetGoldCost(int newGoldCost);
+	void		SetAbilityPointCost(int newAbilityPointCost);
+	void		SetSpellPointCost(int newSpellPointCost);
+	void		SetIntelligenceNeed(int newIntelligenceNeed);
+	void		SetMasteryLvlNeed(int masteryIndex, int newLvl);
 
-	void SetRange(const float&);
-	void SetCastTime(const float&);
-	void SetCooldown(const float&);
-
-	void SetTargetType(const int&);
-	void SetManaCost(const int&);
-	void SetType(const int&);
-	void SetAnimType(const int&);
-
-	void SetGoldCost(const int&);
-	void SetAbilityPointCost(const int&);
-	void SetSpellPointCost(const int&);
-	void SetIntelligenceNeed(const int&);
-	void SetMasteryLvlNeed(const int&, const int&);
-
-
-	const int& GetMasteryLvlNeed(const int&) const;
+	const int&	GetMasteryLvlNeed(int masteryIndex) const;
 };	

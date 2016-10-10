@@ -3,7 +3,6 @@
 
 class WorkFile{
 	
-public:	
-	//Метод считывает данные с файла и преобразовывает их в геодату
-	static GeoData ReadGeoData();
+public:		
+	static GeoData& ReadGeoData();	//Метод считывает данные с файла и преобразовывает их в геодату
 };

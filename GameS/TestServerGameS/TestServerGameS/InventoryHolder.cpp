@@ -7,12 +7,12 @@
 using namespace std;
 
 
-InventoryHolder::InventoryHolder(const int &count){
-	for (int i = 0; i < count; i++){
+InventoryHolder::InventoryHolder(int slotCount){
+	for (int i = 0; i < slotCount; i++){
 		inventory.push_back(InventorySlot());
 	}
 }
 
-InventorySlot& InventoryHolder::GetSlot(const int &i){
-	return inventory[i];
+InventorySlot& InventoryHolder::GetSlot(int index){
+	return inventory[index];
 }

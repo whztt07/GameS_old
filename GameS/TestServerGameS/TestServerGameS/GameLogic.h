@@ -13,43 +13,35 @@ class MSQL_init_data;
 class UpdateData;
 
 class GameLogic{
-	//Секция для безопасного доступа
-	CRITICAL_SECTION gameSection;
-	//Клас геодаты содержащий методы для перемещения персонажей
-	GeoData geoData;
-	//Метод вызываемый для обновления логики
-	void Update();
-	//Метод вызываемый в другом потоке, обновляет логику в цикле
-	static unsigned _stdcall RunUpdate(void*);
+	
+	CRITICAL_SECTION	gameSection;		//Секция для безопасного доступа	
+	GeoData				geoData;			//Клас геодаты содержащий методы для перемещения персонажей	
+	PersonHolder		personHolder;		//Класс содержащий в себе массив персонажей и предоставляющий методы для работы с ним	
+	BasePersonHolder	basePersonHolder;	//Класс содержащий в себе массив базовых персонажей и предоставляющий методы для работы с ним
+	BaseItemHolder		baseItemHolder;		//Класс содержащий в себе массив предметов и предоставляющий методы для работы с ним	
+	SpawnPointHolder	spawnPointHolder;	//Класс содержащий в себе массив точек респавна и предоставляющий методы для работы с ним
+	//DropItemHolder		dropItemHolder;		//Класс содержащий в себе массив выпавших предметов и предоставляющий методы для работы с ним
+	BaseSpellHolder		baseSpellHolder;	//Класс содержащий в себе массив спелов и предоставляющий методы для работы с ним
 
-	//Класс содержащий в себе массив персонажей и предоставляющий методы для работы с ним
-	PersonHolder personHolder;
-	//Класс содержащий в себе массив базовых персонажей и предоставляющий методы для работы с ним
-	BasePersonHolder basePersonHolder;
-	//Класс содержащий в себе массив предметов и предоставляющий методы для работы с ним
-	BaseItemHolder baseItemHolder;
-	//Класс содержащий в себе массив точек респавна и предоставляющий методы для работы с ним
-	SpawnPointHolder spawnPointHolder;
-	//Класс содержащий в себе массив выпавших предметов и предоставляющий методы для работы с ним
-	//DropItemHolder dropItemHolder;
-	//Класс содержащий в себе массив спелов и предоставляющий методы для работы с ним
-	BaseSpellHolder baseSpellHolder;
-
+	
+			void				Update();			//Метод вызываемый для обновления логики	
+	static	unsigned _stdcall	RunUpdate(void *pvoid);	//Метод вызываемый в другом потоке, обновляет логику в цикле
+	
 public:
 	
-	GameLogic(const MSQL_init_data&);
-	//Метод возвращающий дынные необходимые для обновления формы
-	UpdateData GetUpdateData();
+	GameLogic(const MSQL_init_data &msql_init_data);
+	
+	UpdateData		GetUpdateData();											//Метод возвращающий дынные необходимые для обновления формы
 
-	const Person& GetBasePerson(const int&);
-	void AddPerson(const Person&, int = 1);
+	const Person&	GetBasePerson(int index);
+	void			AddPerson(const Person &newPerson, int type = 1);
 
-	string ResolutionGamePers(const vector<int>&, const int&);
-	string NeedUPD(const int&);
-	string NeedUI_UPD(const int&);
-	void Command(string, const int&, const Data&, bool = false);
-	void Exit(const int&);
-	//Метод запускающий метод обновления в потоке
-	void RunThread();
+	string			ResolutionGamePers(const vector<int> &, int);
+	string			NeedUPD(int personId);
+	string			NeedUI_UPD(int personId);
+	void			Command(const string&, int, const Data&, bool = false);
+	void			Exit(int);
+	
+	void			RunThread();												//Метод запускающий метод обновления в потоке
 
 };

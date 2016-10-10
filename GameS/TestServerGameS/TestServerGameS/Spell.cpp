@@ -4,11 +4,7 @@
 
 const int *Spell::masteryLvl;
 
-Spell::Spell(const int& number) : learn(), cooldown(), lvl(), lvlType(masteryLvl[number]){}
-
-const bool& Spell::GetLearn() const{
-	return learn;
-}
+Spell::Spell(int spellNumber) : learn(), cooldown(), lvl(), lvlType(masteryLvl[spellNumber]){}
 
 const float& Spell::GetCooldown() const{
 	return cooldown;
@@ -22,18 +18,18 @@ const int& Spell::GetLvlType() const{
 	return lvlType;
 }
 
-void Spell::SetLearn(const bool& _learn){
-	learn = _learn;
+void Spell::SetLearn(bool newLearn){
+	learn = newLearn;
 }
 
-void Spell::SetCooldown(const float& _cooldown){
-	cooldown = _cooldown;
+void Spell::SetCooldown(float newCooldown){
+	cooldown = newCooldown;
 }
 
-void Spell::SetLvl(const int& _lvl){
-	lvl = _lvl;
+void Spell::SetLvl(int newLvl){
+	lvl = newLvl;
 }
 
-void Spell::SetMasteryLvlList(const int * const list){
-	masteryLvl = list;
+void Spell::SetMasteryLvlList(const int * const newList){
+	masteryLvl = newList;
 }

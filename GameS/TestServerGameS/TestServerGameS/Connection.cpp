@@ -22,7 +22,7 @@ using namespace std;
 
 SOCKET Connection::Socket;
 
-void Connection::Init(GameLogic *game){
+void Connection::Init(GameLogic &game){
 
 	char buff[128];
 
@@ -71,7 +71,7 @@ unsigned _stdcall Connection::ConnectMy(void* pvoid){
 }
 
 
-const int Connection::GetClientCount(){
+int Connection::GetClientCount(){
 	return Client::GetClientCount();
 }
 

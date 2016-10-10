@@ -35,6 +35,25 @@ public:
 	void SetResPierce(const int&);
 	void SetEvasionPenalty(const int&);
 
+	const string& GetType() const;
+	const string& GetSubType() const;
 
+	const bool& GetStack() const;
+
+	const float& GetWeight() const;
+	const float& GetRangeAttack() const;
+
+	const int& GetMinAttack() const;
+	const int& GetMaxAttack() const;
+	const int& GetAccuracy() const;
+	const int& GetAttackSpeed() const;
+	const int& GetCritChance() const;
+	const int& GetCritRate() const;
+	const int& GetSpeedPenalty() const;
+	const int& GetFailCastSpell() const;
+	const int& GetResSlash() const;
+	const int& GetResCrush() const;
+	const int& GetResPierce() const;
+	const int& GetEvasionPenalty() const;
 };
 

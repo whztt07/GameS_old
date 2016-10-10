@@ -13,7 +13,7 @@
 
 
 
-void Client::Init(GameLogic *game){
+void Client::Init(GameLogic &game){
 	Account::Init();
 	Processing::Init(game);
 }
@@ -55,7 +55,7 @@ unsigned _stdcall Client::ToClient(void * pvoid){
 	sendto(Socket, &ss[0], ss.length(), 0, (sockaddr *)&client_add, sizeof(client_add));
 	sockaddr_in client_addr;
 	int client_addr_size = sizeof(client_addr);
-	Account acc = Account();
+	Account acc;
 	int my_lastTimeUPD = clock();
 	fd_set read_s; // Множество
 	timeval time_out; // Таймаут
@@ -101,7 +101,7 @@ unsigned _stdcall Client::ToClient(void * pvoid){
 
 }
 
-const int Client::GetClientCount(){
+int Client::GetClientCount(){
 	return Processing::GetClientCount();
 }
 

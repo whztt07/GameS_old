@@ -2,10 +2,11 @@
 
 
 class Buff{
-	int type, level;
-	float time;
-	bool spec;
+	int		type;
+	int		level;
+	float	time;
+	bool	special;
 public:
-	Buff(int, int, float, bool = false);
+	Buff(int type, int level, float time, bool special = false);
 	Buff();	
 };

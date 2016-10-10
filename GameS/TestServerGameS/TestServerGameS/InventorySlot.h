@@ -3,12 +3,12 @@
 
 class InventorySlot{
 	
-	int item, count;	
+	int itemId;
+	int count;
 public:
 	InventorySlot();
-	void SetItem(const int&);
-	void SetCount(const int&);
 
-	const int& GetItem() const;
-	const int& GetCount() const;
+	void SetItemId(int newItemId);
+	void SetCount(int newCount);
+
 };

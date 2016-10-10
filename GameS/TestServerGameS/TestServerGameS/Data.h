@@ -1,5 +1,9 @@
 #pragma once
 
 struct Data{
-	float q1, q2, q3, q4, q5;
+	float data1; 
+	float data2; 
+	float data3; 
+	float data4; 
+	float data5;
 };

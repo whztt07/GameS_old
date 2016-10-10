@@ -5,35 +5,39 @@ using namespace std;
 
 class Account{
 	friend class AccountHolder;
-	static CRITICAL_SECTION accountSection;
-	
-	int accNum;
-	int persNum;
-	string dopInfo, lastAnswer, lastRequest;
-	vector<int> persIdList;
-	static void EnterSection();
-	static void LeaveSection();
+
+	static	CRITICAL_SECTION	accountSection;	
+			int					accountId;
+			int					personId;
+			string				info;
+			string				lastAnswer;
+			string				lastRequest;
+			vector<int>			personIdList;
+
+
+
+	static	void	EnterSection();
+	static	void	LeaveSection();
+
 public:
-	static void Init();
 	Account();
-	void SetAccNum(const int&);
-	void SetPersNum(const int&);
 
-	void SetDopInfo(const string&);
-	void SetLastAnswer(const string&);
-	void SetLastRequest(const string&);
+	static	void				Init();
 
-	void SetPersIdList(const vector<int>&);
+			
+			void				SetPersonId(int newPersonId);
+			void				SetInfo(const string &newInfo);
+			void				SetLastAnswer(const string &newLastAnswer);
+			void				SetLastRequest(const string &newLastRequest);
+			void				SetPersonIdList(const vector<int> &newPersonIdList);
 
-	const int GetAccNum() const;
-	const int GetPersNum() const;
+			const int&			GetAccountId() const;
+			const int&			GetPersonId() const;
+			const string&		GetInfo() const;
+			const string&		GetLastAnswer() const;
+			const string&		GetLastRequest() const;
+			const vector<int>&	GetPersonIdList() const;
 
-	const string GetDopInfo() const;
-	const string GetLastAnswer() const;
-	const string GetLastRequest() const;
-
-	const vector<int>& GetPersIdList() const;
-
-	Account* GetCopy() const;
+			Account				GetCopyAccount() const;
 	
 };

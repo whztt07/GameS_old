@@ -7,12 +7,11 @@ using namespace std;
 struct MSQL_init_data;
 
 class MSQLConnect{
-	//Соединение по которому происходит общение
-	MYSQL *connection;
-	//Переменная нужная для соединения.
-	MYSQL mysql;
+
+	MYSQL *connection;	//Соединение по которому происходит общение	
+	MYSQL mysql;		//Переменная нужная для соединения.
 public:
-	void Init(const MSQL_init_data&);
-	~MSQLConnect();
-	MYSQL_RES* Query(string quer);
+	~MSQLConnect();										//Закрытие соединения и окончание сеанса связи
+	void		Init(const MSQL_init_data &init_data);	//Создает соединение с базой данных
+	MYSQL_RES*	Query(const string &query);				//Отправляет запрос и возвращает результат
 };

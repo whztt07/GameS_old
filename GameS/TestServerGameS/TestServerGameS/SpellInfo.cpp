@@ -6,7 +6,7 @@
 SpellInfo::SpellInfo() : masteryLvlNeed(new int[MASTERY_COUNT]){}
 
 SpellInfo::SpellInfo(const SpellInfo &s) : active(s.active), learn(s.learn), range(s.range), castTime(s.castTime), cooldown(s.cooldown),
-targetType(s.targetType), manaCost(s.manaCost), type(s.type), animType(animType), goldCost(s.goldCost), abilityPointCost(s.abilityPointCost),
+targetType(s.targetType), manaCost(s.manaCost), type(s.type), animationType(s.animationType), goldCost(s.goldCost), abilityPointCost(s.abilityPointCost),
 spellPointCost(s.spellPointCost), intelligenceNeed(s.intelligenceNeed), masteryLvlNeed(new int[MASTERY_COUNT]){
 	for (int i = 0; i < MASTERY_COUNT; i++)
 		masteryLvlNeed[i] = s.masteryLvlNeed[0];
@@ -21,7 +21,7 @@ SpellInfo& SpellInfo::operator=(const SpellInfo &s){
 	targetType = s.targetType;
 	manaCost = s.manaCost;
 	type = s.type;
-	animType = animType;
+	animationType = s.animationType;
 	goldCost = s.goldCost;
 	abilityPointCost = s.abilityPointCost;
 	spellPointCost = s.spellPointCost;
@@ -33,67 +33,67 @@ SpellInfo& SpellInfo::operator=(const SpellInfo &s){
 	return *this;
 }
 
-void SpellInfo::SetActive(const bool &_active){
-	active = _active;
+void SpellInfo::SetActive(bool newActive){
+	active = newActive;
 }
 
-void SpellInfo::SetLearn(const bool &_learn){
-	learn = _learn;
+void SpellInfo::SetLearn(bool newLearn){
+	learn = newLearn;
 }
 
-void SpellInfo::SetRange(const float &_range){
-	range = _range;
+void SpellInfo::SetRange(float newRange){
+	range = newRange;
 }
 
-void SpellInfo::SetCastTime(const float &_castTime){
-	castTime = _castTime;
+void SpellInfo::SetCastTime(float newCastTime){
+	castTime = newCastTime;
 }
 
-void SpellInfo::SetCooldown(const float &_cooldown){
-	cooldown = _cooldown;
-}
-
-
-void SpellInfo::SetTargetType(const int &_targetType){
-	targetType = _targetType;
-}
-
-void SpellInfo::SetManaCost(const int &_manaCost){
-	manaCost = _manaCost;
-}
-
-void SpellInfo::SetType(const int &_type){
-	type = _type;
-}
-
-void SpellInfo::SetAnimType(const int &_animType){
-	animType = _animType;
+void SpellInfo::SetCooldown(float newCooldown){
+	cooldown = newCooldown;
 }
 
 
-void SpellInfo::SetGoldCost(const int &_goldCost){
-	goldCost = _goldCost;
+void SpellInfo::SetTargetType(int newTargetType){
+	targetType = newTargetType;
 }
 
-void SpellInfo::SetAbilityPointCost(const int &_abilityPointCost){
-	abilityPointCost = _abilityPointCost;
+void SpellInfo::SetManaCost(int newManaCost){
+	manaCost = newManaCost;
 }
 
-void SpellInfo::SetSpellPointCost(const int &_spellPointCost){
-	spellPointCost = _spellPointCost;
+void SpellInfo::SetType(int newType){
+	type = newType;
 }
 
-void SpellInfo::SetIntelligenceNeed(const int &_IntelligenceNeed){
-	intelligenceNeed = _IntelligenceNeed;
-}
-
-void SpellInfo::SetMasteryLvlNeed(const int &i, const int &lvl){
-	masteryLvlNeed[i] = lvl;
+void SpellInfo::SetAnimationType(int newAnimType){
+	animationType = newAnimType;
 }
 
 
-const int& SpellInfo::GetMasteryLvlNeed(const int &i) const{
-	return masteryLvlNeed[i];
+void SpellInfo::SetGoldCost(int newGoldCost){
+	goldCost = newGoldCost;
+}
+
+void SpellInfo::SetAbilityPointCost(int newAbilityPointCost){
+	abilityPointCost = newAbilityPointCost;
+}
+
+void SpellInfo::SetSpellPointCost(int newSpellPointCost){
+	spellPointCost = newSpellPointCost;
+}
+
+void SpellInfo::SetIntelligenceNeed(int newIntelligenceNeed){
+	intelligenceNeed = newIntelligenceNeed;
+}
+
+void SpellInfo::SetMasteryLvlNeed(int masteryIndex, int newLvl){
+	masteryLvlNeed[masteryIndex] = newLvl;
+}
+
+
+const int& SpellInfo::GetMasteryLvlNeed(int masteryIndex) const{
+	return masteryLvlNeed[masteryIndex];
 }
 
 

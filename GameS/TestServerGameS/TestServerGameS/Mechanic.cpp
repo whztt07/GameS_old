@@ -1,15 +1,6 @@
 #include "stdafx.h"
 
 /*
-void Mechanic::AddBasePerson(Person pers){//base pers holder
-
-	EnterCriticalSection(&var->varSection);
-	pers.dropList.push_back(Drop(13, 50, 1, 5));
-	pers.pointDrop = PointsDrop(30, 10, 60, 30, 1, 5);
-	var->basePersonList.push_back(pers);
-	
-	LeaveCriticalSection(&var->varSection);
-}
 
 void Mechanic::PersUPD(int j){//Pers нужен static baseItemHolder
 	

@@ -6,5 +6,6 @@
 #include "Global.h"
 using namespace std;
 
-SpawnPoint::SpawnPoint(const Vector3 &pos, const vector<int> &vec, const float& time) : idList(vec), respawnTime(time), patrolRange(NPC_PATROL_RANGE),
-spawnRange(NPC_SPAWN_RANGE), spawnPosition(pos), curId(-1), deadTime() {}
+SpawnPoint::SpawnPoint(const Vector3 &spawnPosition, const vector<int> &npcIdList, float respawnTime) : npcIdList(npcIdList), 
+respawnTime(respawnTime), patrolRange(NPC_PATROL_RANGE), spawnRange(NPC_SPAWN_RANGE), spawnPosition(spawnPosition), currentNpcId(-1),
+deadTime() {}

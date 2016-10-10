@@ -4,12 +4,12 @@
 
 #include "BuffHolder.h"
 
-BuffHolder::BuffHolder(const int &count){
-	for (int i = 0; i < count; i++){
+BuffHolder::BuffHolder(const int &buffCount){
+	for (int i = 0; i < buffCount; i++){
 		buffList.push_back(Buff());
 	}
 }
 
-void BuffHolder::Init(const vector<Buff> &vec){
-	buffList = vec;
+void BuffHolder::Init(const vector<Buff> &newBuffList){
+	buffList = newBuffList;
 }

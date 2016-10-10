@@ -354,7 +354,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 label6->Text = "Инициализация";
 			 game = new GameLogic(MSQL_init_data(MarhString(textBox1->Text), MarhString(textBox2->Text), MarhString(textBox3->Text),
 				 MarhString(textBox4->Text)));
-			 Connection::Init(game);
+			 Connection::Init(*game);
 			 Connection::RunThread();
 			 game->RunThread();
 			 timer1->Start();

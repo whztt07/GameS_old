@@ -8,6 +8,7 @@ using namespace std;
 class InventoryHolder{
 	vector<InventorySlot> inventory;
 public:
-	InventoryHolder(const int&);
-	InventorySlot& GetSlot(const int&);
+	InventoryHolder(int slotCount);
+
+	InventorySlot& GetSlot(int index);
 };

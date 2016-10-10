@@ -25,12 +25,12 @@ void WorkMSQL::Init(const MSQL_init_data &msql_init_data){
 	
 
 
-string WorkMSQL::Login(string login, string pass){
+string WorkMSQL::Login(const string &login, const string &password){
 
 	MYSQL_RES *resul = msql_connect.Query("SELECT `id`, `pass` FROM  `users` WHERE login = '" + login + "' LIMIT 1");
 	MYSQL_ROW row;
 	if ((row = mysql_fetch_row(resul)) != NULL) {
-		if (row[1] == pass){
+		if (row[1] == password){
 			
 			return "OK|" + string(row[0]) + "|";
 		}
@@ -44,22 +44,22 @@ string WorkMSQL::Login(string login, string pass){
 	return "NULL";
 }
 
-string WorkMSQL::Registrate(string login, string pass){
+string WorkMSQL::Registrate(const string &login, const string &password){
 	MYSQL_RES *resul = msql_connect.Query("SELECT `id` FROM  `users` WHERE login = '" + login + "' LIMIT 1");
 	MYSQL_ROW row;
 	if ((row = mysql_fetch_row(resul)) != NULL) {
 		return "LoginExist";
 	}
 	else{
-		msql_connect.Query("INSERT INTO `users`(`login`, `pass`) VALUES('" + login + "', '" + pass + "')");
+		msql_connect.Query("INSERT INTO `users`(`login`, `pass`) VALUES('" + login + "', '" + password + "')");
 		
 		return "RegistrateOK";
 	}
 	return "NULL";
 }
 
-string WorkMSQL::NeedPers(int num){
-	MYSQL_RES *resul =  msql_connect.Query("SELECT `id`, `name`,`race` FROM  `pers` WHERE accId = '" + to_string(num) + "' LIMIT 5");
+string WorkMSQL::NeedPers(int accountId){
+	MYSQL_RES *resul =  msql_connect.Query("SELECT `id`, `name`,`race` FROM  `pers` WHERE accId = '" + to_string(accountId) + "' LIMIT 5");
 	MYSQL_ROW row;
 	
 	int indexK = 0;
@@ -72,8 +72,8 @@ string WorkMSQL::NeedPers(int num){
 	return  "Pers|" + to_string(indexK) + "|" + temS;
 }
 
-string WorkMSQL::CreatePers(const int &accNum,const string &name, const Person &pers){
-	string ss = name;
+string WorkMSQL::CreatePers(int accountId,const string &name, const Person &basePerson){
+	
 	MYSQL_RES *resul = msql_connect.Query("SELECT `id` FROM  `pers` WHERE name = '" + name + "' LIMIT 1");
 	MYSQL_ROW row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
@@ -81,29 +81,28 @@ string WorkMSQL::CreatePers(const int &accNum,const string &name, const Person &
 	}
 	else{
 		msql_connect.Query("INSERT INTO `pers`( `accId`,`name`, `race`, `curHP`, `curMP`) VALUES('" 
-			+ to_string(accNum) + "','" + name + "', '" + to_string(pers.GetRace()) + "','" + to_string(pers.GetCurHp())
-			+ "','" + to_string(pers.GetCurMp()) + "')");
+			+ to_string(accountId) + "','" + name + "', '" + to_string(basePerson.GetRace()) + "','" + to_string(basePerson.GetCurrentHp())
+			+ "','" + to_string(basePerson.GetCurrentMp()) + "')");
 		MYSQL_RES *resul = msql_connect.Query("SELECT `id` FROM  `pers` WHERE name = '" + name + "' LIMIT 1");
 		MYSQL_ROW row;
 		if ((row = mysql_fetch_row(resul)) != NULL){
-			string s = row[0];
-			msql_connect.Query("INSERT INTO `inventory`( `persId`) VALUES('" + s + "')");
-			msql_connect.Query("INSERT INTO `buff`( `persId`) VALUES('" + s + "')");
-			msql_connect.Query("INSERT INTO `debuff`( `persId`) VALUES('" + s + "')");
+			string personId = row[0];
+			msql_connect.Query("INSERT INTO `inventory`( `persId`) VALUES('" + personId + "')");
+			msql_connect.Query("INSERT INTO `buff`( `persId`) VALUES('" + personId + "')");
+			msql_connect.Query("INSERT INTO `debuff`( `persId`) VALUES('" + personId + "')");
 		}
 		return "CreatePersOK|";
-	}
-	
+	}	
 	return "NULL";
 }
 
-Person WorkMSQL::GamePerson(int num){
+Person WorkMSQL::GamePerson(int personId){
 	Person pers = Person();
-	MYSQL_RES *resul = msql_connect.Query("SELECT * FROM  `pers` WHERE id = '" + to_string(num) + "' LIMIT 1");
+	MYSQL_RES *resul = msql_connect.Query("SELECT * FROM  `pers` WHERE id = '" + to_string(personId) + "' LIMIT 1");
 	MYSQL_ROW row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 		int it = 0;
-		pers.SetPersId(atoi(row[it++]));
+		pers.SetPersonId(atoi(row[it++]));
 		it++;
 		pers.SetName(row[it++]);
 		pers.SetRace(atoi(row[it++]));
@@ -112,8 +111,8 @@ Person WorkMSQL::GamePerson(int num){
 		pers.SetLive(atoi(row[it++]) != 0);
 		pers.SetResInPlace(atoi(row[it++]) != 0);
 		pers.SetCorpseSaveTime(atof(row[it++]));
-		pers.SetCurHp(atof(row[it++]));
-		pers.SetCurMp(atof(row[it++]));
+		pers.SetCurrentHp(atof(row[it++]));
+		pers.SetCurrentMp(atof(row[it++]));
 		pers.SetBaseStrength(atoi(row[it++]));
 		pers.SetBaseAgility(atoi(row[it++]));
 		pers.SetBaseConstitution(atoi(row[it++]));
@@ -127,17 +126,17 @@ Person WorkMSQL::GamePerson(int num){
 		pers.SetAbilityPoint(atoi(row[it++]));
 		pers.SetSpellPoint(atoi(row[it++]));
 	}
-	resul = msql_connect.Query("SELECT * FROM  `inventory` WHERE persId = '" + to_string(num) + "' LIMIT 1");
+	resul = msql_connect.Query("SELECT * FROM  `inventory` WHERE persId = '" + to_string(personId) + "' LIMIT 1");
 	row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 		int it = 1;		
 		for (int i = 0; i < INVENTORY_SIZE; i++){
-			pers.inventory.GetSlot(i).SetItem(atoi(row[it++]));
+			pers.inventory.GetSlot(i).SetItemId(atoi(row[it++]));
 			pers.inventory.GetSlot(i).SetCount(atoi(row[it++]));
 		}
 	}
 
-	resul = msql_connect.Query("SELECT * FROM  `buff` WHERE persId = '" + to_string(num) + "' LIMIT 1");
+	resul = msql_connect.Query("SELECT * FROM  `buff` WHERE persId = '" + to_string(personId) + "' LIMIT 1");
 	row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 		int it = 1;
@@ -147,7 +146,7 @@ Person WorkMSQL::GamePerson(int num){
 		}
 		pers.buffList.Init(buffList);
 	}
-	resul = msql_connect.Query("SELECT * FROM  `debuff` WHERE persId = '" + to_string(num) + "' LIMIT 1");
+	resul = msql_connect.Query("SELECT * FROM  `debuff` WHERE persId = '" + to_string(personId) + "' LIMIT 1");
 	row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 		int it = 1;
@@ -157,7 +156,7 @@ Person WorkMSQL::GamePerson(int num){
 		}
 		pers.debuffList.Init(debuffList);
 	}
-	resul = msql_connect.Query("SELECT * FROM  `mastery` WHERE persId = '" + to_string(num) + "' LIMIT 1");
+	resul = msql_connect.Query("SELECT * FROM  `mastery` WHERE persId = '" + to_string(personId) + "' LIMIT 1");
 	row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 		
@@ -166,7 +165,7 @@ Person WorkMSQL::GamePerson(int num){
 		}
 	}
 
-	resul = msql_connect.Query("SELECT * FROM  `spell` WHERE persId = '" + to_string(num) + "' LIMIT 1");
+	resul = msql_connect.Query("SELECT * FROM  `spell` WHERE persId = '" + to_string(personId) + "' LIMIT 1");
 	row;
 	if ((row = mysql_fetch_row(resul)) != NULL){
 
@@ -224,7 +223,7 @@ vector<SpellInfo> WorkMSQL::GetBaseSpell(){
 		spell.SetActive(atoi(row[it++]) != 0);
 		spell.SetLearn(atoi(row[it++]) != 0);
 		spell.SetTargetType(atoi(row[it++]));
-		spell.SetAnimType(atoi(row[it++]));
+		spell.SetAnimationType(atoi(row[it++]));
 		spell.SetManaCost(atoi(row[it++]));
 		spell.SetCastTime(atof(row[it++]));
 		spell.SetRange(atof(row[it++]));
@@ -263,8 +262,8 @@ vector<Person> WorkMSQL::GetBasePerson(){
 		
 		pers.SetName(row[it++]);
 		pers.SetRace(atoi(row[it++]));
-		pers.SetCurHp(atof(row[it++]));
-		pers.SetCurMp(atof(row[it++]));
+		pers.SetCurrentHp(atof(row[it++]));
+		pers.SetCurrentMp(atof(row[it++]));
 		pers.SetBaseStrength(atoi(row[it++]));
 		pers.SetBaseAgility(atoi(row[it++]));
 		pers.SetBaseConstitution(atoi(row[it++]));

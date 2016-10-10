@@ -5,20 +5,20 @@
 #include "GeoData.h"
 
 
-GeoData WorkFile::ReadGeoData(){
+GeoData& WorkFile::ReadGeoData(){
 	
 	FILE *f;
 
 	int n = 8;
-	System::IO::FileStream^ fs = gcnew System::IO::FileStream("GeoData.geo", System::IO::FileMode::OpenOrCreate);
+	System::IO::FileStream^ fs = gcnew System::IO::FileStream("geoData.geo", System::IO::FileMode::OpenOrCreate);
 	System::IO::BinaryReader^ reader = gcnew System::IO::BinaryReader(fs);
 	n = reader->ReadInt32();
-	GeoData geoData = GeoData();
-	geoData.size_z = n;
+	GeoData *geoData = new GeoData();
+	geoData->size_z = n;
 	n = reader->ReadInt32();
-	geoData.size_x = n;
+	geoData->size_x = n;
 
-	for (int i = 0; i < geoData.size_z*geoData.size_x; i++){
+	for (int i = 0; i < geoData->size_z*geoData->size_x; i++){
 		int n;
 		byte bytes[(4 + 9 * 64)];
 		array<unsigned char, 1> ^cha = gcnew array<unsigned char, 1>((4 + 9 * 64));
@@ -60,8 +60,8 @@ GeoData WorkFile::ReadGeoData(){
 			iter += 4;
 			_geoCells[j].height = fl;
 		}
-		geoData.geoCubs.push_back(GeoCube(n, _geoCells));
+		geoData->geoCubs.push_back(GeoCube(n, _geoCells));
 	}
 	
-	return geoData;
+	return *geoData;
 }

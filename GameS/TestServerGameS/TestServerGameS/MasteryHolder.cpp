@@ -7,14 +7,14 @@
 
 using namespace std;
 
-MasteryHolder::MasteryHolder(const int& count){
-	for (int i = 0; i < count; i++){
+MasteryHolder::MasteryHolder(int masteryCount){
+	for (int i = 0; i < masteryCount; i++){
 		masteryList.push_back(Mastery());
 	}
 }
 
-Mastery& MasteryHolder::GetMastery(const int& i){
-	return masteryList[i];
+Mastery& MasteryHolder::GetMastery(int index){
+	return masteryList[index];
 }
 
 const int& MasteryHolder::GetMasteryCount() const{
