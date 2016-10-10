@@ -13,3 +13,7 @@ BuffHolder::BuffHolder(const int &buffCount){
 void BuffHolder::Init(const vector<Buff> &newBuffList){
 	buffList = newBuffList;
 }
+
+const Buff& BuffHolder::GetBuff(int index) const{
+	return buffList[index];
+}

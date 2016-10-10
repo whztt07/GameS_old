@@ -6,24 +6,25 @@
 #include "PersonHolder.h"
 using namespace std;
 
-void PersonHolder::AddPerson(const Person &pers, int type){
-	Person *ppers = new Person(pers);
-	ppers->SetType(type);
+void PersonHolder::AddPerson(const Person &newPerson, int personType){
+	Person *ppers = new Person(newPerson);
+	ppers->SetType(personType);
 	personList.push_back(ppers);
 }
 
-string PersonHolder::ResolutionGamePers(const vector<int> &vec, const int &id){
+string PersonHolder::ResolutionGamePers(const vector<int> &personIdList, int personId) const{
 	string s = "";
 	bool ok = true;
-	for (int i = 0; i < vec.size(); i++){
-		if (vec[i] != id && GetIndex(vec[i]) > -1){
+	int size = personIdList.size();
+	for (int i = 0; i < size; i++){
+		if (personIdList[i] != personId && GetIndex(personIdList[i]) > -1){
 			s = "PersPlays";
 			ok = false;
 			break;
 		}
 	}
 	if (ok){
-		if (GetIndex(id) == -1){
+		if (GetIndex(personId) == -1){
 			s = "NewPers";
 		}
 		else{
@@ -33,27 +34,27 @@ string PersonHolder::ResolutionGamePers(const vector<int> &vec, const int &id){
 	return s;
 }
 
-const int& PersonHolder::GetIndex(const int &num){
+const int& PersonHolder::GetIndex(int personId) const{
 	int size = personList.size();
 	for (int i = 0; i < size; i++){
-		if (personList[i]->GetPersonId() == num){
+		if (personList[i]->GetPersonId() == personId){
 			return i;
 		}
 	}
 	return -1;
 }
 
-void PersonHolder::Exit(const int &num){
-	if (num > -1){
-		int j = GetIndex(num);
+void PersonHolder::Exit(int personId){
+	if (personId > -1){
+		int j = GetIndex(personId);
 		if (j > -1){
 			personList[j]->SetActive(false);
 		}
 	}
 }
 
-string PersonHolder::NeedUPD(const int &id){
-	int index = GetIndex(id);
+string PersonHolder::NeedUPD(int personId){
+	int index = GetIndex(personId);
 	string s_UPD = personList[index]->GetUpdate();
 	if (s_UPD == "NULL"){
 		personList[index]->SetNeedUpdate(true);
@@ -62,14 +63,14 @@ string PersonHolder::NeedUPD(const int &id){
 	return s_UPD;
 }
 
-string PersonHolder::NeedUI_UPD(const int &id){
-	int index = GetIndex(id);
+string PersonHolder::NeedUI_UPD(int personId){
+	int index = GetIndex(personId);
 	return personList[index]->GetUiUpdate();
 }
 
-void PersonHolder::Command(string command, const int &id, const Data &data, bool b){
-	int index = GetIndex(id);
-	if (b){
+void PersonHolder::Command(const string &command, int personId, const Data &data, bool fast){
+	int index = GetIndex(personId);
+	if (fast){
 		if (personList[index]->GetDoes()){
 			personList[index]->SetWait(true);
 			personList[index]->SetWaitingCommand(command);
@@ -84,4 +85,12 @@ void PersonHolder::Command(string command, const int &id, const Data &data, bool
 		personList[index]->SetFastCommand(command);
 		personList[index]->SetFastData(data);
 	}
+}
+
+Person&	PersonHolder::GetPerson(int index) const{
+	return *personList[index];
+}
+
+int		PersonHolder::GetPersonCount() const{
+	return personList.size();
 }

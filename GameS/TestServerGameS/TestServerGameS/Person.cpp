@@ -8,6 +8,7 @@
 using namespace std;
 
 BaseItemHolder *Person::baseItemHolder;
+BaseSpellHolder *Person::baseSpellHolder;
 
 Person::Person() : spellList(SPELL_COUNT), masteryList(MASTERY_COUNT), buffList(BUFF_COUNT), debuffList(DEBUFF_COUNT),
 inventory(INVENTORY_SIZE){}
@@ -19,39 +20,41 @@ void Person::UpdateSpellLvl(){
 		spellList.UpdateLvl(i, masteryList.GetMastery(i).GetLvl());
 }
 
-void Person::Init(BaseItemHolder &baseItemHolder){
+void Person::Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder){
 	Person::baseItemHolder = &baseItemHolder;
+	Person::baseSpellHolder = &baseSpellHolder;
 }
 
 void Person::UpdateStats(){
-	/*
-	float minAttack = 1, maxAttack = 2, attackSpeed = 600, critChance = 5, critRate = 2, attackRange = 1, accuracy = 4,
-		speedPenalty = 0, failCastSpell = 0, evasionPenalty = 20, resSlash = 0, resCrush = 0, resPierce = 0, regenHPMod = 1,
-		regenMPMod = 1, regenHPBonus = 0, regenMPBonus = 0, speedBonus = 0, bonusAttack = 0, bonusAttackRange = 0, bonusAttackSpeed = 0,
-		bonusInvisible = 0, bonusDetection = 0, bonusConcentration = 0, bonusIntelligence = 0, bonusStrength = 0, bonusAgility = 0;
-	bool root = false;
+	
+	float newMinAttack = 1, newMaxAttack = 2, newAttackSpeed = 600, newCritChance = 5, newCritRate = 2, newAttackRange = 1, newAccuracy = 4,
+		speedPenalty = 0, newFailCastSpell = 0, evasionPenalty = 20, newResistanceSlash = 0, newResistanceCrush = 0, 
+		newResistancePierce = 0, regenHPMod = 1, regenMPMod = 1, regenHPBonus = 0, regenMPBonus = 0, speedBonus = 0, bonusAttack = 0,
+		bonusAttackRange = 0, bonusAttackSpeed = 0,	bonusInvisible = 0, bonusDetection = 0, bonusConcentration = 0, bonusIntelligence = 0,
+		bonusStrength = 0, bonusAgility = 0;
+	bool newRoot = false;
 
 	if (weaponSlot > -1){
 		Item weap = baseItemHolder->GetItem(weaponSlot);
-		minAttack = weap.minAttack;
-		maxAttack = weap.maxAttack;
-		attackSpeed = weap.attackSpeed;
-		critChance = weap.critChance;
-		critRate = weap.critRate;
-		attackRange = weap.rangeAttack;
-		accuracy = weap.accuracy;
-		if (weap.subType == "Sword"){
-			int lvl = var->personList[j].masteryList[0].curLvl;
+		newMinAttack = weap.GetMinAttack();
+		newMaxAttack = weap.GetMaxAttack();
+		newAttackSpeed = weap.GetAttackSpeed();
+		newCritChance = weap.GetCritChance();
+		newCritRate = weap.GetCritRate();
+		newAttackRange = weap.GetRangeAttack();
+		newAccuracy = weap.GetAccuracy();
+		if (weap.GetSubType() == "Sword"){
+			int lvl = masteryList.GetMastery(0).GetLvl();
 			bonusAttack += 1 * lvl;
 			bonusAttackSpeed += 0.05 * lvl;
 		}
-		if (weap.subType == "Blunt"){
-			int lvl = var->personList[j].masteryList[1].curLvl;
+		if (weap.GetSubType() == "Blunt"){
+			int lvl = masteryList.GetMastery(1).GetLvl();
 			bonusAttack += 1.5 * lvl;
 			bonusAttackSpeed += 0.02 * lvl;
 		}
-		if (weap.subType == "Bow"){
-			int lvl = var->personList[j].masteryList[2].curLvl;
+		if (weap.GetSubType() == "Bow"){
+			int lvl = masteryList.GetMastery(2).GetLvl();
 			bonusAttack += 0.5 * lvl;
 			bonusAttackSpeed += 0.03 * lvl;
 			bonusAttackRange += 0.6 * lvl;
@@ -60,21 +63,21 @@ void Person::UpdateStats(){
 
 
 
-	if (var->personList[j].bodySlot > -1){
-		Item armor = var->baseItemList[var->personList[j].bodySlot];
-		speedPenalty = armor.speedPenalty;
-		failCastSpell = armor.failCastSpell;
-		evasionPenalty = armor.evasionPenalty;
-		resSlash = armor.resSlash;
-		resCrush = armor.resCrush;
-		resPierce = armor.resPierce;
+	if (bodySlot > -1){
+		Item armor = baseItemHolder->GetItem(bodySlot);
+		speedPenalty = armor.GetSpeedPenalty();
+		newFailCastSpell = armor.GetFailCastSpell();
+		evasionPenalty = armor.GetEvasionPenalty();
+		newResistanceSlash = armor.GetResistSlash();
+		newResistanceCrush = armor.GetResistCrush();
+		newResistancePierce = armor.GetResistPierce();
 	}
-	bonusInvisible = 2 * var->personList[j].masteryList[7].curLvl;
-	bonusDetection = 2 * var->personList[j].masteryList[8].curLvl;
-	bonusConcentration = 3 * var->personList[j].masteryList[9].curLvl;
+	bonusInvisible = 2 * masteryList.GetMastery(7).GetLvl();
+	bonusDetection = 2 * masteryList.GetMastery(8).GetLvl();
+	bonusConcentration = 3 * masteryList.GetMastery(9).GetLvl();
 
 	for (int i = 0; i < 10; i++){
-		switch (var->personList[j].buffs[i].type)
+		switch (buffList.GetBuff(i).GetType())
 		{
 		case 300:
 			regenHPMod *= 2;
@@ -96,145 +99,247 @@ void Person::UpdateStats(){
 		}
 	}
 
-	if (var->personList[j].spellList[0].learn){
+	if (spellList.GetSpell(0).GetLearn()){
 		bonusIntelligence += 2;
 	}
-	if (var->personList[j].spellList[1].learn){
+	if (spellList.GetSpell(1).GetLearn()){
 		bonusAgility += 4;
 	}
-	if (var->personList[j].spellList[2].learn){
+	if (spellList.GetSpell(2).GetLearn()){
 		bonusStrength -= 2;
 	}
-	if (var->personList[j].spellList[3].learn){
+	if (spellList.GetSpell(3).GetLearn()){
 		bonusStrength += 4;
 	}
-	if (var->personList[j].spellList[4].learn){
+	if (spellList.GetSpell(4).GetLearn()){
 		bonusAgility -= 2;
 	}
-	var->personList[j].strength = var->personList[j].base_strength + bonusStrength;
-	var->personList[j].agility = var->personList[j].base_agility + bonusAgility;
-	var->personList[j].constitution = var->personList[j].base_constitution;
-	var->personList[j].intelligence = var->personList[j].base_intelligence + bonusIntelligence;
-	var->personList[j].wisdom = var->personList[j].base_wisdom;
+	strength = baseStrength + bonusStrength;
+	agility = baseAgility + bonusAgility;
+	constitution = baseConstitution;
+	intelligence = baseIntelligence + bonusIntelligence;
+	wisdom = baseWisdom;
 
-	if (var->personList[j].strength < 1)
-		var->personList[j].strength = 1;
+	if (strength < 1)
+		strength = 1;
 
-	if (var->personList[j].agility < 1)
-		var->personList[j].agility = 1;
+	if (agility < 1)
+		agility = 1;
 
-	if (var->personList[j].constitution < 1)
-		var->personList[j].constitution = 1;
+	if (constitution < 1)
+		constitution = 1;
 
-	if (var->personList[j].intelligence < 1)
-		var->personList[j].intelligence = 1;
+	if (intelligence < 1)
+		intelligence = 1;
 
-	if (var->personList[j].wisdom < 1)
-		var->personList[j].wisdom = 1;
+	if (wisdom < 1)
+		wisdom = 1;
 
-	var->personList[j].modStrength = (var->personList[j].strength - 10) / 2.0;
-	var->personList[j].modAgility = (var->personList[j].agility - 10) / 2.0;
-	var->personList[j].modConstitution = (var->personList[j].constitution - 10) / 2.0;
-	var->personList[j].modIntelligence = (var->personList[j].intelligence - 10) / 2.0;
-	var->personList[j].modWisdom = (var->personList[j].wisdom - 10) / 2.0;
+	modStrength = (strength - 10) / 2.0;
+	modAgility = (agility - 10) / 2.0;
+	modConstitution = (constitution - 10) / 2.0;
+	modIntelligence = (intelligence - 10) / 2.0;
+	modWisdom = (wisdom - 10) / 2.0;
 
-	var->personList[j].maxHP = var->personList[j].constitution * 10;
-	var->personList[j].maxMP = var->personList[j].wisdom * 20;
-	var->personList[j].maxWeight = var->personList[j].strength * 10;
+	maxHp = constitution * 10;
+	maxMp = wisdom * 20;
+	maxWeight = strength * 10;
 
-	if (var->personList[j].maxMP < 1)
-		var->personList[j].maxMP = 1;
+	if (maxMp < 1)
+		maxMp = 1;
 
-	if (var->personList[j].maxMP < 1)
-		var->personList[j].maxMP = 1;
+	if (maxMp < 1)
+		maxMp = 1;
 
-	if (var->personList[j].maxWeight < 1)
-		var->personList[j].maxWeight = 1;
+	if (maxWeight < 1)
+		maxWeight = 1;
 
-	var->personList[j].minAttack = minAttack + var->personList[j].modStrength + bonusAttack;
-	var->personList[j].maxAttack = maxAttack + var->personList[j].modStrength + bonusAttack;
+	minAttack = newMinAttack + modStrength + bonusAttack;
+	maxAttack = newMaxAttack + modStrength + bonusAttack;
 
-	if (var->personList[j].minAttack < 0)
-		var->personList[j].minAttack = 0;
+	if (minAttack < 0)
+		minAttack = 0;
 
-	if (var->personList[j].maxAttack < 0)
-		var->personList[j].maxAttack = 0;
+	if (maxAttack < 0)
+		maxAttack = 0;
 
-	var->personList[j].attackSpeed = attackSpeed * (1 + var->personList[j].modAgility*0.05 + bonusAttackSpeed);
+	attackSpeed = newAttackSpeed * (1 + modAgility*0.05 + bonusAttackSpeed);
 
-	if (var->personList[j].attackSpeed < 100)
-		var->personList[j].attackSpeed = 100;
+	if (attackSpeed < 100)
+		attackSpeed = 100;
 
-	if (var->personList[j].attackSpeed > 1500)
-		var->personList[j].attackSpeed = 1500;
+	if (attackSpeed > 1500)
+		attackSpeed = 1500;
 
-	var->personList[j].critChance = critChance;
-	var->personList[j].critRate = critRate;
+	critChance = newCritChance;
+	critRate = newCritRate;
 
-	float modAgi = var->personList[j].modAgility;
+	float modAgi = modAgility;
 	if (modAgi > evasionPenalty){
 		modAgi = evasionPenalty;
 	}
-	var->personList[j].evasion = 10 + modAgi;
-	var->personList[j].accuracy = accuracy + var->personList[j].modAgility;
-	var->personList[j].speed = 3 * (1 + (speedBonus - speedPenalty) * 0.01);
+	evasion = 10 + modAgi;
+	accuracy = newAccuracy + modAgility;
+	speed = 3 * (1 + (speedBonus - speedPenalty) * 0.01);
 
-	if (var->personList[j].speed < 1)
-		var->personList[j].speed = 1;
+	if (speed < 1)
+		speed = 1;
 
-	if (var->personList[j].speed > 5)
-		var->personList[j].speed = 5;
+	if (speed > 5)
+		speed = 5;
 
-	var->personList[j].saveReaction = var->personList[j].modAgility;
-	var->personList[j].savePersistence = var->personList[j].modConstitution;
-	var->personList[j].saveWill = var->personList[j].modWisdom;
-	var->personList[j].saveDeath = var->personList[j].savePersistence + 2;
-	var->personList[j].complexitySpell = 10 + var->personList[j].modIntelligence;
-	var->personList[j].complexityAbility = 10 + var->personList[j].modStrength;
+	saveReaction = modAgility;
+	savePersistence = modConstitution;
+	saveWill = modWisdom;
+	saveDeath = savePersistence + 2;
+	complexitySpell = 10 + modIntelligence;
+	complexityAbility = 10 + modStrength;
 
-	if (var->personList[j].complexitySpell < 0)
-		var->personList[j].complexitySpell = 0;
+	if (complexitySpell < 0)
+		complexitySpell = 0;
 
-	if (var->personList[j].complexityAbility < 0)
-		var->personList[j].complexityAbility = 0;
+	if (complexityAbility < 0)
+		complexityAbility = 0;
 
-	var->personList[j].invisible = 10 + var->personList[j].modAgility + bonusInvisible;
-	var->personList[j].detection = var->personList[j].modIntelligence + bonusDetection;
-	var->personList[j].concentration = var->personList[j].modConstitution + bonusConcentration;
-	var->personList[j].failSpellChance = failCastSpell;
+	invisible = 10 + modAgility + bonusInvisible;
+	detection = modIntelligence + bonusDetection;
+	concentration = modConstitution + bonusConcentration;
+	failSpellChance = newFailCastSpell;
 
-	if (var->personList[j].failSpellChance < 0)
-		var->personList[j].failSpellChance = 0;
+	if (failSpellChance < 0)
+		failSpellChance = 0;
 
-	if (var->personList[j].failSpellChance > 95)
-		var->personList[j].failSpellChance = 95;
+	if (failSpellChance > 95)
+		failSpellChance = 95;
 
-	var->personList[j].rotationSpeed = var->personList[j].speed * 100 / 1.0;
-	var->personList[j].attackRange = attackRange + bonusAttackRange;
-	var->personList[j].recoveryHP = 100;
-	var->personList[j].recoveryMP = 100 + 10 * var->personList[j].modIntelligence;
+	rotationSpeed = speed * 100 / 1.0;
+	attackRange = newAttackRange + bonusAttackRange;
+	recoveryHp = 100;
+	recoveryMp = 100 + 10 * modIntelligence;
 
-	if (var->personList[j].recoveryHP < 10)
-		var->personList[j].recoveryHP = 10;
+	if (recoveryHp < 10)
+		recoveryHp = 10;
 
-	if (var->personList[j].recoveryMP < 10)
-		var->personList[j].recoveryMP = 10;
+	if (recoveryMp < 10)
+		recoveryMp = 10;
 
-	var->personList[j].regenHPOutBattle = (var->personList[j].constitution / 2.0) * regenHPMod + regenHPBonus;
-	var->personList[j].regenMPOutBattle = (var->personList[j].intelligence / 2.0) * regenMPMod + regenMPBonus;
-	var->personList[j].regenHPInBattle = var->personList[j].regenHPOutBattle / 10.0;
-	var->personList[j].regenMPInBattle = var->personList[j].regenMPOutBattle / 10.0;
-	var->personList[j].resistanceCrush = resCrush;
-	var->personList[j].resistanceSlash = resSlash;
-	var->personList[j].resistancePierce = resPierce;
-	var->personList[j].resistanceFire = 2;
-	var->personList[j].resistanceCold = 2;
-	var->personList[j].resistanceNegative = 2;
+	regenHpOutBattle = (constitution / 2.0) * regenHPMod + regenHPBonus;
+	regenMpOutBattle = (intelligence / 2.0) * regenMPMod + regenMPBonus;
+	regenHpInBattle = regenHpOutBattle / 10.0;
+	regenMpInBattle = regenMpOutBattle / 10.0;
+	resistanceCrush = newResistanceCrush;
+	resistanceSlash = newResistanceSlash;
+	resistancePierce = newResistancePierce;
+	resistanceFire = 2;
+	resistanceCold = 2;
+	resistanceNegative = 2;
 
-	var->personList[j].root = root;
+	root = newRoot;
+
+	needStatsUpdate = false;
+}
+
+bool Person::StartClientUpdate(){
+	if (needUpdate){
+		update = "AllUPD|" + to_string(personId) + "|" + name + "|"
+			+ to_string(live) + "|" + to_string(corpseSave) + "|"
+			+ to_string(resInPlace) + "|" + to_string(position.x) + "|"
+			+ to_string(position.y) + "|" + to_string(position.z) + "|"
+			+ to_string(rotation) + "|" + to_string(currentHp) + "|"
+			+ to_string(maxHp) + "|" + to_string(currentMp) + "|"
+			+ to_string(maxMp) + "|" + to_string(animationStatus) + "|"
+			+ to_string(animationSpeed) + "|" + to_string(targetNumber) + "|";
 
 
-	var->personList[j].needPersUPD = false;*/
+		string ss = "UIUPD|" + to_string(baseStrength) + "|" + to_string(baseAgility) + "|"
+			+ to_string(baseConstitution) + "|" + to_string(baseIntelligence) + "|"
+			+ to_string(baseWisdom) + "|"
+			+ to_string(strength) + "|" + to_string(agility) + "|"
+			+ to_string(constitution) + "|" + to_string(intelligence) + "|"
+			+ to_string(wisdom) + "|" + to_string(modStrength) + "|"
+			+ to_string(modAgility) + "|" + to_string(modConstitution) + "|"
+			+ to_string(modIntelligence) + "|" + to_string(modWisdom) + "|"
+			+ to_string(minAttack) + "|" + to_string(maxAttack) + "|"
+			+ to_string(attackSpeed) + "|" + to_string(critChance) + "|"
+			+ to_string(critRate) + "|" + to_string(evasion) + "|"
+			+ to_string(accuracy) + "|" + to_string(speed) + "|"
+			+ to_string(saveReaction) + "|" + to_string(savePersistence) + "|"
+			+ to_string(saveWill) + "|" + to_string(saveDeath) + "|"
+			+ to_string(complexitySpell) + "|" + to_string(complexityAbility) + "|"
+			+ to_string(invisible) + "|" + to_string(detection) + "|"
+			+ to_string(concentration) + "|" + to_string(failSpellChance) + "|"
+			+ to_string(rotationSpeed) + "|" + to_string(visibleRange) + "|"
+			+ to_string(attackRange) + "|" + to_string(recoveryHp) + "|"
+			+ to_string(recoveryMp) + "|" + to_string(regenHpOutBattle) + "|"
+			+ to_string(regenMpOutBattle) + "|" + to_string(regenHpInBattle) + "|"
+			+ to_string(regenMpInBattle) + "|" + to_string(resistanceSlash) + "|"
+			+ to_string(resistanceCrush) + "|" + to_string(resistancePierce) + "|"
+			+ to_string(resistanceFire) + "|" + to_string(resistanceCold) + "|"
+			+ to_string(resistanceNegative) + "|" + to_string(freeCharacteristics) + "|"
+			+ to_string(currentWeight) + "|" + to_string(maxWeight) + "|"
+			+ to_string(characteristicPoint) + "|" + to_string(abilityPoint) + "|"
+			+ to_string(spellPoint) + "|" + to_string(weaponSlot) + "|"
+			+ to_string(bodySlot) + "|";
+
+		for (int j = 0; j < INVENTORY_SIZE; j++){
+			ss += to_string(inventory.GetSlot(j).GetItemId()) + "|" + to_string(inventory.GetSlot(j).GetCount()) + "|";
+		}
+		for (int j = 0; j < 10; j++){
+			ss += to_string(buffList.GetBuff(j).GetType()) + "|";
+		}
+		for (int j = 0; j < 10; j++){
+			ss += to_string(debuffList.GetBuff(j).GetType()) + "|";
+		}
+		for (int j = 0; j < 10; j++){
+			ss += to_string(masteryList.GetMastery(j).GetLvl()) + "|" + to_string(masteryList.GetMastery(j).GetExp()
+				/ Mastery::GetLvlExp(masteryList.GetMastery(j).GetLvl() + 1)) + "|";
+		}
+		int num = 0;
+		string dopcurstring = "";
+		for (int j = 0; j < 20; j++){
+			if (spellList.GetSpell(j).GetLearn()){
+				num++;
+				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
+					+ to_string(spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown()) + "|";
+			}
+		}
+		ss += to_string(num) + "|" + dopcurstring;
+		num = 0;
+		dopcurstring = "";
+		for (int j = 20; j < 44; j++){
+			if (spellList.GetSpell(j).GetLearn()){
+				num++;
+				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
+					+ to_string(spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown()) + "|";
+			}
+
+		}
+		ss += to_string(num) + "|" + dopcurstring;
+		uiUpdate = ss;
+		needUpdate = false;
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+string Person::NeedClientUpdate(const Vector3 &personPosition, float visibleRange){
+	if (Vector3::Distance(position, personPosition) <= visibleRange){
+		return to_string(personId) + "|" + name + "|"
+			+ to_string(live) + "|" + to_string(position.x) + "|"
+			+ to_string(position.y) + "|" + to_string(position.z) + "|"
+			+ to_string(rotation) + "|"
+			+ to_string(currentHp / maxHp) + "|" + to_string(animationStatus) + "|"
+			+ to_string(animationSpeed) + "|";
+	}
+	else{
+		return "NULL";
+	}
+}
+
+void Person::FinishClientUpdate(const string &updateInfo){
+	update += updateInfo;
 }
 
 void Person::SetName(const string &newName){
@@ -399,5 +504,11 @@ const float& Person::GetCurrentMp() const{
 	return currentMp;
 }
 
+const Vector3&	Person::GetPosition() const{
+	return position;
+}
 
+const float&	Person::GetVisibleRange() const{
+	return visibleRange;
+}
 

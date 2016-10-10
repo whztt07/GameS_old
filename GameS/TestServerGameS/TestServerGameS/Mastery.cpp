@@ -41,4 +41,11 @@ void Mastery::AddExp(float additionalExp){
 const bool& Mastery::GetLvlUp() const{
 	return lvlUp;
 }
-	
+
+const float& Mastery::GetExp() const{
+	return exp;
+}
+
+const float& Mastery::GetLvlExp(int index){
+	return lvlExpList[index];
+}

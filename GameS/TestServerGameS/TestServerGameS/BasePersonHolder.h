@@ -9,6 +9,6 @@ using namespace std;
 class BasePersonHolder{
 	vector<Person> personList;
 public:
-	void Init(const vector<Person> &);
-	const Person& GetPerson(const int&) const;
+	void			Init(const vector<Person> &newPersonList);
+	const Person&	GetPerson(int index) const;
 };

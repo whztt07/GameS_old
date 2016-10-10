@@ -170,8 +170,8 @@ Person WorkMSQL::GamePerson(int personId){
 	if ((row = mysql_fetch_row(resul)) != NULL){
 
 		for (int i = 0; i < SPELL_COUNT; i++){
-			pers.spellList.GetSpell(i).SetLearn(atoi(row[i * 2 - 1]) != 0);
-			pers.spellList.GetSpell(i).SetCooldown(atof(row[i * 2]));
+			pers.spellList.GetSpell(i).SetLearn(atoi(row[(i + 1) * 2 - 1]) != 0);
+			pers.spellList.GetSpell(i).SetCooldown(atof(row[(i + 1) * 2]));
 		}
 	}
 
@@ -200,9 +200,9 @@ vector<Item> WorkMSQL::GetBaseItem(){
 		item.SetCritRate(atoi(row[it++]));
 		item.SetSpeedPenalty(atoi(row[it++]));
 		item.SetFailCastSpell(atoi(row[it++]));
-		item.SetResSlash(atoi(row[it++]));
-		item.SetResCrush(atoi(row[it++]));
-		item.SetResPierce(atoi(row[it++]));
+		item.SetResistSlash(atoi(row[it++]));
+		item.SetResistCrush(atoi(row[it++]));
+		item.SetResistPierce(atoi(row[it++]));
 		item.SetEvasionPenalty(atoi(row[it++]));
 		itemList.push_back(item);
 	}

@@ -60,8 +60,8 @@ unsigned _stdcall Connection::ConnectMy(void* pvoid){
 		if (bsize == SOCKET_ERROR){
 			printf("recvfrom() error: %d\n", WSAGetLastError());
 		}
-		
-		if (buff == "Connect"){
+		string s = string(buff, bsize);
+		if (s == "Connect"){
 			_beginthreadex(NULL, NULL, Client::ToClient, new sockaddr_in(client_addr), NULL, NULL);
 		}
 	}

@@ -6,10 +6,10 @@
 #include "BaseItemHolder.h"
 
 
-void BaseItemHolder::Init(const vector<Item> &vec){
-	itemList = vec;
+void BaseItemHolder::Init(const vector<Item> &newItemList){
+	itemList = newItemList;
 }
 
-const Item& BaseItemHolder::GetItem(int i) const{
-	return itemList[i];
+const Item& BaseItemHolder::GetItem(int index) const{
+	return itemList[index];
 }

@@ -1,43 +1,18 @@
-﻿Build started 10.10.2016 17:54:58.
+﻿Build started 10.10.2016 23:36:56.
      1>Project "D:\Git\GameS\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib PersonHolder.cpp WorkMSQL.cpp
-         PersonHolder.cpp
+         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib TestServerGameS.cpp
+         TestServerGameS.cpp
      1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
                  d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
-     1>PersonHolder.cpp(18): warning C4018: '<' : signed/unsigned mismatch
-     1>PersonHolder.cpp(40): warning C4172: returning address of local variable or temporary
-     1>PersonHolder.cpp(43): warning C4172: returning address of local variable or temporary
-         WorkMSQL.cpp
-     1>D:\VisualStudio\VC\include\config-win.h(24): warning C4005: '_WIN32_WINNT' : macro redefinition
-                 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\sdkddkver.h(200) : see previous definition of '_WIN32_WINNT'
-     1>d:\git\games\games\testservergames\testservergames\MSQLConnect.h(7): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 d:\git\games\games\testservergames\testservergames\WorkMSQL.h(4) : see declaration of 'MSQL_init_data'
-     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\GameLogic.h(11): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
      1>d:\git\games\games\testservergames\testservergames\MSQL_init_data.h(5): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
-                 d:\git\games\games\testservergames\testservergames\WorkMSQL.h(4) : see declaration of 'MSQL_init_data'
-     1>WorkMSQL.cpp(109): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(110): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(113): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(114): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(115): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(124): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(145): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(155): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(164): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>WorkMSQL.cpp(174): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(192): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(196): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>WorkMSQL.cpp(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(229): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(230): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(265): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(266): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>WorkMSQL.cpp(272): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         Generating Code...
+                 d:\git\games\games\testservergames\testservergames\GameLogic.h(12) : see declaration of 'MSQL_init_data'
+     1>d:\git\games\games\testservergames\testservergames\UpdateData.h(4): warning C4099: 'UpdateData' : type name first seen using 'class' now seen using 'struct'
+                 d:\git\games\games\testservergames\testservergames\GameLogic.h(13) : see declaration of 'UpdateData'
        Link:
          D:\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\MySQL\MySQL Server 5.5\lib" /ASSEMBLYRESOURCE:Debug\TestServerGameS.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
          Debug\Account.obj
@@ -79,4 +54,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.78
+Time Elapsed 00:00:02.99

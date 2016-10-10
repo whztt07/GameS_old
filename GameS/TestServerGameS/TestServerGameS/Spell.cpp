@@ -6,6 +6,10 @@ const int *Spell::masteryLvl;
 
 Spell::Spell(int spellNumber) : learn(), cooldown(), lvl(), lvlType(masteryLvl[spellNumber]){}
 
+const bool&	Spell::GetLearn() const{
+	return learn;
+}
+
 const float& Spell::GetCooldown() const{
 	return cooldown;
 }

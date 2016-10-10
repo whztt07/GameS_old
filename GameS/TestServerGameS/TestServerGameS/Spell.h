@@ -14,7 +14,7 @@ public:
 	 
 	Spell(int spellNumber);	//Инициализирует lvlType
 
-			
+			const bool&		GetLearn() const;
 			const float&	GetCooldown() const;
 			const int&		GetLvl() const;
 			const int&		GetLvlType() const;

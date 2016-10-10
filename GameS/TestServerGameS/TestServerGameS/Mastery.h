@@ -10,10 +10,13 @@ public:
 	
 	Mastery();
 	
-	void		SetLvl(int newLvl);		//”станавливает уровень в указаное значенее и выставл€ет соответствующее к-во опыта
+			void			SetLvl(int newLvl);				//”станавливает уровень в указаное значенее и выставл€ет соответствующее к-во опыта
 	
-	const int&	GetLvl() const;			//¬озвращает уровень
-	const bool&	GetLvlUp() const;
+	static	const float&	GetLvlExp(int index);
+			const float&	GetExp() const;
+			const int&		GetLvl() const;					//¬озвращает уровень
+			const bool&		GetLvlUp() const;
 
-	void		AddExp(float additionalExp);	//ƒобавл€ет опыт, и если нужно повышает уровень
+			void			AddExp(float additionalExp);	//ƒобавл€ет опыт, и если нужно повышает уровень
+	
 };

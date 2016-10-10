@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <process.h>
+#include <time.h>
 
 #include "WorkMSQL.h"
 #include "WorkFile.h"
@@ -27,7 +28,7 @@ GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::R
 
 	baseItemHolder.Init(WorkMSQL::GetBaseItem());
 
-	Person::Init(baseItemHolder);
+	Person::Init(baseItemHolder, baseSpellHolder);
 
 	basePersonHolder.Init(WorkMSQL::GetBasePerson());
 
@@ -42,14 +43,47 @@ GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::R
 	spawnPointHolder.Init(vec2);
 }
 
-void GameLogic::Update(){
+void GameLogic::UpdateClientData(){
+	int size = personHolder.GetPersonCount();
+
+	for (int i = 0; i < size; i++)
+	if (personHolder.GetPerson(i).StartClientUpdate()){
+		Vector3 position = personHolder.GetPerson(i).GetPosition();
+		float visibleRange = personHolder.GetPerson(i).GetVisibleRange();
+		int number = 0;
+		string curS = "";
+		for (int j = 0; j < size; j++){
+			if (i != j){
+				string s = personHolder.GetPerson(i).NeedClientUpdate(position, visibleRange);
+				if (s != "NULL") { 
+					number++; 
+					curS += s;
+				}
+			}
+		}
+		curS = to_string(number) + "|" + curS;
+		personHolder.GetPerson(i).FinishClientUpdate(curS);
+	}
 
 }
 
 
 unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 	GameLogic *game = (GameLogic*)pvoid;
-	while (1) game->Update();
+	unsigned int mainLogicTime = clock();
+	while (1) {
+		
+		if (clock() - mainLogicTime >= 20){			
+			mainLogicTime = clock();
+			EnterCriticalSection(&game->gameSection);
+			game->UpdateClientData();
+			LeaveCriticalSection(&game->gameSection);
+
+		}
+		int sleepTime = 20 - clock() + mainLogicTime;
+		if (sleepTime > 0)
+			Sleep(sleepTime);
+	}
 	return 1;
 }
 
@@ -72,15 +106,15 @@ const Person& GameLogic::GetBasePerson(int index){
 }
 
 
-void GameLogic::AddPerson(const Person &newPerson, int type){
+void GameLogic::AddPerson(const Person &newPerson, int personType){
 	EnterCriticalSection(&gameSection);
-	personHolder.AddPerson(newPerson, type);
+	personHolder.AddPerson(newPerson, personType);
 	LeaveCriticalSection(&gameSection);
 }
 
-string GameLogic::ResolutionGamePers(const vector<int> &vec, int id){
+string GameLogic::ResolutionGamePers(const vector<int> &personIdList, int personId){
 	EnterCriticalSection(&gameSection);
-	string s = personHolder.ResolutionGamePers(vec, id);
+	string s = personHolder.ResolutionGamePers(personIdList, personId);
 	LeaveCriticalSection(&gameSection);
 	return s;
 }
@@ -102,15 +136,15 @@ string GameLogic::NeedUI_UPD(int personId){
 
 
 
-void GameLogic::Command(const string &s, int id, const Data &data, bool b){
+void GameLogic::Command(const string &command, int personId, const Data &data, bool fast){
 	EnterCriticalSection(&gameSection);
-	personHolder.Command(s, id, data, b);
+	personHolder.Command(command, personId, data, fast);
 	LeaveCriticalSection(&gameSection);
 }
 
-void GameLogic::Exit(int num){
+void GameLogic::Exit(int personId){
 	EnterCriticalSection(&gameSection);
-	personHolder.Exit(num);
+	personHolder.Exit(personId);
 	LeaveCriticalSection(&gameSection);
 }
 

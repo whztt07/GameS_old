@@ -10,5 +10,6 @@ class BuffHolder{
 public:
 	BuffHolder(const int &buffCount);
 
-	void Init(const vector<Buff> &newBuffList);
+	void	Init(const vector<Buff> &newBuffList);
+	const	Buff& GetBuff(int index) const;
 };

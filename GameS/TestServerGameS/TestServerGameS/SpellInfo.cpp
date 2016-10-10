@@ -100,3 +100,7 @@ const int& SpellInfo::GetMasteryLvlNeed(int masteryIndex) const{
 SpellInfo::~SpellInfo(){
 	delete[] masteryLvlNeed;
 }
+
+const float& SpellInfo::GetCooldown() const{
+	return cooldown;
+}

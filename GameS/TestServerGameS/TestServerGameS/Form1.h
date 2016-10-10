@@ -351,15 +351,22 @@ namespace TestServerGameS {
 	
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 label6->Text = "Инициализация";
-			 game = new GameLogic(MSQL_init_data(MarhString(textBox1->Text), MarhString(textBox2->Text), MarhString(textBox3->Text),
-				 MarhString(textBox4->Text)));
-			 Connection::Init(*game);
-			 Connection::RunThread();
-			 game->RunThread();
-			 timer1->Start();
-			 label6->Text = "Работает";
-
+			 static bool start;
+			 if (!start){
+				 start = true;
+				 label6->Text = "Инициализация";
+				 game = new GameLogic(MSQL_init_data(MarhString(textBox1->Text), MarhString(textBox2->Text), MarhString(textBox3->Text),
+					 MarhString(textBox4->Text)));
+				 Connection::Init(*game);
+				 Connection::RunThread();
+				 game->RunThread();
+				 timer1->Start();
+				 label6->Text = "Работает";
+				 button1->Text = "Выход";
+			 }
+			 else{
+				 Application::Exit();
+			 }
 }
 };
 }

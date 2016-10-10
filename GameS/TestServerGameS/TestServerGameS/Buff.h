@@ -9,4 +9,6 @@ class Buff{
 public:
 	Buff(int type, int level, float time, bool special = false);
 	Buff();	
+
+	const int& GetType() const;
 };

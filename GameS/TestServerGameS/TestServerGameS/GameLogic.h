@@ -24,7 +24,7 @@ class GameLogic{
 	BaseSpellHolder		baseSpellHolder;	//Класс содержащий в себе массив спелов и предоставляющий методы для работы с ним
 
 	
-			void				Update();			//Метод вызываемый для обновления логики	
+			void				UpdateClientData();				
 	static	unsigned _stdcall	RunUpdate(void *pvoid);	//Метод вызываемый в другом потоке, обновляет логику в цикле
 	
 public:
@@ -34,14 +34,14 @@ public:
 	UpdateData		GetUpdateData();											//Метод возвращающий дынные необходимые для обновления формы
 
 	const Person&	GetBasePerson(int index);
-	void			AddPerson(const Person &newPerson, int type = 1);
+	void			AddPerson(const Person &newPerson, int personType = 1);
 
-	string			ResolutionGamePers(const vector<int> &, int);
+	string			ResolutionGamePers(const vector<int> &personIdList, int personId);
 	string			NeedUPD(int personId);
 	string			NeedUI_UPD(int personId);
-	void			Command(const string&, int, const Data&, bool = false);
-	void			Exit(int);
+	void			Command(const string &command, int personId, const Data &data, bool fast = false);
+	void			Exit(int personId);
 	
-	void			RunThread();												//Метод запускающий метод обновления в потоке
+	void			RunThread();												//Метод вызываемый для бесконечного обновления логики
 
 };

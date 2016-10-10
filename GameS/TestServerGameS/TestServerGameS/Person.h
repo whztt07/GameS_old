@@ -11,6 +11,7 @@ using namespace std;
 #include "InventoryHolder.h"
 #include "Data.h"
 #include "BaseItemHolder.h"
+#include "BaseSpellHolder.h"
 
 class Person{
 protected:
@@ -22,12 +23,59 @@ protected:
 			int				baseConstitution;
 			int				baseIntelligence;
 			int				baseWisdom;
+			int				strength;
+			int				agility;
+			int				constitution;
+			int				intelligence;
+			int				wisdom;
+			int				modStrength;
+			int				modAgility;
+			int				modConstitution;
+			int				modIntelligence;
+			int				modWisdom;
 			int				freeCharacteristics;
 			int				weaponSlot;
 			int				bodySlot;
+			float			currentWeight;
 			float			currentHp;
 			float			currentMp;
 			float			visibleRange;
+			float			maxHp;
+			float			maxMp;
+			float			maxWeight;
+			float			evasion;
+			float			minAttack;
+			float			maxAttack;
+			float			attackSpeed;
+			float			critChance;
+			float			critRate;
+			float			accuracy;
+			float			speed;
+			float			saveReaction;
+			float			savePersistence;
+			float			saveWill;
+			float			saveDeath;
+			float			complexitySpell;
+			float			complexityAbility;
+			float			invisible;
+			float			detection;
+			float			concentration;
+			float			failSpellChance;
+			float			rotationSpeed;
+			float			attackRange;
+			float			recoveryHp;
+			float			recoveryMp;
+			float			regenHpOutBattle;
+			float			regenMpOutBattle;
+			float			regenHpInBattle;
+			float			regenMpInBattle;
+			float			resistanceSlash;
+			float			resistanceCrush;
+			float			resistancePierce;
+			float			resistanceFire;
+			float			resistanceCold;
+			float			resistanceNegative;
+			bool			root;
 			bool			live;
 			bool			resInPlace;
 			float			corpseSaveTime;	
@@ -40,8 +88,14 @@ protected:
 			int				spellPoint;
 			bool			active;
 			bool			needUpdate;
+			bool			needStatsUpdate;
 			bool			does;
 			bool			wait;
+			bool			corpseSave;
+			int				status;
+			int				animationStatus;
+			float			animationSpeed;
+			int				targetNumber;
 			string			update;
 			string			uiUpdate;
 			string			waitingCommand;
@@ -51,7 +105,7 @@ protected:
 			Data			fastData;
 			Data			waitingData;	
 	static	BaseItemHolder	*baseItemHolder;
-
+	static	BaseSpellHolder	*baseSpellHolder;
 public:
 	SpellHolder		spellList;
 	MasteryHolder	masteryList;
@@ -61,7 +115,7 @@ public:
 	
 	Person();
 
-	static	void			Init(BaseItemHolder &baseItemHolder);
+	static	void			Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder);
 
 			void			SetName(const string &newName);
 			void			SetRace(int newRace);
@@ -104,7 +158,13 @@ public:
 			const int&		GetRace() const;
 			const float&	GetCurrentHp() const;
 			const float&	GetCurrentMp() const;
+			const Vector3&	GetPosition() const;
+			const float&	GetVisibleRange() const;
+
 
 			void			UpdateSpellLvl();
 			void			UpdateStats();
+			bool			StartClientUpdate();
+			string			NeedClientUpdate(const Vector3 &personPosition, float visibleRange);
+			void			FinishClientUpdate(const string &updateInfo);
 };

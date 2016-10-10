@@ -24,20 +24,21 @@ public:
 
 	SpellInfo&	operator=(const SpellInfo&);	
 	
-	void		SetActive(bool newActive);
-	void		SetLearn(bool newLearn);
-	void		SetRange(float newRange);
-	void		SetCastTime(float newCastTime);
-	void		SetCooldown(float newCooldown);
-	void		SetTargetType(int newTargetType);
-	void		SetManaCost(int newManaCost);
-	void		SetType(int newType);
-	void		SetAnimationType(int newAnimationType);
-	void		SetGoldCost(int newGoldCost);
-	void		SetAbilityPointCost(int newAbilityPointCost);
-	void		SetSpellPointCost(int newSpellPointCost);
-	void		SetIntelligenceNeed(int newIntelligenceNeed);
-	void		SetMasteryLvlNeed(int masteryIndex, int newLvl);
+	void			SetActive(bool newActive);
+	void			SetLearn(bool newLearn);
+	void			SetRange(float newRange);
+	void			SetCastTime(float newCastTime);
+	void			SetCooldown(float newCooldown);
+	void			SetTargetType(int newTargetType);
+	void			SetManaCost(int newManaCost);
+	void			SetType(int newType);
+	void			SetAnimationType(int newAnimationType);
+	void			SetGoldCost(int newGoldCost);
+	void			SetAbilityPointCost(int newAbilityPointCost);
+	void			SetSpellPointCost(int newSpellPointCost);
+	void			SetIntelligenceNeed(int newIntelligenceNeed);
+	void			SetMasteryLvlNeed(int masteryIndex, int newLvl);
 
-	const int&	GetMasteryLvlNeed(int masteryIndex) const;
+	const float&	GetCooldown() const;
+	const int&		GetMasteryLvlNeed(int masteryIndex) const;
 };	
