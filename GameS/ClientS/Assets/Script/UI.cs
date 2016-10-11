@@ -146,7 +146,7 @@ public class UI  {
 		Variables.debuffPanelTransform = GameObject.Find ("DebuffPanel").transform;
 		Variables.contentMasteryTransform = GameObject.Find ("ContentMastery").transform;
 		Variables.contentAbilityTransform = GameObject.Find ("ContentAbility").transform;
-		Variables.contentSpellTransform = GameObject.Find ("ContetntSpell").transform;
+		Variables.contentSpellTransform = GameObject.Find ("ContentSpell").transform;
 
 		settingButtonPanel.SetActive (false);
 		settingWindowPanel.SetActive (false);

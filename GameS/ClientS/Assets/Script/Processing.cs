@@ -196,7 +196,7 @@ public class Processing {
 		if(s == "MasteryPress"){
 			UI.ShowMasteryPanel ();
 			UI.HideSpellPanel ();
-			UI.HideAbilityPanel()
+			UI.HideAbilityPanel ();
 		}
 
 		if (s == "NewPersPress") {
@@ -271,7 +271,7 @@ public class Processing {
 		if(s == "SpellPress"){
 			UI.HideMasteryPanel ();
 			UI.ShowSpellPanel ();
-			UI.HideAbilityPanel()
+			UI.HideAbilityPanel ();
 		}
 
 		if (s == "StatsUPPress") {

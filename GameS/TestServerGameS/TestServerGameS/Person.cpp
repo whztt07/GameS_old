@@ -11,7 +11,26 @@ BaseItemHolder *Person::baseItemHolder;
 BaseSpellHolder *Person::baseSpellHolder;
 
 Person::Person() : spellList(SPELL_COUNT), masteryList(MASTERY_COUNT), buffList(BUFF_COUNT), debuffList(DEBUFF_COUNT),
-inventory(INVENTORY_SIZE){}
+inventory(INVENTORY_SIZE){
+	live = true;
+	active = true;
+	needUpdate = false;
+	needStatsUpdate = false;
+	does = false;
+	wait = false;	
+	status = idle;
+	corpseSave = false;
+	resInPlace = false;
+	animationSpeed = 1;
+	animationStatus = animIdle;
+	corpseSaveTime = 0;
+	targetNumber = -1;
+	update = "NULL";
+	uiUpdate = "NULL";
+	waitingCommand = "NULL";
+	command = "NULL";
+	fastCommand = "NULL";
+}
 
 void Person::UpdateSpellLvl(){
 	int count = masteryList.GetMasteryCount();

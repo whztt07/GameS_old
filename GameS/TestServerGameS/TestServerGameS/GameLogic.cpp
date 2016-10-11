@@ -61,7 +61,7 @@ void GameLogic::UpdateClientData(){
 				}
 			}
 		}
-		curS = to_string(number) + "|" + curS;
+		curS = to_string(number) + "|" + curS + "0|";
 		personHolder.GetPerson(i).FinishClientUpdate(curS);
 	}
 

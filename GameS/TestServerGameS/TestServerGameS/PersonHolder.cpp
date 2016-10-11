@@ -9,6 +9,7 @@ using namespace std;
 void PersonHolder::AddPerson(const Person &newPerson, int personType){
 	Person *ppers = new Person(newPerson);
 	ppers->SetType(personType);
+	ppers->UpdateStats();
 	personList.push_back(ppers);
 }
 

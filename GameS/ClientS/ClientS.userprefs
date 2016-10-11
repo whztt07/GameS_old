@@ -1,12 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Processing.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Initializate.cs">
     <Files>
       <File FileName="Assets\Script\MyCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\UI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\MainLogin.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\UI.cs" Line="149" Column="60" />
+      <File FileName="Assets\Script\MainLogin.cs" Line="46" Column="1" />
       <File FileName="Assets\Script\Variables.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Processing.cs" Line="24" Column="27" />
+      <File FileName="Assets\Script\Processing.cs" Line="274" Column="27" />
       <File FileName="Assets\Script\Initializate.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Connection.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\PersChoiceButton.cs" Line="1" Column="1" />
@@ -20,7 +20,7 @@
       <File FileName="Assets\Script\BuffObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\AnimationC.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\DropItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\SpellButton.cs" Line="3" Column="22" />
+      <File FileName="Assets\Script\SpellButton.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
