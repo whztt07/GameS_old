@@ -12,13 +12,14 @@ GeoData& WorkFile::ReadGeoData(){
 	int n = 8;
 	System::IO::FileStream^ fs = gcnew System::IO::FileStream("geoData.geo", System::IO::FileMode::OpenOrCreate);
 	System::IO::BinaryReader^ reader = gcnew System::IO::BinaryReader(fs);
-	n = reader->ReadInt32();
+	int size_z = reader->ReadInt32();
 	GeoData *geoData = new GeoData();
-	geoData->size_z = n;
-	n = reader->ReadInt32();
-	geoData->size_x = n;
+	 
+	geoData->SetSizeZ(size_z);
+	int size_x = reader->ReadInt32();
+	geoData->SetSizeX(size_x);
 
-	for (int i = 0; i < geoData->size_z*geoData->size_x; i++){
+	for (int i = 0; i < size_z*size_x; i++){
 		int n;
 		byte bytes[(4 + 9 * 64)];
 		array<unsigned char, 1> ^cha = gcnew array<unsigned char, 1>((4 + 9 * 64));
@@ -60,7 +61,7 @@ GeoData& WorkFile::ReadGeoData(){
 			iter += 4;
 			_geoCells[j].height = fl;
 		}
-		geoData->geoCubs.push_back(GeoCube(n, _geoCells));
+		geoData->AddGeoCub(GeoCube(n, _geoCells));
 	}
 	
 	return *geoData;

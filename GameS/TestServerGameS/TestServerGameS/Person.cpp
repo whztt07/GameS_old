@@ -15,12 +15,16 @@ inventory(INVENTORY_SIZE){
 	live = true;
 	active = true;
 	needUpdate = false;
-	needStatsUpdate = false;
+	needStatsUpdate = true;
 	does = false;
 	wait = false;	
 	status = idle;
 	corpseSave = false;
 	resInPlace = false;
+	stand = true;
+	stan = false;
+	battle = false;
+	attackTime = 0;
 	animationSpeed = 1;
 	animationStatus = animIdle;
 	corpseSaveTime = 0;
@@ -45,217 +49,276 @@ void Person::Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHold
 }
 
 void Person::UpdateStats(){
-	
-	float newMinAttack = 1, newMaxAttack = 2, newAttackSpeed = 600, newCritChance = 5, newCritRate = 2, newAttackRange = 1, newAccuracy = 4,
-		speedPenalty = 0, newFailCastSpell = 0, evasionPenalty = 20, newResistanceSlash = 0, newResistanceCrush = 0, 
-		newResistancePierce = 0, regenHPMod = 1, regenMPMod = 1, regenHPBonus = 0, regenMPBonus = 0, speedBonus = 0, bonusAttack = 0,
-		bonusAttackRange = 0, bonusAttackSpeed = 0,	bonusInvisible = 0, bonusDetection = 0, bonusConcentration = 0, bonusIntelligence = 0,
-		bonusStrength = 0, bonusAgility = 0;
-	bool newRoot = false;
+	if (needStatsUpdate){
+		float newMinAttack = 1, newMaxAttack = 2, newAttackSpeed = 600, newCritChance = 5, newCritRate = 2, newAttackRange = 1, newAccuracy = 4,
+			speedPenalty = 0, newFailCastSpell = 0, evasionPenalty = 20, newResistanceSlash = 0, newResistanceCrush = 0,
+			newResistancePierce = 0, regenHPMod = 1, regenMPMod = 1, regenHPBonus = 0, regenMPBonus = 0, speedBonus = 0, bonusAttack = 0,
+			bonusAttackRange = 0, bonusAttackSpeed = 0, bonusInvisible = 0, bonusDetection = 0, bonusConcentration = 0, bonusIntelligence = 0,
+			bonusStrength = 0, bonusAgility = 0;
+		bool newRoot = false;
 
-	if (weaponSlot > -1){
-		Item weap = baseItemHolder->GetItem(weaponSlot);
-		newMinAttack = weap.GetMinAttack();
-		newMaxAttack = weap.GetMaxAttack();
-		newAttackSpeed = weap.GetAttackSpeed();
-		newCritChance = weap.GetCritChance();
-		newCritRate = weap.GetCritRate();
-		newAttackRange = weap.GetRangeAttack();
-		newAccuracy = weap.GetAccuracy();
-		if (weap.GetSubType() == "Sword"){
-			int lvl = masteryList.GetMastery(0).GetLvl();
-			bonusAttack += 1 * lvl;
-			bonusAttackSpeed += 0.05 * lvl;
+		if (weaponSlot > -1){
+			Item weap = baseItemHolder->GetItem(weaponSlot);
+			newMinAttack = weap.GetMinAttack();
+			newMaxAttack = weap.GetMaxAttack();
+			newAttackSpeed = weap.GetAttackSpeed();
+			newCritChance = weap.GetCritChance();
+			newCritRate = weap.GetCritRate();
+			newAttackRange = weap.GetRangeAttack();
+			newAccuracy = weap.GetAccuracy();
+			if (weap.GetSubType() == "Sword"){
+				int lvl = masteryList.GetMastery(0).GetLvl();
+				bonusAttack += 1 * lvl;
+				bonusAttackSpeed += 0.05 * lvl;
+			}
+			if (weap.GetSubType() == "Blunt"){
+				int lvl = masteryList.GetMastery(1).GetLvl();
+				bonusAttack += 1.5 * lvl;
+				bonusAttackSpeed += 0.02 * lvl;
+			}
+			if (weap.GetSubType() == "Bow"){
+				int lvl = masteryList.GetMastery(2).GetLvl();
+				bonusAttack += 0.5 * lvl;
+				bonusAttackSpeed += 0.03 * lvl;
+				bonusAttackRange += 0.6 * lvl;
+			}
 		}
-		if (weap.GetSubType() == "Blunt"){
-			int lvl = masteryList.GetMastery(1).GetLvl();
-			bonusAttack += 1.5 * lvl;
-			bonusAttackSpeed += 0.02 * lvl;
+
+
+
+		if (bodySlot > -1){
+			Item armor = baseItemHolder->GetItem(bodySlot);
+			speedPenalty = armor.GetSpeedPenalty();
+			newFailCastSpell = armor.GetFailCastSpell();
+			evasionPenalty = armor.GetEvasionPenalty();
+			newResistanceSlash = armor.GetResistSlash();
+			newResistanceCrush = armor.GetResistCrush();
+			newResistancePierce = armor.GetResistPierce();
 		}
-		if (weap.GetSubType() == "Bow"){
-			int lvl = masteryList.GetMastery(2).GetLvl();
-			bonusAttack += 0.5 * lvl;
-			bonusAttackSpeed += 0.03 * lvl;
-			bonusAttackRange += 0.6 * lvl;
+		bonusInvisible = 2 * masteryList.GetMastery(7).GetLvl();
+		bonusDetection = 2 * masteryList.GetMastery(8).GetLvl();
+		bonusConcentration = 3 * masteryList.GetMastery(9).GetLvl();
+
+		for (int i = 0; i < BUFF_COUNT; i++){
+			switch (buffList.GetBuff(i).GetType())
+			{
+			case 300:
+				regenHPMod *= 2;
+				break;
+			case 301:
+				regenMPMod *= 2;
+				break;
+			case 400:
+				speedBonus += -20;
+				break;
+			case 401:
+				speedBonus += -50;
+				break;
+			case 402:
+				root = true;
+				break;
+			default:
+				break;
+			}
 		}
-	}
 
-
-
-	if (bodySlot > -1){
-		Item armor = baseItemHolder->GetItem(bodySlot);
-		speedPenalty = armor.GetSpeedPenalty();
-		newFailCastSpell = armor.GetFailCastSpell();
-		evasionPenalty = armor.GetEvasionPenalty();
-		newResistanceSlash = armor.GetResistSlash();
-		newResistanceCrush = armor.GetResistCrush();
-		newResistancePierce = armor.GetResistPierce();
-	}
-	bonusInvisible = 2 * masteryList.GetMastery(7).GetLvl();
-	bonusDetection = 2 * masteryList.GetMastery(8).GetLvl();
-	bonusConcentration = 3 * masteryList.GetMastery(9).GetLvl();
-
-	for (int i = 0; i < 10; i++){
-		switch (buffList.GetBuff(i).GetType())
-		{
-		case 300:
-			regenHPMod *= 2;
-			break;
-		case 301:
-			regenMPMod *= 2;
-			break;
-		case 400:
-			speedBonus += -20;
-			break;
-		case 401:
-			speedBonus += -50;
-			break;
-		case 402:
-			root = true;
-			break;
-		default:
-			break;
+		if (spellList.GetSpell(0).GetLearn()){
+			bonusIntelligence += 2;
 		}
+		if (spellList.GetSpell(1).GetLearn()){
+			bonusAgility += 4;
+		}
+		if (spellList.GetSpell(2).GetLearn()){
+			bonusStrength -= 2;
+		}
+		if (spellList.GetSpell(3).GetLearn()){
+			bonusStrength += 4;
+		}
+		if (spellList.GetSpell(4).GetLearn()){
+			bonusAgility -= 2;
+		}
+		strength = baseStrength + bonusStrength;
+		agility = baseAgility + bonusAgility;
+		constitution = baseConstitution;
+		intelligence = baseIntelligence + bonusIntelligence;
+		wisdom = baseWisdom;
+
+		if (strength < 1)
+			strength = 1;
+
+		if (agility < 1)
+			agility = 1;
+
+		if (constitution < 1)
+			constitution = 1;
+
+		if (intelligence < 1)
+			intelligence = 1;
+
+		if (wisdom < 1)
+			wisdom = 1;
+
+		modStrength = (strength - 10) / 2.0;
+		modAgility = (agility - 10) / 2.0;
+		modConstitution = (constitution - 10) / 2.0;
+		modIntelligence = (intelligence - 10) / 2.0;
+		modWisdom = (wisdom - 10) / 2.0;
+
+		maxHp = constitution * 10;
+		maxMp = wisdom * 20;
+		maxWeight = strength * 10;
+
+		if (maxMp < 1)
+			maxMp = 1;
+
+		if (maxMp < 1)
+			maxMp = 1;
+
+		if (maxWeight < 1)
+			maxWeight = 1;
+
+		minAttack = newMinAttack + modStrength + bonusAttack;
+		maxAttack = newMaxAttack + modStrength + bonusAttack;
+
+		if (minAttack < 0)
+			minAttack = 0;
+
+		if (maxAttack < 0)
+			maxAttack = 0;
+
+		attackSpeed = newAttackSpeed * (1 + modAgility*0.05 + bonusAttackSpeed);
+
+		if (attackSpeed < 100)
+			attackSpeed = 100;
+
+		if (attackSpeed > 1500)
+			attackSpeed = 1500;
+
+		critChance = newCritChance;
+		critRate = newCritRate;
+
+		float modAgi = modAgility;
+		if (modAgi > evasionPenalty){
+			modAgi = evasionPenalty;
+		}
+		evasion = 10 + modAgi;
+		accuracy = newAccuracy + modAgility;
+		speed = 3 * (1 + (speedBonus - speedPenalty) * 0.01);
+
+		if (speed < 1)
+			speed = 1;
+
+		if (speed > 5)
+			speed = 5;
+
+		saveReaction = modAgility;
+		savePersistence = modConstitution;
+		saveWill = modWisdom;
+		saveDeath = savePersistence + 2;
+		complexitySpell = 10 + modIntelligence;
+		complexityAbility = 10 + modStrength;
+
+		if (complexitySpell < 0)
+			complexitySpell = 0;
+
+		if (complexityAbility < 0)
+			complexityAbility = 0;
+
+		invisible = 10 + modAgility + bonusInvisible;
+		detection = modIntelligence + bonusDetection;
+		concentration = modConstitution + bonusConcentration;
+		failSpellChance = newFailCastSpell;
+
+		if (failSpellChance < 0)
+			failSpellChance = 0;
+
+		if (failSpellChance > 95)
+			failSpellChance = 95;
+
+		rotationSpeed = speed * 100 / 1.0;
+		attackRange = newAttackRange + bonusAttackRange;
+		recoveryHp = 100;
+		recoveryMp = 100 + 10 * modIntelligence;
+
+		if (recoveryHp < 10)
+			recoveryHp = 10;
+
+		if (recoveryMp < 10)
+			recoveryMp = 10;
+
+		regenHpOutBattle = (constitution / 2.0) * regenHPMod + regenHPBonus;
+		regenMpOutBattle = (intelligence / 2.0) * regenMPMod + regenMPBonus;
+		regenHpInBattle = regenHpOutBattle / 10.0;
+		regenMpInBattle = regenMpOutBattle / 10.0;
+		resistanceCrush = newResistanceCrush;
+		resistanceSlash = newResistanceSlash;
+		resistancePierce = newResistancePierce;
+		resistanceFire = 2;
+		resistanceCold = 2;
+		resistanceNegative = 2;
+
+		root = newRoot;
+
+		needStatsUpdate = false;
+	}
+}
+
+void Person::UpdateWeight(){
+
+}
+
+
+void Person::UpdateCommand(){
+
+	if (command == "Move"){
+		command = "";
+		status = r_move;
+		movePosition = Vector3(data.data1, data.data2, data.data3);
+		needPathUpdate = true;
+	}
+	if (command == "Attack"){
+		command = "";
+		status = r_attack;
+		targetNumber = data.data1;
+
+	}
+	if (command == "Cast"){
+		command = "";
+
+
+	}
+	if (command == "UseItem"){
+		command = "";
+		status = useItem;
+		useItemSlotNumber = data.data1;
+	}
+	if (command == "Pickup"){
+		command = "";
+		status = r_pickup;
+		pickupNumber = data.data1;
+	}
+	if (command == "Resurrection"){
+		command = "";
+		status = res;
+	}
+	if (command == "ResurrectionInPlace"){
+		command = "";
+		status = resplace;
+	}
+	if (command == "DropItem"){
+		command = "";
+
+	}
+	if (command == "Dialog"){
+		command = "";
+
+	}
+	if (command == "StatsUP"){
+		command = "";
+		status = statsUp;
+		statsUpData = data;
 	}
 
-	if (spellList.GetSpell(0).GetLearn()){
-		bonusIntelligence += 2;
-	}
-	if (spellList.GetSpell(1).GetLearn()){
-		bonusAgility += 4;
-	}
-	if (spellList.GetSpell(2).GetLearn()){
-		bonusStrength -= 2;
-	}
-	if (spellList.GetSpell(3).GetLearn()){
-		bonusStrength += 4;
-	}
-	if (spellList.GetSpell(4).GetLearn()){
-		bonusAgility -= 2;
-	}
-	strength = baseStrength + bonusStrength;
-	agility = baseAgility + bonusAgility;
-	constitution = baseConstitution;
-	intelligence = baseIntelligence + bonusIntelligence;
-	wisdom = baseWisdom;
-
-	if (strength < 1)
-		strength = 1;
-
-	if (agility < 1)
-		agility = 1;
-
-	if (constitution < 1)
-		constitution = 1;
-
-	if (intelligence < 1)
-		intelligence = 1;
-
-	if (wisdom < 1)
-		wisdom = 1;
-
-	modStrength = (strength - 10) / 2.0;
-	modAgility = (agility - 10) / 2.0;
-	modConstitution = (constitution - 10) / 2.0;
-	modIntelligence = (intelligence - 10) / 2.0;
-	modWisdom = (wisdom - 10) / 2.0;
-
-	maxHp = constitution * 10;
-	maxMp = wisdom * 20;
-	maxWeight = strength * 10;
-
-	if (maxMp < 1)
-		maxMp = 1;
-
-	if (maxMp < 1)
-		maxMp = 1;
-
-	if (maxWeight < 1)
-		maxWeight = 1;
-
-	minAttack = newMinAttack + modStrength + bonusAttack;
-	maxAttack = newMaxAttack + modStrength + bonusAttack;
-
-	if (minAttack < 0)
-		minAttack = 0;
-
-	if (maxAttack < 0)
-		maxAttack = 0;
-
-	attackSpeed = newAttackSpeed * (1 + modAgility*0.05 + bonusAttackSpeed);
-
-	if (attackSpeed < 100)
-		attackSpeed = 100;
-
-	if (attackSpeed > 1500)
-		attackSpeed = 1500;
-
-	critChance = newCritChance;
-	critRate = newCritRate;
-
-	float modAgi = modAgility;
-	if (modAgi > evasionPenalty){
-		modAgi = evasionPenalty;
-	}
-	evasion = 10 + modAgi;
-	accuracy = newAccuracy + modAgility;
-	speed = 3 * (1 + (speedBonus - speedPenalty) * 0.01);
-
-	if (speed < 1)
-		speed = 1;
-
-	if (speed > 5)
-		speed = 5;
-
-	saveReaction = modAgility;
-	savePersistence = modConstitution;
-	saveWill = modWisdom;
-	saveDeath = savePersistence + 2;
-	complexitySpell = 10 + modIntelligence;
-	complexityAbility = 10 + modStrength;
-
-	if (complexitySpell < 0)
-		complexitySpell = 0;
-
-	if (complexityAbility < 0)
-		complexityAbility = 0;
-
-	invisible = 10 + modAgility + bonusInvisible;
-	detection = modIntelligence + bonusDetection;
-	concentration = modConstitution + bonusConcentration;
-	failSpellChance = newFailCastSpell;
-
-	if (failSpellChance < 0)
-		failSpellChance = 0;
-
-	if (failSpellChance > 95)
-		failSpellChance = 95;
-
-	rotationSpeed = speed * 100 / 1.0;
-	attackRange = newAttackRange + bonusAttackRange;
-	recoveryHp = 100;
-	recoveryMp = 100 + 10 * modIntelligence;
-
-	if (recoveryHp < 10)
-		recoveryHp = 10;
-
-	if (recoveryMp < 10)
-		recoveryMp = 10;
-
-	regenHpOutBattle = (constitution / 2.0) * regenHPMod + regenHPBonus;
-	regenMpOutBattle = (intelligence / 2.0) * regenMPMod + regenMPBonus;
-	regenHpInBattle = regenHpOutBattle / 10.0;
-	regenMpInBattle = regenMpOutBattle / 10.0;
-	resistanceCrush = newResistanceCrush;
-	resistanceSlash = newResistanceSlash;
-	resistancePierce = newResistancePierce;
-	resistanceFire = 2;
-	resistanceCold = 2;
-	resistanceNegative = 2;
-
-	root = newRoot;
-
-	needStatsUpdate = false;
 }
 
 bool Person::StartClientUpdate(){
@@ -303,19 +366,19 @@ bool Person::StartClientUpdate(){
 		for (int j = 0; j < INVENTORY_SIZE; j++){
 			ss += to_string(inventory.GetSlot(j).GetItemId()) + "|" + to_string(inventory.GetSlot(j).GetCount()) + "|";
 		}
-		for (int j = 0; j < 10; j++){
+		for (int j = 0; j < BUFF_COUNT; j++){
 			ss += to_string(buffList.GetBuff(j).GetType()) + "|";
 		}
-		for (int j = 0; j < 10; j++){
+		for (int j = 0; j < DEBUFF_COUNT; j++){
 			ss += to_string(debuffList.GetBuff(j).GetType()) + "|";
 		}
-		for (int j = 0; j < 10; j++){
+		for (int j = 0; j < MASTERY_COUNT; j++){
 			ss += to_string(masteryList.GetMastery(j).GetLvl()) + "|" + to_string(masteryList.GetMastery(j).GetExp()
 				/ Mastery::GetLvlExp(masteryList.GetMastery(j).GetLvl() + 1)) + "|";
 		}
 		int num = 0;
 		string dopcurstring = "";
-		for (int j = 0; j < 20; j++){
+		for (int j = 0; j < ABILITY_COUNT; j++){
 			if (spellList.GetSpell(j).GetLearn()){
 				num++;
 				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
@@ -325,7 +388,7 @@ bool Person::StartClientUpdate(){
 		ss += to_string(num) + "|" + dopcurstring;
 		num = 0;
 		dopcurstring = "";
-		for (int j = 20; j < 44; j++){
+		for (int j = ABILITY_COUNT; j < SPELL_COUNT; j++){
 			if (spellList.GetSpell(j).GetLearn()){
 				num++;
 				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
@@ -495,6 +558,27 @@ void Person::SetWaitingData(const Data &newWaitingData){
 	waitingData = newWaitingData;
 }
 
+void Person::SetStatus(int newStatus){
+	status = newStatus;
+}
+
+void Person::SetStand(bool newStand){
+	stand = newStand;
+}
+
+void Person::SetPathList(const vector<Vector3> &newPathList){
+	pathList = newPathList;
+}
+
+void Person::SetNeedPathUpdate(bool newNeedPathUpdate){
+	needPathUpdate = newNeedPathUpdate;
+}
+
+void Person::SetMoving(bool newMoving){
+	moving = newMoving;
+}
+
+
 const int& Person::GetPersonId() const{
 	return personId;
 }
@@ -523,11 +607,130 @@ const float& Person::GetCurrentMp() const{
 	return currentMp;
 }
 
-const Vector3&	Person::GetPosition() const{
+const Vector3& Person::GetPosition() const{
 	return position;
 }
 
-const float&	Person::GetVisibleRange() const{
+const float& Person::GetVisibleRange() const{
 	return visibleRange;
 }
 
+const bool& Person::GetRoot() const{
+	return root;
+}
+
+const float& Person::GetSpeed() const{
+	return speed;
+}
+
+const int& Person::GetStatus() const{
+	return status;
+}
+
+const Vector3& Person::GetMovePosition() const{
+	return movePosition;
+}
+
+const float& Person::GetRotation() const{
+	return rotation;
+}
+
+const float& Person::GetRotationSpeed() const{
+	return rotationSpeed;
+}
+
+const Vector3& Person::GetFirstPath() const{
+	return pathList[0];
+}
+
+int Person::GetPathListSize() const{
+	return pathList.size();
+}
+
+const bool& Person::GetNeedPathUpdate() const{
+	return needPathUpdate;
+}
+
+
+void Person::DeleteFirstPath(){
+	pathList.erase(pathList.begin() + 0);
+}
+
+
+
+void Person::UpdateAnimation(){
+
+	animationSpeed = 1.0;
+	switch (status){
+	case idle:
+		if (battle){
+			animationStatus = animWarIdle;
+		}
+		else{
+			animationStatus = animIdle;
+		}
+		break;
+	case r_attack:
+	case r_move:
+	case r_pickup:
+		if (moving && !root && !stan){
+			if (speed > 1.5){
+				animationStatus = animRun;
+				animationSpeed = speed / 3.0;
+			}
+			else{
+				animationStatus = animWalk;
+				animationSpeed = speed / 1.5;
+			}
+		}
+		else{
+			if (battle){
+				animationStatus = animWarIdle;
+			}
+			else{
+				animationStatus = animIdle;
+			}
+		}
+		break;
+
+	case _move:
+	case move_attack:
+	case move_pickup:
+		if (root || stan){
+			if (battle){
+				animationStatus = animWarIdle;
+			}
+			else{
+				animationStatus = animIdle;
+			}
+		}
+		else{
+			if (speed > 1.5){
+				animationStatus = animRun;
+				animationSpeed = speed / 3.0;
+			}
+			else{
+				animationStatus = animWalk;
+				animationSpeed = speed / 1.5;
+			}
+		}
+		break;
+
+	case attack:
+		if (baseItemHolder->GetItem(weaponSlot).GetSubType() == "Bow"){
+			animationStatus = animRangeAttack;
+		}
+		else{
+			animationStatus = animAttack;
+		}
+		animationSpeed = 1.0 / attackTime;
+		break;
+
+	case dead:
+
+		animationStatus = animDead;
+
+		break;
+	}
+
+}

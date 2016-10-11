@@ -1,7 +1,21 @@
-﻿Build started 11.10.2016 11:31:54.
+﻿Build started 11.10.2016 23:31:53.
      1>Project "D:\Git\GameS\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib GameLogic.cpp Person.cpp
+         D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Client.cpp Connection.cpp GameLogic.cpp PersonHolder.cpp Processing.cpp TestServerGameS.cpp
+         Client.cpp
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>d:\git\games\games\testservergames\testservergames\GameLogic.h(11): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+         Connection.cpp
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>d:\git\games\games\testservergames\testservergames\GameLogic.h(11): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
          GameLogic.cpp
      1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
@@ -15,56 +29,43 @@
                  d:\git\games\games\testservergames\testservergames\MSQL_init_data.h(5) : see declaration of 'MSQL_init_data'
      1>d:\git\games\games\testservergames\testservergames\GameLogic.h(13): warning C4099: 'UpdateData' : type name first seen using 'struct' now seen using 'class'
                  d:\git\games\games\testservergames\testservergames\UpdateData.h(4) : see declaration of 'UpdateData'
-     1>GameLogic.cpp(105): warning C4172: returning address of local variable or temporary
-         Person.cpp
+     1>GameLogic.cpp(114): warning C4172: returning address of local variable or temporary
+     1>GameLogic.cpp(165): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>GameLogic.cpp(172): warning C4305: '=' : truncation from 'double' to 'float'
+     1>GameLogic.cpp(173): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>GameLogic.cpp(183): warning C4101: 'itemIndex' : unreferenced local variable
+         PersonHolder.cpp
      1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>Person.cpp(58): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(59): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(60): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(61): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(62): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(64): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(68): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(72): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(73): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(77): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(78): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(79): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(87): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(88): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(89): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(90): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(91): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(92): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(94): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(95): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(96): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(136): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(137): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(139): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(157): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(158): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(159): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(160): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(161): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(163): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(164): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(165): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(185): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(196): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(202): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(210): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(211): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(212): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(214): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(215): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(234): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(237): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(245): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(246): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(247): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(248): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>PersonHolder.cpp(41): warning C4172: returning address of local variable or temporary
+     1>PersonHolder.cpp(44): warning C4172: returning address of local variable or temporary
+         Processing.cpp
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>d:\git\games\games\testservergames\testservergames\GameLogic.h(11): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>Processing.cpp(161): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Processing.cpp(162): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Processing.cpp(163): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Processing.cpp(171): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>Processing.cpp(178): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>Processing.cpp(190): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>Processing.cpp(209): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+         TestServerGameS.cpp
+     1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\git\games\games\testservergames\testservergames\PersonHolder.h(4): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>d:\git\games\games\testservergames\testservergames\GameLogic.h(11): warning C4099: 'Data' : type name first seen using 'struct' now seen using 'class'
+                 d:\git\games\games\testservergames\testservergames\Data.h(3) : see declaration of 'Data'
+     1>d:\git\games\games\testservergames\testservergames\MSQL_init_data.h(5): warning C4099: 'MSQL_init_data' : type name first seen using 'class' now seen using 'struct'
+                 d:\git\games\games\testservergames\testservergames\GameLogic.h(12) : see declaration of 'MSQL_init_data'
+     1>d:\git\games\games\testservergames\testservergames\UpdateData.h(4): warning C4099: 'UpdateData' : type name first seen using 'class' now seen using 'struct'
+                 d:\git\games\games\testservergames\testservergames\GameLogic.h(13) : see declaration of 'UpdateData'
          Generating Code...
        Link:
          D:\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\MySQL\MySQL Server 5.5\lib" /ASSEMBLYRESOURCE:Debug\TestServerGameS.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
@@ -73,6 +74,7 @@
          Debug\BaseItemHolder.obj
          Debug\Buff.obj
          Debug\BuffHolder.obj
+         Debug\GeoData.obj
          Debug\InventoryHolder.obj
          Debug\InventorySlot.obj
          Debug\Item.obj
@@ -107,4 +109,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.83
+Time Elapsed 00:00:06.93

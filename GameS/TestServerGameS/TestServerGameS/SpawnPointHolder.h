@@ -8,6 +8,6 @@ class SpawnPointHolder{
 
 	vector<SpawnPoint> spawnPointList;
 public:
-	void Init(const vector<SpawnPoint> &newSpawnPointList);
-
+	void	Init(const vector<SpawnPoint> &newSpawnPointList);
+	int		GetSpawnPointCount() const;
 };

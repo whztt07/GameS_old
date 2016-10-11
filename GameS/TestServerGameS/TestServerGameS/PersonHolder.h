@@ -16,4 +16,7 @@ public:
 	void	Command(const string &command, int personId, const Data &data, bool fast);
 	Person&	GetPerson(int index) const;
 	int		GetPersonCount() const;
+	void	UpdatePersonStats();
+	void	UpdatePersonCommand();
+	void	UpdatePersonAnimation();
 };

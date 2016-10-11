@@ -92,10 +92,18 @@ protected:
 			bool			does;
 			bool			wait;
 			bool			corpseSave;
+			bool			needPathUpdate;
+			bool			stand;
+			bool			moving;
+			bool			battle;
+			bool			stan;
 			int				status;
 			int				animationStatus;
 			float			animationSpeed;
+			float			attackTime;
 			int				targetNumber;
+			int				useItemSlotNumber;
+			int				pickupNumber;
 			string			update;
 			string			uiUpdate;
 			string			waitingCommand;
@@ -104,6 +112,9 @@ protected:
 			Data			data;
 			Data			fastData;
 			Data			waitingData;	
+			Data			statsUpData;
+			Vector3			movePosition;
+			vector<Vector3>	pathList;
 	static	BaseItemHolder	*baseItemHolder;
 	static	BaseSpellHolder	*baseSpellHolder;
 public:
@@ -150,6 +161,11 @@ public:
 			void			SetData(const Data &newData);
 			void			SetFastData(const Data &newFastData);
 			void			SetWaitingData(const Data &newWaitingData);
+			void			SetStatus(int newStatus);
+			void			SetStand(bool newStand);
+			void			SetPathList(const vector<Vector3> &newPathList);
+			void			SetNeedPathUpdate(bool newNeedPathUpdate);
+			void			SetMoving(bool newMoving);
 
 			const int&		GetPersonId() const;
 			const string&	GetUpdate() const;
@@ -160,11 +176,23 @@ public:
 			const float&	GetCurrentMp() const;
 			const Vector3&	GetPosition() const;
 			const float&	GetVisibleRange() const;
-
+			const bool&		GetRoot() const;
+			const float&	GetSpeed() const;
+			const int&		GetStatus() const;
+			const Vector3&	GetMovePosition() const;
+			const float&	GetRotation() const;
+			const float&	GetRotationSpeed() const;
+			const Vector3&	GetFirstPath() const;
+			int				GetPathListSize() const;
+			const bool&		GetNeedPathUpdate() const;
 
 			void			UpdateSpellLvl();
 			void			UpdateStats();
+			void			UpdateWeight();
+			void			UpdateCommand();
+			void			UpdateAnimation();
 			bool			StartClientUpdate();
 			string			NeedClientUpdate(const Vector3 &personPosition, float visibleRange);
 			void			FinishClientUpdate(const string &updateInfo);
+			void			DeleteFirstPath();
 };

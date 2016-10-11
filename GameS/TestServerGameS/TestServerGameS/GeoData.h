@@ -1,12 +1,33 @@
-#include <vector>
 #pragma once
+#include <vector>
+
 #include "GeoCube.h"
 
+class Person;
+class Vector3;
+
+using namespace std;
+
 class GeoData {
-public:
-	GeoData() : size_x(), size_z(){}
-	GeoData(const GeoData &geo) : size_x(geo.size_x), size_z(geo.size_z), geoCubs(geo.geoCubs){}
-	int size_x, size_z;
-	std::vector<GeoCube> geoCubs;
 	
+	int				size_x;
+	int				size_z;
+	vector<GeoCube>	geoCubs;
+
+	float	GeoHeight(const Vector3 &position) const;
+	float	GetAngle(const Vector3 &position) const;	
+	float	GetRotation(float angle) const;
+	void Rotate(float deltaTime, float angle, Person &person) const;
+public:	
+	GeoData();
+	GeoData(const GeoData&);
+
+	void SetSizeX(int newSizeX);
+	void SetSizeZ(int newSizeZ);
+
+	void AddGeoCub(const GeoCube &newGeoCub);
+	bool FallingPerson(float deltaTime, Person &person) const;
+	void MovePerson(float deltaTime, Person &person) const;
+	void NeedPersonPath(Person &person, const Vector3 &movePosition) const;	
+	void MoveRotation(float deltaTime, Person &person) const;
 };

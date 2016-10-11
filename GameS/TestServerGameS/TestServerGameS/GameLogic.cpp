@@ -16,6 +16,7 @@
 #include "GameLogic.h"
 #include "Spell.h"
 #include "Data.h"
+#include "Global.h"
 
 GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::ReadGeoData()){
 	InitializeCriticalSection(&gameSection);
@@ -76,7 +77,13 @@ unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 		if (clock() - mainLogicTime >= 20){			
 			mainLogicTime = clock();
 			EnterCriticalSection(&game->gameSection);
+
+			game->personHolder.UpdatePersonCommand();
+			game->personHolder.UpdatePersonStats();
+			game->UpdateAction();
+			game->personHolder.UpdatePersonAnimation();
 			game->UpdateClientData();
+
 			LeaveCriticalSection(&game->gameSection);
 
 		}
@@ -90,6 +97,8 @@ unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 UpdateData GameLogic::GetUpdateData(){
 	EnterCriticalSection(&gameSection);
 	UpdateData data = UpdateData();
+	data.personCount = personHolder.GetPersonCount();
+	data.spawnPointCount = spawnPointHolder.GetSpawnPointCount();
 	LeaveCriticalSection(&gameSection);
 	return data;
 }
@@ -148,6 +157,150 @@ void GameLogic::Exit(int personId){
 	LeaveCriticalSection(&gameSection);
 }
 
+
+
+void GameLogic::UpdateAction(){
+	static unsigned int lastUpdate = clock();
+	int n = personHolder.GetPersonCount();
+	float dsTime = (float)(clock() - lastUpdate) / 1000.0;
+	lastUpdate = clock();
+
+	float dlTime = 0;
+	while (dsTime > 0){
+
+		if (dsTime > 0.025){
+			dlTime = 0.025;
+			dsTime -= 0.025;
+		}
+		else{
+			dlTime = dsTime;
+			dsTime = 0;
+		}
+		for (int i = 0; i < n; i++){
+
+			if (geoData.FallingPerson(dlTime, personHolder.GetPerson(i))){
+				Vector3 targPos;
+				int itemIndex;
+				switch (personHolder.GetPerson(i).GetStatus()){
+				case r_move:
+					if (personHolder.GetPerson(i).GetNeedPathUpdate()){
+						geoData.NeedPersonPath(personHolder.GetPerson(i), personHolder.GetPerson(i).GetMovePosition());
+						personHolder.GetPerson(i).SetNeedPathUpdate(false);
+						personHolder.GetPerson(i).SetMoving(false);
+					}
+					else{
+						geoData.MoveRotation(dlTime, personHolder.GetPerson(i));
+					}
+					break;
+				case _move:
+					personHolder.GetPerson(i).SetMoving(true);
+					geoData.MovePerson(dlTime, personHolder.GetPerson(i));
+					break;
+					/*
+				case r_attack:
+				targPos = var->personList[GetIndex(var->personList[i].targetNumber)].position;
+				if (Vector3::Distance(var->personList[i].position, targPos) <= var->personList[i].attackRange){
+				GeoDvig::TargetRotation(dlTime, i);
+				}
+				else{
+				if (var->personList[i].pathList.size() == 0 || Vector3::Distance(targPos, var->personList[i].pathList.back()) > 0.5){
+				GeoDvig::NeedPersonPath(i, targPos);
+				var->personList[i].dvig = false;
+				}
+				GeoDvig::MoveRotation(dlTime, i);
+				}
+				break;
+				case move_attack:
+
+				targPos = var->personList[GetIndex(var->personList[i].targetNumber)].position;
+				if (Vector3::Distance(var->personList[i].position, targPos) <= var->personList[i].attackRange){
+				var->personList[i].status = r_attack;
+				}
+				else{
+				if (var->personList[i].pathList.size() == 0 || Vector3::Distance(targPos, var->personList[i].pathList.back()) > 0.5){
+				GeoDvig::NeedPersonPath(i, targPos);
+				var->personList[i].status = r_attack;
+				}
+				else{
+				var->personList[i].dvig = true;
+				GeoDvig::MovePerson(dlTime, i);
+				}
+				}
+				break;
+				case attack:
+
+				GeoDvig::TargetDoesRotation(dlTime, i);
+				Attack(i);
+				break;
+				case r_pickup:
+				itemIndex = GetItemIndex(var->personList[i].pickupNumber);
+				if (itemIndex == -1){
+				var->personList[i].status = idle;
+				}
+				else{
+				targPos = var->dropItemList[itemIndex].position;
+				if (Vector3::Distance(var->personList[i].position, targPos) <= 0.2){
+				GeoDvig::TargetItemRotation(dlTime, i);
+				}
+				else{
+				if (var->personList[i].pathList.size() == 0 || Vector3::Distance(targPos, var->personList[i].pathList.back()) > 0.2){
+				GeoDvig::NeedPersonPath(i, targPos);
+				var->personList[i].dvig = false;
+				}
+				GeoDvig::MoveRotation(dlTime, i);
+				}
+				}
+				break;
+				case move_pickup:
+				itemIndex = GetItemIndex(var->personList[i].pickupNumber);
+				if (itemIndex == -1){
+				var->personList[i].status = idle;
+				}
+				else{
+				targPos = var->dropItemList[itemIndex].position;
+				if (Vector3::Distance(var->personList[i].position, targPos) <= 0.2){
+				var->personList[i].status = r_pickup;
+				}
+				else{
+				var->personList[i].dvig = true;
+				GeoDvig::MovePerson(dlTime, i);
+				}
+				}
+				break;
+				case pickup:
+				Pickup(i);
+				break;
+				case statsUp:
+
+				StatsUP(i);
+				break;
+				case useItem:
+
+				UseItem(i);
+				break;*/
+				}
+			}
+			else{
+				switch (personHolder.GetPerson(i).GetStatus()){
+
+				case _move:
+					personHolder.GetPerson(i).SetStatus(r_move);
+					break;
+				case move_attack:
+					personHolder.GetPerson(i).SetStatus(r_attack);
+					break;
+				case move_pickup:
+					personHolder.GetPerson(i).SetStatus(r_pickup);
+					break;
+				default:
+					personHolder.GetPerson(i).SetStatus(idle);
+					break;
+				}
+			}
+		}
+	}
+}
+		
 /*
 
 void UPDLogic::MainLogic(){

@@ -5,7 +5,7 @@
 #define MASTERY_EXP_ARRAY  0, 20, 30, 20, 70, 60, 100
 
 #define SPELL_COUNT 44
-
+#define ABILITY_COUNT 20
 #define BUFF_COUNT 10
 #define DEBUFF_COUNT 10
 

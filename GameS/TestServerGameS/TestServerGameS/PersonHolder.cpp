@@ -9,7 +9,6 @@ using namespace std;
 void PersonHolder::AddPerson(const Person &newPerson, int personType){
 	Person *ppers = new Person(newPerson);
 	ppers->SetType(personType);
-	ppers->UpdateStats();
 	personList.push_back(ppers);
 }
 
@@ -71,7 +70,7 @@ string PersonHolder::NeedUI_UPD(int personId){
 
 void PersonHolder::Command(const string &command, int personId, const Data &data, bool fast){
 	int index = GetIndex(personId);
-	if (fast){
+	if (!fast){
 		if (personList[index]->GetDoes()){
 			personList[index]->SetWait(true);
 			personList[index]->SetWaitingCommand(command);
@@ -94,4 +93,27 @@ Person&	PersonHolder::GetPerson(int index) const{
 
 int		PersonHolder::GetPersonCount() const{
 	return personList.size();
+}
+
+void PersonHolder::UpdatePersonStats(){
+	int size = personList.size();
+	for (int i = 0; i < size; i++){
+		personList[i]->UpdateStats();
+		personList[i]->UpdateWeight();
+	}
+}
+
+void PersonHolder::UpdatePersonCommand(){
+	int size = personList.size();
+	for (int i = 0; i < size; i++)
+		personList[i]->UpdateCommand();
+		
+	
+}
+
+void PersonHolder::UpdatePersonAnimation(){
+	int size = personList.size();
+	for (int i = 0; i < size; i++)
+		personList[i]->UpdateAnimation();
+
 }

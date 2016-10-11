@@ -96,6 +96,7 @@
     <ClCompile Include="BaseItemHolder.cpp" />
     <ClCompile Include="Buff.cpp" />
     <ClCompile Include="BuffHolder.cpp" />
+    <ClCompile Include="GeoData.cpp" />
     <ClCompile Include="InventoryHolder.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="Item.cpp" />

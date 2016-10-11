@@ -25,9 +25,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{bc64224a-35ea-44c9-ae80-503f7afb078b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GeoData">
-      <UniqueIdentifier>{c416a7fc-2822-40d1-860b-d2f99064b167}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Work\MSQL">
       <UniqueIdentifier>{4f43a786-af7b-4c9c-91fc-856ad0179d5e}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="Game\Person\Inventory">
       <UniqueIdentifier>{8d82690b-eb0b-4238-94b1-917bc4ffa46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GeoData">
+      <UniqueIdentifier>{c416a7fc-2822-40d1-860b-d2f99064b167}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +168,9 @@
     <ClCompile Include="PersonHolder.cpp">
       <Filter>Game\Person\Holders</Filter>
     </ClCompile>
+    <ClCompile Include="GeoData.cpp">
+      <Filter>Game\GeoData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form1.h">
@@ -196,13 +199,13 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="GeoCell.h">
-      <Filter>GeoData</Filter>
+      <Filter>Game\GeoData</Filter>
     </ClInclude>
     <ClInclude Include="GeoCube.h">
-      <Filter>GeoData</Filter>
+      <Filter>Game\GeoData</Filter>
     </ClInclude>
     <ClInclude Include="GeoData.h">
-      <Filter>GeoData</Filter>
+      <Filter>Game\GeoData</Filter>
     </ClInclude>
     <ClInclude Include="GeoDvig.h">
       <Filter>Old</Filter>

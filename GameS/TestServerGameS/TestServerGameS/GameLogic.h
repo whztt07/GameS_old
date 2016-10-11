@@ -23,7 +23,7 @@ class GameLogic{
 	//DropItemHolder		dropItemHolder;		// ласс содержащий в себе массив выпавших предметов и предоставл€ющий методы дл€ работы с ним
 	BaseSpellHolder		baseSpellHolder;	// ласс содержащий в себе массив спелов и предоставл€ющий методы дл€ работы с ним
 
-	
+			void				UpdateAction();
 			void				UpdateClientData();				
 	static	unsigned _stdcall	RunUpdate(void *pvoid);	//ћетод вызываемый в другом потоке, обновл€ет логику в цикле
 	
