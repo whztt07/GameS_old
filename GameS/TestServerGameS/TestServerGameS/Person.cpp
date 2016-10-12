@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <string>
+#include <time.h>
 
 #include "Person.h"
 #include "Global.h"
@@ -29,6 +30,7 @@ inventory(INVENTORY_SIZE){
 	animationStatus = animIdle;
 	corpseSaveTime = 0;
 	targetNumber = -1;
+	lastPersonUpdate = clock();
 	update = "NULL";
 	uiUpdate = "NULL";
 	waitingCommand = "NULL";
@@ -522,42 +524,6 @@ void Person::SetActive(bool  newActive){
 	active = newActive;
 }
 
-void Person::SetNeedUpdate(bool  newNeedUpdate){
-	needUpdate = newNeedUpdate;
-}
-
-void Person::SetUpdate(const string &newUpdate){
-	update = newUpdate;
-}
-
-void Person::SetWait(bool  newWait){
-	wait = newWait;
-}
-
-void Person::SetCommand(const string &newCommand){
-	command = newCommand;
-}
-
-void Person::SetFastCommand(const string &newFastCommand){
-	fastCommand = newFastCommand;
-}
-
-void Person::SetWaitingCommand(const string &newWaitingCommand){
-	waitingCommand = newWaitingCommand;
-}
-
-void Person::SetData(const Data &newData){
-	data = newData;
-}
-
-void Person::SetFastData(const Data &newFastData){
-	fastData = newFastData;
-}
-
-void Person::SetWaitingData(const Data &newWaitingData){
-	waitingData = newWaitingData;
-}
-
 void Person::SetStatus(int newStatus){
 	status = newStatus;
 }
@@ -583,16 +549,8 @@ const int& Person::GetPersonId() const{
 	return personId;
 }
 
-const string& Person::GetUpdate() const{
-	return update;
-}
-
 const string& Person::GetUiUpdate() const{
 	return uiUpdate;
-}
-
-const bool& Person::GetDoes() const{
-	return does;
 }
 
 const int& Person::GetRace() const{
@@ -733,4 +691,84 @@ void Person::UpdateAnimation(){
 		break;
 	}
 
+}
+
+void Person::UpdateRegeneration(float deltaTime){
+	if (live){
+		float regen;
+		if (battle){
+			regen = regenHpInBattle;
+		}
+		else{
+			regen = regenHpOutBattle;
+		}
+		regen *= deltaTime;
+		if (regen > 0 && currentHp < maxHp){
+			currentHp += regen;
+			if (currentHp > maxHp){
+				currentHp = maxHp;
+			}
+		}
+		if (regen < 0 && currentHp > 1){
+			currentHp += regen;
+			if (currentHp < 1){
+				currentHp = 1;
+			}
+		}
+
+		if (battle){
+			regen = regenMpInBattle;
+		}
+		else{
+			regen = regenMpOutBattle;
+		}
+		regen *= deltaTime;
+		if (regen > 0 && currentMp < maxMp){
+			currentMp += regen;
+			if (currentMp > maxMp){
+				currentMp = maxMp;
+			}
+		}
+		if (regen < 0 && currentMp > 1){
+			currentMp += regen;
+			if (currentMp < 1){
+				currentMp = 1;
+			}
+		}
+	}
+}
+
+bool Person::PersonActive(){
+	if(!active)
+	return clock() - lastPersonUpdate > 10000 ? false : true;
+	return true;
+}
+
+string Person::NeedUpdate(){	
+	lastPersonUpdate = clock();
+	if (update == "NULL"){
+		needUpdate = true;;
+	}
+	string s = update;  
+	update = "NULL";
+	return s;
+}
+
+void Person::Command(const string &command, const Data &data, bool fast){
+	
+	if (!fast){
+		if (does){
+			wait = true;
+			waitingCommand = command;
+			waitingData = data;
+		}
+		else{
+			this->data = data;
+			this->command = command;
+		}
+	}
+	else{
+		fastCommand = command;
+		fastData = data;
+	}
 }

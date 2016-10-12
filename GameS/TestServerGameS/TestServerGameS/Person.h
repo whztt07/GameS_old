@@ -104,6 +104,7 @@ protected:
 			int				targetNumber;
 			int				useItemSlotNumber;
 			int				pickupNumber;
+			unsigned int	lastPersonUpdate;
 			string			update;
 			string			uiUpdate;
 			string			waitingCommand;
@@ -152,15 +153,6 @@ public:
 			void			SetAbilityPoint(int newAbilityPoint);
 			void			SetSpellPoint(int newSpellPoint);
 			void			SetActive(bool newActive);
-			void			SetNeedUpdate(bool newNeedUpdate);
-			void			SetUpdate(const string &newUpdate);
-			void			SetWait(bool newWait);
-			void			SetCommand(const string &newCommand);
-			void			SetFastCommand(const string &newFastCommand);
-			void			SetWaitingCommand(const string &newWaitingCommand);
-			void			SetData(const Data &newData);
-			void			SetFastData(const Data &newFastData);
-			void			SetWaitingData(const Data &newWaitingData);
 			void			SetStatus(int newStatus);
 			void			SetStand(bool newStand);
 			void			SetPathList(const vector<Vector3> &newPathList);
@@ -168,9 +160,7 @@ public:
 			void			SetMoving(bool newMoving);
 
 			const int&		GetPersonId() const;
-			const string&	GetUpdate() const;
 			const string&	GetUiUpdate() const;
-			const bool&		GetDoes() const;
 			const int&		GetRace() const;
 			const float&	GetCurrentHp() const;
 			const float&	GetCurrentMp() const;
@@ -190,9 +180,14 @@ public:
 			void			UpdateStats();
 			void			UpdateWeight();
 			void			UpdateCommand();
+			void			UpdateRegeneration(float deltaTime);
 			void			UpdateAnimation();
 			bool			StartClientUpdate();
 			string			NeedClientUpdate(const Vector3 &personPosition, float visibleRange);
 			void			FinishClientUpdate(const string &updateInfo);
 			void			DeleteFirstPath();
+			bool			PersonActive();
+
+			string			NeedUpdate();			
+			void			Command(const string &command, const Data &data, bool fast);
 };

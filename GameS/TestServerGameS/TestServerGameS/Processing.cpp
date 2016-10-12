@@ -134,7 +134,7 @@ string Processing::Process(string &message, Account &curAccount){
 				return copyAccount.GetLastAnswer();
 			}
 			if (copyAccount.GetInfo() == "GamePers"){
-				string qs = game->NeedUPD(copyAccount.GetPersonId());
+				string qs = game->NeedUpdate(copyAccount.GetPersonId());
 				if (qs != "NULL"){
 					curAccount.SetInfo("NeedFirstUPD");
 					curAccount.SetLastAnswer(qs);
@@ -145,13 +145,13 @@ string Processing::Process(string &message, Account &curAccount){
 		if (temMess == "NeedUPD"){
 			if (copyAccount.GetInfo() == "NeedFirstUPD" || copyAccount.GetInfo() == "NeedUPD"){
 				curAccount.SetInfo("NeedUPD");
-				string qs = game->NeedUPD(copyAccount.GetPersonId());
+				string qs = game->NeedUpdate(copyAccount.GetPersonId());
 				return qs;
 			}
 		}
 		if (temMess == "NeedUIUPD"){
 			if (copyAccount.GetInfo() == "NeedUPD"){
-				string qs = game->NeedUI_UPD(copyAccount.GetPersonId());
+				string qs = game->NeedUiUpdate(copyAccount.GetPersonId());
 				return qs;
 			}
 		}

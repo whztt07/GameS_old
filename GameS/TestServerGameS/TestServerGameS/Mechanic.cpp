@@ -11,23 +11,6 @@ int Mechanic::GetItemIndex(int j){ // drop item holder
 	return -1;
 }
 
-
-
-
-
-void Mechanic::UPDPersonList(){//person holder
-	EnterCriticalSection(&var->varSection);
-	for (int i = 0; i < var->personList.size(); i++){
-		if (!var->personList[i].active){
-			if (clock() - var->personList[i].lastPersUPD > 10000){
-				var->personList.erase(var->personList.begin() + i);
-				i--;
-			}
-		}
-	}
-	LeaveCriticalSection(&var->varSection);
-}
-
 void Mechanic::StatsUP(int index){
 	
 	int str = var->personList[index].statsUpData.q1, agi = var->personList[index].statsUpData.q2, con = var->personList[index].statsUpData.q3,
@@ -328,62 +311,6 @@ void Mechanic::AddDebuff(int j, int type, float time, int level){
 
 }
 
-
-void Mechanic::Regen(){
-	EnterCriticalSection(&var->varSection);
-	for (int i = 0; i < var->personList.size(); i++){
-		if (var->personList[i].live){
-			int dif = clock() - var->personList[i].lastPersRegen;
-			int count = dif / 1000;
-			var->personList[i].lastPersRegen += count * 1000;
-			if (count > 0){
-				float regen;
-				if (var->personList[i].battle){
-					regen = var->personList[i].regenHPInBattle;
-				}
-				else{
-					regen = var->personList[i].regenHPOutBattle;
-				}
-				regen *= count;
-				if (regen > 0 && var->personList[i].curHP < var->personList[i].maxHP){
-					var->personList[i].curHP += regen;
-					if (var->personList[i].curHP > var->personList[i].maxHP){
-						var->personList[i].curHP = var->personList[i].maxHP;
-					}
-				}
-				if (regen < 0 && var->personList[i].curHP > 1){
-					var->personList[i].curHP += regen;
-					if (var->personList[i].curHP < 1){
-						var->personList[i].curHP = 1;
-					}
-				}
-
-				if (var->personList[i].battle){
-					regen = var->personList[i].regenMPInBattle;
-				}
-				else{
-					regen = var->personList[i].regenMPOutBattle;
-				}
-				regen *= count;
-				if (regen > 0 && var->personList[i].curMP < var->personList[i].maxMP){
-					var->personList[i].curMP += regen;
-					if (var->personList[i].curMP > var->personList[i].maxMP){
-						var->personList[i].curMP = var->personList[i].maxMP;
-					}
-				}
-				if (regen < 0 && var->personList[i].curMP > 1){
-					var->personList[i].curMP += regen;
-					if (var->personList[i].curMP < 1){
-						var->personList[i].curMP = 1;
-					}
-				}
-			}
-		}
-	}
-	LeaveCriticalSection(&var->varSection);
-}
-
-
 void Mechanic::BuffUPD(){
 	EnterCriticalSection(&var->varSection);
 	for (int i = 0; i < var->personList.size(); i++){
@@ -454,16 +381,6 @@ void Mechanic::WeightUPD(int j){
 	}
 	
 }
-
-
-float Mechanic::LastMainUPD(int j){
-	EnterCriticalSection(&var->varSection);
-	float dTime = (float)(clock() - var->personList[j].lastMainUPD) / 1000.0;
-	var->personList[j].lastMainUPD = clock();
-	LeaveCriticalSection(&var->varSection);
-	return dTime;
-}
-
 
 bool Mechanic::TargetAttackRange(int j){
 	bool ok = false;
@@ -611,11 +528,6 @@ void Mechanic::Kill(int j, int target){
 
 }
 
-void Mechanic::AddSpawnPoint(Vector3 pos, vector<int> vec, float time){
-	EnterCriticalSection(&var->varSection);
-	var->spawnPointList.push_back(SpawnPoint(pos, vec, time));
-	LeaveCriticalSection(&var->varSection);
-}
 
 void Mechanic::SpawnPointUPD(){
 	EnterCriticalSection(&var->varSection);

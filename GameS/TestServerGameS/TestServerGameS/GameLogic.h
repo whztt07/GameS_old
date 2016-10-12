@@ -7,6 +7,7 @@
 #include "BaseItemHolder.h"
 #include "SpawnPointHolder.h"
 #include "PersonHolder.h"
+#include "DropItemHolder.h"
 
 class Data;
 class MSQL_init_data;
@@ -20,11 +21,11 @@ class GameLogic{
 	BasePersonHolder	basePersonHolder;	//Класс содержащий в себе массив базовых персонажей и предоставляющий методы для работы с ним
 	BaseItemHolder		baseItemHolder;		//Класс содержащий в себе массив предметов и предоставляющий методы для работы с ним	
 	SpawnPointHolder	spawnPointHolder;	//Класс содержащий в себе массив точек респавна и предоставляющий методы для работы с ним
-	//DropItemHolder		dropItemHolder;		//Класс содержащий в себе массив выпавших предметов и предоставляющий методы для работы с ним
+	DropItemHolder		dropItemHolder;		//Класс содержащий в себе массив выпавших предметов и предоставляющий методы для работы с ним
 	BaseSpellHolder		baseSpellHolder;	//Класс содержащий в себе массив спелов и предоставляющий методы для работы с ним
 
-			void				UpdateAction();
-			void				UpdateClientData();				
+			
+						
 	static	unsigned _stdcall	RunUpdate(void *pvoid);	//Метод вызываемый в другом потоке, обновляет логику в цикле
 	
 public:
@@ -37,8 +38,8 @@ public:
 	void			AddPerson(const Person &newPerson, int personType = 1);
 
 	string			ResolutionGamePers(const vector<int> &personIdList, int personId);
-	string			NeedUPD(int personId);
-	string			NeedUI_UPD(int personId);
+	string			NeedUpdate(int personId);
+	string			NeedUiUpdate(int personId);
 	void			Command(const string &command, int personId, const Data &data, bool fast = false);
 	void			Exit(int personId);
 	
