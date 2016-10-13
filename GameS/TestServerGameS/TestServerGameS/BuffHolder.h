@@ -10,6 +10,9 @@ class BuffHolder{
 public:
 	BuffHolder(const int &buffCount);
 
-	void	Init(const vector<Buff> &newBuffList);
-	const	Buff& GetBuff(int index) const;
+	void		Init(const vector<Buff> &newBuffList);
+	const Buff&	GetBuff(int index) const;
+	void		AddBuff(int type, float time, int level = 1);
+	void		DeleteBuff(int type);
+	void		UpdateBuffs(float deltaTime);
 };

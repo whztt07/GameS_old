@@ -10,4 +10,5 @@ class SpawnPointHolder{
 public:
 	void	Init(const vector<SpawnPoint> &newSpawnPointList);
 	int		GetSpawnPointCount() const;
+	void	SpawnUpdate();
 };

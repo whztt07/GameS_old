@@ -1,4 +1,4 @@
-
+#pragma once
 //Параметры Mastery
 #define MASTERY_COUNT 10
 #define MASTERY_MAX_LVL 5
@@ -61,3 +61,4 @@ enum AnimationStatus{
 	animDead = 6,
 	animWarIdle = 7
 };
+

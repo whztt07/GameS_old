@@ -13,4 +13,6 @@ public:
 
 	const int&	GetItemId() const;
 	const int&	GetCount() const;
+
+	void		TakeCount(int count);
 };

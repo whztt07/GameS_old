@@ -29,4 +29,6 @@ public:
 	void	UpdatePersonAnimation();
 	void	UpdatePersonList();
 	void	UpdateAction(float deltaTime);
+	void	UpdatePersonBuff(float deltaTime);
+	bool	PersonLive(int personId) const;
 };

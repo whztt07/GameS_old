@@ -89,6 +89,7 @@ protected:
 			bool			active;
 			bool			needUpdate;
 			bool			needStatsUpdate;
+			bool			needWeightUpdate;
 			bool			does;
 			bool			wait;
 			bool			corpseSave;
@@ -118,6 +119,8 @@ protected:
 			vector<Vector3>	pathList;
 	static	BaseItemHolder	*baseItemHolder;
 	static	BaseSpellHolder	*baseSpellHolder;
+			
+			
 public:
 	SpellHolder		spellList;
 	MasteryHolder	masteryList;
@@ -175,11 +178,13 @@ public:
 			const Vector3&	GetFirstPath() const;
 			int				GetPathListSize() const;
 			const bool&		GetNeedPathUpdate() const;
+			const bool&		GetLive() const;
 
 			void			UpdateSpellLvl();
 			void			UpdateStats();
 			void			UpdateWeight();
 			void			UpdateCommand();
+			void			UpdateBuff(float deltaTime);
 			void			UpdateRegeneration(float deltaTime);
 			void			UpdateAnimation();
 			bool			StartClientUpdate();
@@ -187,7 +192,10 @@ public:
 			void			FinishClientUpdate(const string &updateInfo);
 			void			DeleteFirstPath();
 			bool			PersonActive();
+			
 
 			string			NeedUpdate();			
 			void			Command(const string &command, const Data &data, bool fast);
+			void			StatsUp();
+			void			UseItem();
 };

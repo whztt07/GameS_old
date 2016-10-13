@@ -17,6 +17,7 @@ inventory(INVENTORY_SIZE){
 	active = true;
 	needUpdate = false;
 	needStatsUpdate = true;
+	needWeightUpdate = true;
 	does = false;
 	wait = false;	
 	status = idle;
@@ -266,9 +267,36 @@ void Person::UpdateStats(){
 }
 
 void Person::UpdateWeight(){
-
+	if (needWeightUpdate){
+		currentWeight = 0;
+		for (int i = 0; i < INVENTORY_SIZE; i++){
+			if (inventory.GetSlot(i).GetItemId() != -1)
+				currentWeight += baseItemHolder->GetItem(inventory.GetSlot(i).GetItemId()).GetWeight();
+		}
+		currentWeight += baseItemHolder->GetItem(weaponSlot).GetWeight();
+		currentWeight += baseItemHolder->GetItem(bodySlot).GetWeight();
+		float cur = currentWeight * 100.0 / maxWeight;
+		buffList.DeleteBuff(400);
+		buffList.DeleteBuff(401);
+		buffList.DeleteBuff(402);
+		if (cur >= 60 && cur < 80){
+			buffList.AddBuff(400, 0);
+		}
+		if (cur >= 80 && cur < 100){
+			buffList.AddBuff(401, 0);
+		}
+		if (cur >= 100){
+			buffList.AddBuff(402, 0);
+		}
+		needWeightUpdate = false;
+		needStatsUpdate = true;
+	}
 }
 
+void Person::UpdateBuff(float deltaTime){
+	buffList.UpdateBuffs(deltaTime);
+	debuffList.UpdateBuffs(deltaTime);
+}
 
 void Person::UpdateCommand(){
 
@@ -772,3 +800,186 @@ void Person::Command(const string &command, const Data &data, bool fast){
 		fastData = data;
 	}
 }
+
+
+const bool& Person::GetLive() const{
+	return live;
+}
+
+
+void Person::StatsUp(){
+
+	int str = statsUpData.data1, agi = statsUpData.data2, con = statsUpData.data3, intel = statsUpData.data4, wis = statsUpData.data5;
+
+	int free = freeCharacteristics, _str = baseStrength, _agi = baseAgility, _con = baseConstitution, _intel = baseIntelligence, 
+		_wis = baseWisdom;
+
+	for (int i = 0; i < str; i++){
+		int mod = (_str - 10) / 2;
+		if (mod < 1)
+			mod = 1;
+		if (free < mod){
+
+			return;
+		}
+		free -= mod;
+		_str++;
+	}
+	for (int i = 0; i < agi; i++){
+		int mod = (_agi - 10) / 2;
+		if (mod < 1)
+			mod = 1;
+		if (free < mod){
+
+			return;
+		}
+		free -= mod;
+		_agi++;
+	}
+	for (int i = 0; i < con; i++){
+		int mod = (_con - 10) / 2;
+		if (mod < 1)
+			mod = 1;
+		if (free < mod){
+
+			return;
+		}
+		free -= mod;
+		_con++;
+	}
+	for (int i = 0; i < intel; i++){
+		int mod = (_intel - 10) / 2;
+		if (mod < 1)
+			mod = 1;
+		if (free < mod){
+
+			return;
+		}
+		free -= mod;
+		_intel++;
+	}
+	for (int i = 0; i < wis; i++){
+		int mod = (_wis - 10) / 2;
+		if (mod < 1)
+			mod = 1;
+		if (free < mod){
+
+			return;
+		}
+		free -= mod;
+		_wis++;
+	}
+
+	freeCharacteristics = free;
+	baseStrength = _str;
+	baseAgility = _agi;
+	baseConstitution = _con;
+	baseIntelligence = _intel;
+	baseWisdom = _wis;
+	needStatsUpdate = true;
+	status = idle;
+}
+
+
+void Person::UseItem(){
+
+	if (useItemSlotNumber < 0){
+		if (useItemSlotNumber == -1 && weaponSlot != -1){
+			int freeSlot = inventory.FreeInventorySlot();
+
+			if (freeSlot == -1){
+
+				status = idle;
+
+				return;
+			}
+			else{
+				inventory.GetSlot(freeSlot).SetItemId(weaponSlot);
+				inventory.GetSlot(freeSlot).SetCount(1);
+				weaponSlot = -1;
+				needStatsUpdate = true;
+			}
+		}
+		if (useItemSlotNumber == -2 && bodySlot != -1){
+			int freeSlot = inventory.FreeInventorySlot();
+			if (freeSlot == -1){
+
+				status = idle;
+
+				return;
+			}
+			else{
+				inventory.GetSlot(freeSlot).SetItemId(bodySlot);
+				inventory.GetSlot(freeSlot).SetCount(1);
+				bodySlot = -1;
+				needStatsUpdate = true;
+			}
+		}
+	}
+	else{
+		if (inventory.GetSlot(useItemSlotNumber).GetItemId() != -1){
+			string type = baseItemHolder->GetItem(inventory.GetSlot(useItemSlotNumber).GetItemId()).GetType();
+			if (type == "Weapon"){
+
+				int item = weaponSlot;
+				weaponSlot = inventory.GetSlot(useItemSlotNumber).GetItemId();
+				inventory.GetSlot(useItemSlotNumber).SetItemId(-1);
+				inventory.GetSlot(useItemSlotNumber).SetCount(0);
+				needStatsUpdate = true;
+				if (item > -1){
+					int freeSlot = inventory.FreeInventorySlot();
+
+					inventory.GetSlot(freeSlot).SetItemId(item);
+					inventory.GetSlot(freeSlot).SetCount(1);
+				}
+			}
+			if (type == "Armor"){
+
+				int item = bodySlot;
+				bodySlot = inventory.GetSlot(useItemSlotNumber).GetItemId();
+				inventory.GetSlot(useItemSlotNumber).SetItemId(-1);
+				inventory.GetSlot(useItemSlotNumber).SetCount(0);
+				needStatsUpdate= true;
+				if (item > -1){
+					int freeSlot = inventory.FreeInventorySlot();
+
+					inventory.GetSlot(freeSlot).SetItemId(item);
+					inventory.GetSlot(freeSlot).SetCount(1);
+				}
+
+			}
+			if (type == "Potion"){
+				string subType = baseItemHolder->GetItem(inventory.GetSlot(useItemSlotNumber).GetItemId()).GetSubType();
+				inventory.TakeItem(useItemSlotNumber);
+				needWeightUpdate = true;
+				if (subType == "HP"){
+					needStatsUpdate = true;
+					buffList.AddBuff(300, 5);
+					if (currentHp < maxHp){
+						currentHp += 50 * recoveryHp / 100;
+						if (currentHp > maxHp){
+							currentHp = maxHp;
+						}
+					}
+				}
+				if (subType == "MP"){
+					needStatsUpdate = true;
+					buffList.AddBuff(301, 5);
+					if (currentMp < maxMp){
+						currentMp += 50 * recoveryMp / 100;
+						if (currentMp > maxMp){
+							currentMp = maxMp;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	status = idle;
+
+}
+
+
+
+

@@ -18,10 +18,12 @@ class SpawnPoint {
 			unsigned int		deadTime;			//Время когда освободилось место
 	static	PersonHolder		*personHolder;
 	static	BasePersonHolder	*basePersonHolder;
-
+	static	int					npcNumber;
 public:	
 	SpawnPoint(const Vector3 &spawnPosition, const vector<int> &npcIdList, float respawnTime);
 
 	static	void	Init(PersonHolder &personHolder, BasePersonHolder &basePersonHolder);
+
+			void	SpawnUpdate();
 };
 

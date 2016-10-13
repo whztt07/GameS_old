@@ -73,14 +73,14 @@ unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 					deltaTime = 0;
 				}
 				game->personHolder.UpdatePersonCommand();
-				//Mechanic::BuffUPD();			
+				game->personHolder.UpdatePersonBuff(dsTime);
 				game->personHolder.UpdatePersonStats();
 				game->personHolder.UpdateAction(dsTime);
 				game->personHolder.UpdatePersonRegeneration(dsTime);
 				//Mechanic::BattleStatusUPD();
 			}
 
-			//Mechanic::SpawnPointUPD();						
+			game->spawnPointHolder.SpawnUpdate();
 			//Mechanic::DeadUPD();
 
 			game->personHolder.UpdatePersonList();

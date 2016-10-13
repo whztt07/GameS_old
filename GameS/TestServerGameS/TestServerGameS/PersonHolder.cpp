@@ -241,14 +241,13 @@ void PersonHolder::UpdateAction(float deltaTime){
 				case pickup:
 				Pickup(i);
 				break;
+				*/
 				case statsUp:
-
-				StatsUP(i);
+				personList[i].StatsUp();
 				break;
 				case useItem:
-
-				UseItem(i);
-				break;*/
+				personList[i].UseItem();
+				break;
 			}
 		}
 		else{
@@ -272,3 +271,15 @@ void PersonHolder::UpdateAction(float deltaTime){
 }
 
 
+
+bool PersonHolder::PersonLive(int personId) const{
+	int index = GetIndex(personId);
+	if (index == -1) return false;
+	return personList[index].GetLive();
+}
+
+void PersonHolder::UpdatePersonBuff(float deltaTime){
+	int size = personList.size();
+	for (int i = 0; i < size; i++)
+		personList[i].UpdateBuff(deltaTime);
+}

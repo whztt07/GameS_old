@@ -19,3 +19,7 @@ const int& InventorySlot::GetItemId() const{
 const int& InventorySlot::GetCount() const{
 	return count;
 }
+
+void InventorySlot::TakeCount(int count){
+	this->count -= count;
+}
