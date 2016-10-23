@@ -121,8 +121,7 @@ void PersonHolder::UpdatePersonCommand(){
 	int size = personList.size();
 	for (int i = 0; i < size; i++){
 		personList[i]->UpdateCommand();
-		switch (personList[i]->GetStatus()){
-		case r_attack:
+		if (personList[i]->GetCommand() == "GetTarget"){
 			personList[i]->SetTargetPerson(*personList[GetIndex(personList[i]->GetTargetNumber())]);
 		}
 	}		
@@ -141,7 +140,11 @@ void PersonHolder::UpdatePersonRegeneration(float deltaTime){
 		personList[i]->UpdateRegeneration(deltaTime);
 
 }
-
+void PersonHolder::UpdatePersonAI(){
+	int size = personList.size();
+	for (int i = 0; i < size; i++)
+		personList[i]->UpdateAI();
+}
 void PersonHolder::UpdatePersonBattleStatus(){
 	int size = personList.size();
 	for (int i = 0; i < size; i++)

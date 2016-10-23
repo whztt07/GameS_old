@@ -1,4 +1,4 @@
-﻿Build started 23.10.2016 13:33:00.
+﻿Build started 23.10.2016 16:39:12.
      1>Project "D:\Git\GameS\GameS\TestServerGameS\TestServerGameS\TestServerGameS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\VisualStudio\VC\bin\CL.exe /c /I"C:\Program Files (x86)\MySQL\MySQL Server 5.5\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\TestServerGameS.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Person.cpp
@@ -6,71 +6,71 @@
      1>d:\git\games\games\testservergames\testservergames\Person.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>d:\git\games\games\testservergames\testservergames\MasteryHolder.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>Person.cpp(20): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(94): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(95): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(96): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(97): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(98): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(100): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(104): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(108): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(109): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(113): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(104): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(105): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(106): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(107): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(108): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(110): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
      1>Person.cpp(114): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(115): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(123): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(124): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(125): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(126): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(127): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(128): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(130): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(131): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(132): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>Person.cpp(172): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(173): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(175): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(193): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(194): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(195): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(196): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(197): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>Person.cpp(199): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(200): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(201): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(221): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(232): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(238): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(246): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(247): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(248): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(250): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(251): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(270): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(273): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(281): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(282): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(283): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(284): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(307): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(341): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(352): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(357): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(388): warning C4172: returning address of local variable or temporary
-     1>Person.cpp(726): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(730): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(757): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(761): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(773): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(789): warning C4101: 'itemIndex' : unreferenced local variable
-     1>Person.cpp(930): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(935): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>Person.cpp(939): warning C4244: '=' : conversion from 'clock_t' to 'float', possible loss of data
-     1>Person.cpp(942): warning C4244: '=' : conversion from 'clock_t' to 'float', possible loss of data
-     1>Person.cpp(946): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(947): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Person.cpp(947): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>Person.cpp(1108): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(118): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(119): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(123): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(124): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(125): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(133): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(134): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(135): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(136): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(137): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(138): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(140): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(141): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(142): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Person.cpp(182): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(183): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(185): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(203): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Person.cpp(204): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Person.cpp(205): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Person.cpp(206): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Person.cpp(207): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>Person.cpp(209): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(210): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(211): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(231): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(242): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(248): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(256): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(257): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(258): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(260): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(261): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(280): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(283): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(291): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(292): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(293): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(294): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(316): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(350): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(361): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(366): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(397): warning C4172: returning address of local variable or temporary
+     1>Person.cpp(735): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(739): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(766): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(770): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(782): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(798): warning C4101: 'itemIndex' : unreferenced local variable
+     1>Person.cpp(952): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(957): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>Person.cpp(961): warning C4244: '=' : conversion from 'clock_t' to 'float', possible loss of data
+     1>Person.cpp(964): warning C4244: '=' : conversion from 'clock_t' to 'float', possible loss of data
+     1>Person.cpp(968): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(969): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>Person.cpp(969): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>Person.cpp(1130): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
        Link:
          D:\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\MySQL\MySQL Server 5.5\lib" /ASSEMBLYRESOURCE:Debug\TestServerGameS.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Git\GameS\GameS\TestServerGameS\Debug\TestServerGameS.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
          Debug\Account.obj
@@ -94,7 +94,6 @@
          Debug\Spell.obj
          Debug\SpellHolder.obj
          Debug\SpellInfo.obj
-         Debug\AI.obj
          Debug\AssemblyInfo.obj
          Debug\Client.obj
          Debug\Connection.obj
@@ -112,4 +111,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.96
+Time Elapsed 00:00:02.80

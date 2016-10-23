@@ -52,22 +52,6 @@ bool Mechanic::PickupItemRange(int j){
 }
 
 
-
-void Mechanic::Resurrection(int j, bool place){
-	EnterCriticalSection(&var->varSection);
-	int num = GetIndex(j);
-	Vector3 resPos = Vector3(1, 0, 1);
-	if (!place)
-		var->personList[num].position = resPos;
-	
-	var->personList[num].live = true;
-	var->personList[num].curHP = var->personList[num].maxHP / 2.0;
-	var->personList[num].status = idle;
-	
-	LeaveCriticalSection(&var->varSection);
-}
-
-
 void Mechanic::AddPoints(int j, int cha, int abi, int spe){
 	var->personList[j].spellPoint += spe;
 	var->personList[j].abilityPoint += abi;

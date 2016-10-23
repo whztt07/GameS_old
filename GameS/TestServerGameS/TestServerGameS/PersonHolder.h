@@ -33,6 +33,7 @@ public:
 	void	UpdatePersonBuff(float deltaTime);
 	void	UpdatePersonBattleStatus();
 	void	UpdateDead();
+	void	UpdatePersonAI();
 	bool	PersonLive(int personId) const;
 	Person* AddBasePerson(int index);
 };

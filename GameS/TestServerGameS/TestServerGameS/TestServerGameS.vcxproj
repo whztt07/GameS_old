@@ -112,7 +112,6 @@
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellHolder.cpp" />
     <ClCompile Include="SpellInfo.cpp" />
-    <ClCompile Include="AI.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Connection.cpp" />
@@ -150,7 +149,6 @@
     <ClInclude Include="SpellHolder.h" />
     <ClInclude Include="SpellInfo.h" />
     <ClInclude Include="UpdateData.h" />
-    <ClInclude Include="AI.h" />
     <ClInclude Include="Buff.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Connection.h" />

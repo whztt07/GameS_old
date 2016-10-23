@@ -54,6 +54,7 @@ GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::R
 unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 	GameLogic *game = (GameLogic*)pvoid;
 	unsigned int mainLogicTime = clock();
+	unsigned int AITime = clock();
 	unsigned int time;
 	float deltaTime, dsTime;
 	while (1) {
@@ -89,6 +90,10 @@ unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 
 			LeaveCriticalSection(&game->gameSection);
 
+		}
+		if (time - AITime > 200){
+			AITime = clock();
+			game->personHolder.UpdatePersonAI();
 		}
 		int sleepTime = 20 - clock() + mainLogicTime;
 		if (sleepTime > 0)

@@ -194,7 +194,10 @@ public:
 			const float &	GetAttackRange() const;
 			const bool&		GetBattle() const;
 			const int&		GetType() const;
+			const string&	GetCommand() const;
 
+			void			Resurrection(bool place = false);
+			void			UpdateAI();
 			void			UpdateAction(float deltaTime);
 			void			UpdateBattleStatus();
 			void			UpdateSpellLvl();

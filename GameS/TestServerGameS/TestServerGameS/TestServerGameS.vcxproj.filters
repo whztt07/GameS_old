@@ -40,9 +40,6 @@
     <Filter Include="Game\GeoData">
       <UniqueIdentifier>{c416a7fc-2822-40d1-860b-d2f99064b167}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\AI">
-      <UniqueIdentifier>{d55221ad-218c-48ea-bebb-c1796c24065e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Mastery">
       <UniqueIdentifier>{1602b55d-da73-4559-9f2f-3658cf47f500}</UniqueIdentifier>
     </Filter>
@@ -164,9 +161,6 @@
     </ClCompile>
     <ClCompile Include="PersonHolder.cpp">
       <Filter>Game\Person</Filter>
-    </ClCompile>
-    <ClCompile Include="AI.cpp">
-      <Filter>Game\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +284,6 @@
     </ClInclude>
     <ClInclude Include="PersonHolder.h">
       <Filter>Game\Person</Filter>
-    </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Game\AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

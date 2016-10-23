@@ -49,7 +49,7 @@ inventory(INVENTORY_SIZE){
 	needWeightUpdate = true;
 	does = false;
 	wait = false;
-	corpseSave = false;
+	corpseSave = true;
 	needPathUpdate = false;
 	stand = false;
 	moving = false;
@@ -78,6 +78,16 @@ void Person::AddTargetPerson(Person &newTargetPerson){
 void Person::SetTargetPerson(Person &newTargetPerson){
 	
 	targetPerson = &newTargetPerson;
+}
+
+void Person::UpdateAI(){
+	if (type == 2 && targetPerson && status == idle) {
+		status = r_attack;
+	}
+}
+
+const string& Person::GetCommand() const{
+	return command;
 }
 
 void Person::UpdateStats(){
@@ -288,7 +298,6 @@ void Person::UpdateStats(){
 		resistanceFire = 2;
 		resistanceCold = 2;
 		resistanceNegative = 2;
-
 		root = newRoot;
 
 		needStatsUpdate = false;
@@ -336,7 +345,7 @@ void Person::UpdateCommand(){
 		needPathUpdate = true;
 	}
 	if (command == "Attack"){
-		command = "";
+		command = "GetTarget";
 		status = r_attack;
 		targetNumber = data.data1;
 
@@ -896,6 +905,9 @@ void Person::UpdateAction(float deltaTime){
 	Pickup(i);
 	break;
 	*/
+	case res:
+		Resurrection();
+		break;
 	case statsUp:
 	StatsUp();
 	break;
@@ -921,6 +933,16 @@ void Person::UpdateAction(float deltaTime){
 	break;
 	}
 	}
+}
+
+void Person::Resurrection(bool place){
+	Vector3 resPos = Vector3(1, 0, 1);
+	if (!place)
+		position = resPos;
+	corpseSave = true;
+	live = true;
+	currentHp = maxHp / 2;
+	status = idle;
 }
 
 void Person::Attack(){
