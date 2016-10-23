@@ -10,33 +10,53 @@ using namespace std;
 
 BaseItemHolder *Person::baseItemHolder;
 BaseSpellHolder *Person::baseSpellHolder;
+GeoData *Person::geoData;
+
+int PRandom(int min, int max){
+	return (rand() % (max - min + 1)) + min;
+}
+
+float PRandomf(int min, int max){
+	return (rand() % ((max - min) * 100 + 1)) / 100.0 + min;
+}
 
 Person::Person() : spellList(SPELL_COUNT), masteryList(MASTERY_COUNT), buffList(BUFF_COUNT), debuffList(DEBUFF_COUNT),
 inventory(INVENTORY_SIZE){
-	live = true;
-	active = true;
-	needUpdate = false;
-	needStatsUpdate = true;
-	needWeightUpdate = true;
-	does = false;
-	wait = false;	
-	status = idle;
-	corpseSave = false;
-	resInPlace = false;
-	stand = true;
-	stan = false;
-	battle = false;
-	attackTime = 0;
-	animationSpeed = 1;
-	animationStatus = animIdle;
-	corpseSaveTime = 0;
-	targetNumber = -1;
+	
+	
 	lastPersonUpdate = clock();
+	targetPerson = NULL;
+	
 	update = "NULL";
 	uiUpdate = "NULL";
 	waitingCommand = "NULL";
 	command = "NULL";
 	fastCommand = "NULL";
+	status = idle;
+	animationStatus = animIdle;
+	targetNumber = -1;
+	useItemSlotNumber = -1;
+	pickupNumber = -1;
+	corpseSaveTime = 0;
+	animationSpeed = 1;
+	attackTime = 0;
+	battleTime = 0;
+	live = true;
+	resInPlace = false;
+	active = true;
+	needUpdate = false;
+	needStatsUpdate = true;
+	needWeightUpdate = true;
+	does = false;
+	wait = false;
+	corpseSave = false;
+	needPathUpdate = false;
+	stand = false;
+	moving = false;
+	battle = false;
+	stan = false;
+	_delete = false;
+
 }
 
 void Person::UpdateSpellLvl(){
@@ -46,9 +66,18 @@ void Person::UpdateSpellLvl(){
 		spellList.UpdateLvl(i, masteryList.GetMastery(i).GetLvl());
 }
 
-void Person::Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder){
+void Person::Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder, GeoData &geoData){
 	Person::baseItemHolder = &baseItemHolder;
 	Person::baseSpellHolder = &baseSpellHolder;
+	Person::geoData = &geoData;
+}
+void Person::AddTargetPerson(Person &newTargetPerson){
+	if (!targetPerson)
+		targetPerson = &newTargetPerson;
+}
+void Person::SetTargetPerson(Person &newTargetPerson){
+	
+	targetPerson = &newTargetPerson;
 }
 
 void Person::UpdateStats(){
@@ -351,6 +380,36 @@ void Person::UpdateCommand(){
 
 }
 
+const int& Person::GetTargetNumber() const{
+	return targetNumber;
+}
+
+const bool&	Person::IsDead() const{
+	return !live;
+}
+
+const bool&	Person::IsLive() const{
+	return live;
+}
+
+void Person::SetCorpseSave(bool newCorpseSave){
+	corpseSave = newCorpseSave;
+}
+
+const int& Person::GetType() const{
+	return type;
+}
+
+bool Person::IsFullDead() const{
+	return clock() - deadTime > corpseSaveTime ? true : false;
+}
+const Vector3& Person::GetLastPath() const{
+	return pathList.back();
+}
+const float & Person::GetAttackRange() const{
+	return attackRange;
+}
+
 bool Person::StartClientUpdate(){
 	if (needUpdate){
 		update = "AllUPD|" + to_string(personId) + "|" + name + "|"
@@ -412,7 +471,8 @@ bool Person::StartClientUpdate(){
 			if (spellList.GetSpell(j).GetLearn()){
 				num++;
 				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
-					+ to_string(spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown()) + "|";
+					+ to_string(baseSpellHolder->GetSpell(j).GetCooldown() > 0 ?
+					spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown() : 0) + "|";
 			}
 		}
 		ss += to_string(num) + "|" + dopcurstring;
@@ -422,7 +482,8 @@ bool Person::StartClientUpdate(){
 			if (spellList.GetSpell(j).GetLearn()){
 				num++;
 				dopcurstring += to_string(j) + "|" + to_string(spellList.GetSpell(j).GetLvl()) + "|"
-					+ to_string(spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown()) + "|";
+					+ to_string(baseSpellHolder->GetSpell(j).GetCooldown() > 0 ? 
+					spellList.GetSpell(j).GetCooldown() / baseSpellHolder->GetSpell(j).GetCooldown() : 0) + "|";
 			}
 
 		}
@@ -721,6 +782,224 @@ void Person::UpdateAnimation(){
 
 }
 
+
+void Person::UpdateAction(float deltaTime){	
+	if (geoData->FallingPerson(deltaTime, *this)){
+	Vector3 targPos;
+	int itemIndex;
+	switch (status){
+	case r_move:
+	if (needPathUpdate){
+	geoData->NeedPersonPath(*this, movePosition);
+	needPathUpdate = false;
+	moving = false;
+	}
+	else{
+	if (geoData->Rotate(deltaTime, *this, pathList[0]))
+	status = _move;
+	}
+	break;
+	case _move:
+	moving = true;
+	geoData->MovePerson(deltaTime, *this);
+	break;
+	
+	case r_attack:
+		if (targetPerson->live && !targetPerson->_delete){
+			if (Vector3::Distance(position, targetPerson->position) <= attackRange){
+				if (geoData->Rotate(deltaTime, *this, targetPerson->position))
+					status = attack;
+			}
+			else{
+				if (pathList.size() == 0 || Vector3::Distance(targetPerson->position, pathList.back()) > 0.5){
+					geoData->NeedPersonPath(*this, targetPerson->position);
+					needPathUpdate = false;
+					moving = false;
+				}
+				if (geoData->Rotate(deltaTime, *this, pathList[0]))
+					status = move_attack;
+			}
+		}
+		else{
+			status = idle;
+			targetPerson = NULL;
+		}
+	break;
+	case move_attack:
+		if (targetPerson->live && !targetPerson->_delete){
+			if (Vector3::Distance(position, targetPerson->position) <= attackRange){
+				status = r_attack;
+			}
+			else{
+				if (pathList.size() == 0 || Vector3::Distance(targetPerson->position, pathList.back()) > 0.5){
+					geoData->NeedPersonPath(*this, targetPerson->position);
+					status = r_attack;
+				}
+				else{
+					moving = true;
+					geoData->MovePerson(deltaTime, *this);
+				}
+			}
+		}
+		else{
+			status = idle;
+			targetPerson = NULL;
+		}
+		break;
+	case attack:
+		if (targetPerson->live && !targetPerson->_delete){
+			geoData->Rotate(deltaTime, *this, targetPerson->position);
+			Attack();
+		}
+		else{
+			status = idle;
+			targetPerson = NULL;
+		}
+	break;
+	/*
+	case r_pickup:
+	itemIndex = GetItemIndex(var->personList[i].pickupNumber);
+	if (itemIndex == -1){
+	var->personList[i].status = idle;
+	}
+	else{
+	targPos = var->dropItemList[itemIndex].position;
+	if (Vector3::Distance(var->personList[i].position, targPos) <= 0.2){
+	GeoDvig::TargetItemRotation(deltaTime, i);
+	}
+	else{
+	if (var->personList[i].pathList.size() == 0 || Vector3::Distance(targPos, var->personList[i].pathList.back()) > 0.2){
+	GeoDvig::NeedPersonPath(i, targPos);
+	var->personList[i].dvig = false;
+	}
+	GeoDvig::MoveRotation(deltaTime, i);
+	}
+	}
+	break;
+	case move_pickup:
+	itemIndex = GetItemIndex(var->personList[i].pickupNumber);
+	if (itemIndex == -1){
+	var->personList[i].status = idle;
+	}
+	else{
+	targPos = var->dropItemList[itemIndex].position;
+	if (Vector3::Distance(var->personList[i].position, targPos) <= 0.2){
+	var->personList[i].status = r_pickup;
+	}
+	else{
+	var->personList[i].dvig = true;
+	GeoDvig::MovePerson(deltaTime, i);
+	}
+	}
+	break;
+	case pickup:
+	Pickup(i);
+	break;
+	*/
+	case statsUp:
+	StatsUp();
+	break;
+	case useItem:
+	UseItem();
+	break;
+	}
+	}
+	else{
+	switch (status){
+
+	case _move:
+	status = r_move;
+	break;
+	case move_attack:
+		status = r_attack;
+	break;
+	case move_pickup:
+		status = r_pickup;
+	break;
+	default:
+		status = idle;
+	break;
+	}
+	}
+}
+
+void Person::Attack(){
+
+
+	if (!does){
+		attackTime = 750.0 / attackSpeed;
+		does = true;
+		lastAttackTime = clock();
+	}
+	else{
+		float time = (clock() - lastAttackTime) / 1000.0;
+		if (time >= attackTime){
+			status = r_attack; 
+			battle = true;
+			battleTime = clock();
+			if (PRandom(1, 20) + accuracy >= targetPerson->evasion){				
+				targetPerson->battle = true;
+				targetPerson->battleTime = clock();
+				targetPerson->AddTargetPerson(*this);
+				int mod = 1;
+				if (PRandom(0, 100) <= critChance)
+					mod = critRate;
+				float damage = PRandom(minAttack, maxAttack) * mod;
+				damage -= targetPerson->resistanceCrush;
+				if (damage > 0)
+					targetPerson->currentHp -= damage;
+				if (targetPerson->currentHp <= 0 && targetPerson->live){
+					targetPerson->currentHp = 0;
+					targetPerson->Kill(*this);
+				}
+			}
+			does = false;
+			if (wait){
+				wait = false;
+				status = idle;
+				command = waitingCommand;
+				data = waitingData;
+			}
+		}
+	}
+}
+
+
+void Person::Kill(Person &killer){
+	killer.status = idle;
+	status = dead;
+	live = false;
+	corpseSaveTime = 15000;
+	deadTime = clock();
+	does = false;
+
+	/*if (persType == 2){
+		for (int i = 0; i < dropList.size(); i++){
+			if (Random(0, 100) <= dropList[i].chance){
+				int count = Random(dropList[i].minCount, dropList[i].maxCount);
+				float offsetX = Randomf(-1, 1), offsetZ = Randomf(-1, 1);
+				DropItems(dropList[i].item, count, Vector3(position.x + offsetX, position.y, position.z + offsetZ));
+			}
+		}
+		if (Random(0, 100) <= pointDrop.totalChance){
+			int chance = Random(0, 100);
+			int count = Random(pointDrop.minCount, pointDrop.maxCount);
+			if (chance <= pointDrop.chanceCharacteristics){
+				killer.AddPoints(count, 0, 0);
+			}
+			else if (chance <= pointDrop.chanceAbility){
+				killer.AddPoints(0, count, 0);
+			}
+			else{
+				killer.AddPoints(0, 0, count);
+			}
+		}
+	}*/
+
+	if (killer.targetPerson == this){
+		killer.targetPerson = NULL;
+	}
+}
 void Person::UpdateRegeneration(float deltaTime){
 	if (live){
 		float regen;
@@ -806,6 +1085,23 @@ const bool& Person::GetLive() const{
 	return live;
 }
 
+
+void Person::UpdateBattleStatus(){
+	if (battle && clock() - battleTime > 10000)
+		battle = false;
+}
+			
+const bool& Person::GetBattle() const{
+	return battle;
+}
+
+const bool& Person::IsDelete() const{
+	return _delete;
+}
+
+void Person::SetDelete(bool newDelete) {
+	_delete = newDelete;
+}
 
 void Person::StatsUp(){
 

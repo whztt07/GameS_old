@@ -3,18 +3,19 @@
 
 #include "GeoData.h"
 #include "DropItemHolder.h"
+#include "BasePersonHolder.h"
 class Data;
 class Person;
 
 class PersonHolder{
-	vector<Person>	personList;
-	GeoData			*geoData;
-	DropItemHolder	*dropItemHolder;
-
-	const int& GetIndex(int personId) const;	
+	vector<Person*>		personList;
+	DropItemHolder		*dropItemHolder;
+	BasePersonHolder	*basePersonHolder;
+	int					npcNumber;
+	const int&	GetIndex(int personId) const;	
 public:
-	void	Init(GeoData &geoData, DropItemHolder &dropItemHolder);
-	void	AddPerson(const Person &newPerson, int type);
+	void	Init(DropItemHolder &dropItemHolder, BasePersonHolder &basePersonHolder);
+	void	AddPerson(const Person &newPerson);
 	string	ResolutionGamePers(const vector<int> &personIdList, int personId) const;
 	void	Exit(int personId);
 	string	NeedUpdate(int personId);
@@ -30,5 +31,8 @@ public:
 	void	UpdatePersonList();
 	void	UpdateAction(float deltaTime);
 	void	UpdatePersonBuff(float deltaTime);
+	void	UpdatePersonBattleStatus();
+	void	UpdateDead();
 	bool	PersonLive(int personId) const;
+	Person* AddBasePerson(int index);
 };

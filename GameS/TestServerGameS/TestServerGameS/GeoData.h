@@ -17,7 +17,7 @@ class GeoData {
 	float	GeoHeight(const Vector3 &position) const;
 	float	GetAngle(const Vector3 &position) const;	
 	float	GetRotation(float angle) const;
-	void Rotate(float deltaTime, float angle, Person &person) const;
+	
 public:	
 	GeoData();
 	GeoData(const GeoData&);
@@ -29,5 +29,5 @@ public:
 	bool FallingPerson(float deltaTime, Person &person) const;
 	void MovePerson(float deltaTime, Person &person) const;
 	void NeedPersonPath(Person &person, const Vector3 &movePosition) const;	
-	void MoveRotation(float deltaTime, Person &person) const;
+	bool Rotate(float deltaTime, Person &person, const Vector3 &position) const;
 };

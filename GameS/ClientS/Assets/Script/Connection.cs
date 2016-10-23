@@ -12,8 +12,8 @@ public class Connection {
 	static MainLogin mainLoginScript;
 
 	static public void Init(MainLogin sc){
-		Reset ();
 		mainLoginScript = sc;
+		Reset ();
 	}
 
 	static public void Connect(){
@@ -37,23 +37,25 @@ public class Connection {
 	static public string GetConnectData(){
 		
 		if (Server.Available != 0) {
-			byte[] data = new byte[1024];
-			try {
+			byte[] data = new byte[8192];
+			//try {
 				int sizeData = Server.Receive (data);
 				string s = Encoding.UTF8.GetString (data, 0, sizeData);
 				if (!Variables.mainLoginScript.showAllPosts){
 					string tem = GetDat(s);
 					if(tem != "AllUPD" && tem != "UIUPD"){
-						mainLoginScript.PrintS ("RECEIVE: " + s);
+
+					mainLoginScript.PrintS ("RECEIVE: " + sizeData.ToString () +" " + s);
 					}
 				}
 				else{
-					mainLoginScript.PrintS ("RECEIVE: " + s);
+
+				mainLoginScript.PrintS ("RECEIVE: " + sizeData.ToString () + " " + s);
 				}
 				return s;
-			} catch {
-				return "ConnectLost|";
-			}
+			//} catch {
+			//	return "ConnectLost|";
+			//}
 
 		}		
 		return "NoneData";
@@ -86,9 +88,11 @@ public class Connection {
 		return connect;
 	}
 	static public void CloseConnect(){
+
 		Server.Close ();
 	}
 	static public void Reset(){
+
 		if (connect) {
 			CloseConnect ();
 		}

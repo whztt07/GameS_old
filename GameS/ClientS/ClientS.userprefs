@@ -1,14 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Initializate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Connection.cs">
     <Files>
       <File FileName="Assets\Script\MyCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\UI.cs" Line="149" Column="60" />
+      <File FileName="Assets\Script\UI.cs" Line="440" Column="22" />
       <File FileName="Assets\Script\MainLogin.cs" Line="46" Column="1" />
       <File FileName="Assets\Script\Variables.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Processing.cs" Line="274" Column="27" />
-      <File FileName="Assets\Script\Initializate.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Connection.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Processing.cs" Line="337" Column="13" />
+      <File FileName="Assets\Script\Initializate.cs" Line="188" Column="33" />
+      <File FileName="Assets\Script\Connection.cs" Line="40" Column="31" />
       <File FileName="Assets\Script\PersChoiceButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Person.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\PanelButton.cs" Line="1" Column="1" />

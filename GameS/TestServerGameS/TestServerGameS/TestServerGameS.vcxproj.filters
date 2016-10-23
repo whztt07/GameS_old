@@ -90,9 +90,6 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GeoDvig.cpp">
-      <Filter>Old</Filter>
-    </ClCompile>
     <ClCompile Include="Mechanic.cpp">
       <Filter>Old</Filter>
     </ClCompile>
@@ -206,15 +203,6 @@
     </ClInclude>
     <ClInclude Include="GeoData.h">
       <Filter>Game\GeoData</Filter>
-    </ClInclude>
-    <ClInclude Include="GeoDvig.h">
-      <Filter>Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Mechanic.h">
-      <Filter>Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Person2.h">
-      <Filter>Old</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Work</Filter>

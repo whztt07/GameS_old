@@ -9,6 +9,7 @@ using namespace std;
 #include "MasteryHolder.h"
 #include "BuffHolder.h"
 #include "InventoryHolder.h"
+#include "GeoData.h"
 #include "Data.h"
 #include "BaseItemHolder.h"
 #include "BaseSpellHolder.h"
@@ -16,7 +17,12 @@ using namespace std;
 class Person{
 protected:
 	
-			string			name;		
+			string			name;	
+			string			update;
+			string			uiUpdate;
+			string			waitingCommand;
+			string			command;
+			string			fastCommand;
 			int				race;
 			int				baseStrength;
 			int				baseAgility;
@@ -36,6 +42,16 @@ protected:
 			int				freeCharacteristics;
 			int				weaponSlot;
 			int				bodySlot;
+			int				personId;
+			int				type;
+			int				characteristicPoint;
+			int				abilityPoint;
+			int				spellPoint;
+			int				status;
+			int				animationStatus;
+			int				targetNumber;
+			int				useItemSlotNumber;
+			int				pickupNumber;
 			float			currentWeight;
 			float			currentHp;
 			float			currentMp;
@@ -74,18 +90,15 @@ protected:
 			float			resistancePierce;
 			float			resistanceFire;
 			float			resistanceCold;
-			float			resistanceNegative;
+			float			resistanceNegative;			
+			float			corpseSaveTime;	
+			float			rotation;
+			float			animationSpeed;
+			float			attackTime;
+			float			battleTime;
 			bool			root;
 			bool			live;
 			bool			resInPlace;
-			float			corpseSaveTime;	
-			int				personId;
-			int				type;
-			Vector3			position;
-			float			rotation;
-			int				characteristicPoint;
-			int				abilityPoint;
-			int				spellPoint;
 			bool			active;
 			bool			needUpdate;
 			bool			needStatsUpdate;
@@ -98,29 +111,23 @@ protected:
 			bool			moving;
 			bool			battle;
 			bool			stan;
-			int				status;
-			int				animationStatus;
-			float			animationSpeed;
-			float			attackTime;
-			int				targetNumber;
-			int				useItemSlotNumber;
-			int				pickupNumber;
-			unsigned int	lastPersonUpdate;
-			string			update;
-			string			uiUpdate;
-			string			waitingCommand;
-			string			command;
-			string			fastCommand;
+			bool			_delete;
 			Data			data;
 			Data			fastData;
-			Data			waitingData;	
-			Data			statsUpData;
+			Data			waitingData;
+			Data			statsUpData;			
+			unsigned int	lastPersonUpdate;
+			unsigned int	lastAttackTime;
+			unsigned int	deadTime;
+			Vector3			position;
 			Vector3			movePosition;
 			vector<Vector3>	pathList;
+			Person			*targetPerson;
 	static	BaseItemHolder	*baseItemHolder;
 	static	BaseSpellHolder	*baseSpellHolder;
+	static	GeoData			*geoData;
 			
-			
+	void Attack();
 public:
 	SpellHolder		spellList;
 	MasteryHolder	masteryList;
@@ -130,7 +137,7 @@ public:
 	
 	Person();
 
-	static	void			Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder);
+	static	void			Init(BaseItemHolder &baseItemHolder, BaseSpellHolder &baseSpellHolder, GeoData &geoData);
 
 			void			SetName(const string &newName);
 			void			SetRace(int newRace);
@@ -158,10 +165,13 @@ public:
 			void			SetActive(bool newActive);
 			void			SetStatus(int newStatus);
 			void			SetStand(bool newStand);
+			void			SetCorpseSave(bool newCorpseSave);
 			void			SetPathList(const vector<Vector3> &newPathList);
 			void			SetNeedPathUpdate(bool newNeedPathUpdate);
 			void			SetMoving(bool newMoving);
-
+			void			SetTargetPerson(Person &newTargetPerson);
+			void			AddTargetPerson(Person &newTargetPerson);
+			void			SetDelete(bool newDelete);
 			const int&		GetPersonId() const;
 			const string&	GetUiUpdate() const;
 			const int&		GetRace() const;
@@ -179,7 +189,14 @@ public:
 			int				GetPathListSize() const;
 			const bool&		GetNeedPathUpdate() const;
 			const bool&		GetLive() const;
+			const int&		GetTargetNumber() const;
+			const Vector3&	GetLastPath() const;
+			const float &	GetAttackRange() const;
+			const bool&		GetBattle() const;
+			const int&		GetType() const;
 
+			void			UpdateAction(float deltaTime);
+			void			UpdateBattleStatus();
 			void			UpdateSpellLvl();
 			void			UpdateStats();
 			void			UpdateWeight();
@@ -192,7 +209,11 @@ public:
 			void			FinishClientUpdate(const string &updateInfo);
 			void			DeleteFirstPath();
 			bool			PersonActive();
-			
+			const bool&		IsDead() const;
+			bool			IsFullDead() const;
+			const bool&		IsLive() const;
+			const bool&		IsDelete() const;
+			void			Kill(Person &killer);
 
 			string			NeedUpdate();			
 			void			Command(const string &command, const Data &data, bool fast);

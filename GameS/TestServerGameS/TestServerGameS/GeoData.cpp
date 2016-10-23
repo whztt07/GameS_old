@@ -309,49 +309,32 @@ float GeoData::GetRotation(float angle) const{
 }
 
 
-void GeoData::Rotate(float deltaTime, float angle, Person &person) const{
-
-	float diffAngle = angle - person.GetRotation();
-	float dopDiffAngle = fabsf(diffAngle);
-	if (dopDiffAngle > 180){
-		dopDiffAngle = 360 - 180;
-	}
-	float rotAngle = person.GetRotationSpeed() * deltaTime;
-	if (dopDiffAngle <= rotAngle){
-		person.SetRotation(GetRotation(angle));
-	}
-	else{
-		float angleDirec = 1;
-		if (diffAngle > 180 || (diffAngle < 0 && diffAngle > -180)){
-			angleDirec = -1;
-		}
-		person.SetRotation(GetRotation(person.GetRotation() + rotAngle * angleDirec));
-	}
-}
-
-void GeoData::MoveRotation(float deltaTime, Person &person) const{
+bool GeoData::Rotate(float deltaTime, Person &person, const Vector3 &position) const{
 	Vector3 pos = person.GetPosition();
 	pos.y = 0;
-	Vector3 direc = person.GetFirstPath() - pos;
+	Vector3 direc = position - pos;
 	direc.Normalize();
 	float angle = GetAngle(direc);
 	if (person.GetRotation() != angle){
-		Rotate(deltaTime, angle, person);
-	}
-	else{
-		switch (person.GetStatus()){
-		case r_move:
-			person.SetStatus(_move);
-			break;
-		case r_attack:
-			person.SetStatus(move_attack);
-			break;
-		case r_pickup:
-			person.SetStatus(move_pickup);
-			break;
+		float diffAngle = angle - person.GetRotation();
+		float dopDiffAngle = fabsf(diffAngle);
+		if (dopDiffAngle > 180){
+			dopDiffAngle = 360 - 180;
 		}
+		float rotAngle = person.GetRotationSpeed() * deltaTime;
+		if (dopDiffAngle <= rotAngle){
+			person.SetRotation(GetRotation(angle));
+		}
+		else{
+			float angleDirec = 1;
+			if (diffAngle > 180 || (diffAngle < 0 && diffAngle > -180)){
+				angleDirec = -1;
+			}
+			person.SetRotation(GetRotation(person.GetRotation() + rotAngle * angleDirec));
+		}
+		return false;
 	}
-
+	return true;
 }
 
 void GeoData::SetSizeX(int newSizeX){

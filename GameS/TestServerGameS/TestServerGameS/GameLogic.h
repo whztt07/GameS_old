@@ -35,7 +35,7 @@ public:
 	UpdateData		GetUpdateData();											//Метод возвращающий дынные необходимые для обновления формы
 
 	const Person&	GetBasePerson(int index);
-	void			AddPerson(const Person &newPerson, int personType = 1);
+	void			AddPerson(const Person &newPerson);
 
 	string			ResolutionGamePers(const vector<int> &personIdList, int personId);
 	string			NeedUpdate(int personId);

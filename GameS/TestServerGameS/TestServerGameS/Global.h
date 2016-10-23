@@ -23,6 +23,7 @@
 #define NPC_PATROL_RANGE 5
 #define NPC_SPAWN_RANGE 5
 
+
 enum PersonStatus{
 	idle = 0,
 	r_move = 1,

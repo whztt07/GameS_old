@@ -392,7 +392,7 @@ public class Processing {
 				UI.SetStatusText ("Не удалось соединиться с сервером!");
 			}
 
-			
+
 			Reset ();
 			return;
 		}
@@ -533,6 +533,7 @@ public class Processing {
 	}
 
 	static void Reset(){
+
 		Variables.persChoiceNumber = -1;
 		Variables.work = false;
 		Variables.waitMees = false;

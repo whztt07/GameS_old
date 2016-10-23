@@ -13,8 +13,6 @@
 using namespace std;
 
 PersonHolder *SpawnPoint::personHolder;
-BasePersonHolder *SpawnPoint::basePersonHolder;
-int	SpawnPoint::npcNumber = -2;
 
 
 int Random(int min, int max){
@@ -26,34 +24,30 @@ float Randomf(int min, int max){
 }
 
 SpawnPoint::SpawnPoint(const Vector3 &spawnPosition, const vector<int> &npcIdList, float respawnTime) : npcIdList(npcIdList), 
-respawnTime(respawnTime), patrolRange(NPC_PATROL_RANGE), spawnRange(NPC_SPAWN_RANGE), spawnPosition(spawnPosition), currentNpcId(-1),
-deadTime() {}
+respawnTime(respawnTime), patrolRange(NPC_PATROL_RANGE), spawnRange(NPC_SPAWN_RANGE), spawnPosition(spawnPosition), currentPerson(NULL),
+deadTime(0) {}
 
-void SpawnPoint::Init(PersonHolder &personHolder, BasePersonHolder &basePersonHolder){
+void SpawnPoint::Init(PersonHolder &personHolder){
 	SpawnPoint::personHolder = &personHolder;
-	SpawnPoint::basePersonHolder = &basePersonHolder;
 }
 
 
 void SpawnPoint::SpawnUpdate(){
-		if (currentNpcId != -1){
-			if (!personHolder->PersonLive(currentNpcId)){
-				currentNpcId = -1;
+		if (currentPerson){
+			if (currentPerson->IsDead()){
+				currentPerson = NULL;
 				deadTime = clock();
 			}
 		}
 		else{
 			if (clock() - deadTime >= respawnTime){
 				int rand = Random(0, npcIdList.size() - 1);
-				Person person = basePersonHolder->GetPerson(npcIdList[rand]);
-
-				int num = npcNumber--;				
-				person.SetPersonId(num);
-				currentNpcId = num;
+				currentPerson = personHolder->AddBasePerson(npcIdList[rand]);
+			
 				float range = spawnRange;
 				float offsetX = Randomf(-1 * range, range), offsetZ = Randomf(-1 * range, range);
-				person.SetPosition(Vector3(spawnPosition.x + offsetX, spawnPosition.y, spawnPosition.z + offsetZ));
-				personHolder->AddPerson(person, 2);
+				currentPerson->SetPosition(Vector3(spawnPosition.x + offsetX, spawnPosition.y, spawnPosition.z + offsetZ));
+				
 			}
 		}
 	

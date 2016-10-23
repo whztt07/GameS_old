@@ -30,14 +30,14 @@ GameLogic::GameLogic(const MSQL_init_data &msql_init_data) : geoData(WorkFile::R
 
 	baseItemHolder.Init(WorkMSQL::GetBaseItem());
 
-	Person::Init(baseItemHolder, baseSpellHolder);
+	Person::Init(baseItemHolder, baseSpellHolder, geoData);
 
 	basePersonHolder.Init(WorkMSQL::GetBasePerson());
 
 
-	personHolder.Init(geoData, dropItemHolder);
+	personHolder.Init(dropItemHolder, basePersonHolder);
 
-	SpawnPoint::Init(personHolder, basePersonHolder);
+	SpawnPoint::Init(personHolder);
 
 	vector<int> vec;
 	vector<SpawnPoint> vec2;
@@ -75,13 +75,13 @@ unsigned _stdcall GameLogic::RunUpdate(void* pvoid){
 				game->personHolder.UpdatePersonCommand();
 				game->personHolder.UpdatePersonBuff(dsTime);
 				game->personHolder.UpdatePersonStats();
+				game->personHolder.UpdateDead();
 				game->personHolder.UpdateAction(dsTime);
 				game->personHolder.UpdatePersonRegeneration(dsTime);
-				//Mechanic::BattleStatusUPD();
+				game->personHolder.UpdatePersonBattleStatus();
 			}
 
 			game->spawnPointHolder.SpawnUpdate();
-			//Mechanic::DeadUPD();
 
 			game->personHolder.UpdatePersonList();
 			game->personHolder.UpdatePersonAnimation();
@@ -118,9 +118,9 @@ const Person& GameLogic::GetBasePerson(int index){
 }
 
 
-void GameLogic::AddPerson(const Person &newPerson, int personType){
+void GameLogic::AddPerson(const Person &newPerson){
 	EnterCriticalSection(&gameSection);
-	personHolder.AddPerson(newPerson, personType);
+	personHolder.AddPerson(newPerson);
 	LeaveCriticalSection(&gameSection);
 }
 
